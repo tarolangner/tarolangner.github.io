@@ -2,7 +2,7 @@
 title:               Tensor Labbet
 tagline:             'A blog of deep learnings'
 description:         '<b>Tensor Labbet</b> presents a captivating blog with articles, reviews and unsolicited opinion pieces on the state of artificial intelligence research in academia and the industry'
-url:                 tensorlabbet.com
+url:                 https://tensorlabbet.com
 baseurl:             ''
 paginate:            5
 permalink:           pretty
