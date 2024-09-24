@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2024-09-24T19:00:43+02:00</updated>
- <id>http://localhost:4000</id>
+ <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
+ <link href="https://tensorlabbet.com/"/>
+ <updated>2024-09-24T19:09:40+02:00</updated>
+ <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Summary of Ilya Sutskevers AI Reading List</title>
-   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
+   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
+   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskevers AI Reading list in ~120 words per item &lt;br /&gt;
     
