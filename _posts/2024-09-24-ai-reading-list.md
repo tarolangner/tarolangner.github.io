@@ -423,3 +423,7 @@ Although low-quality, generated content was a recurring theme I encountered whil
 
 With this blog post, the known contents of the reading list are compressed to barely more than one percent of the original word count. This leaves a lot more to be discussed, but hopefully it still has something to offer for the interested reader. My own, subjective review will be saved for another post in the future.
 
+---
+
+*As a concluding note, I dedicate this post to Virginia Coronel and the GoFundMe campaign to pay for her important surgery in her home country of Venezuela. You can find the fundraiser under the following link:*  
+*[https://www.gofundme.com/f/support-virginias-urgent-brain-surgery](https://www.gofundme.com/f/support-virginias-urgent-brain-surgery)*

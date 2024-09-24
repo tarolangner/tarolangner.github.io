@@ -1,4 +1,13 @@
-# Released under MIT License
+# Licensing
+
+This repository builds on the Lanyon blog template created by Mark Otto. For all content of this repository and the website that is not included in the Lanyon template itself, the following applies:
+
+© 2024 Taro Langner. All rights reserved. 
+
+
+The Lanyon blog template is licensed further below.
+
+# Lanyon Blog Template released under MIT License
 
 Copyright (c) 2014 Mark Otto.
 
