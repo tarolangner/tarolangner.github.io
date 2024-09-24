@@ -1,0 +1,22 @@
+# Setup
+title:               Tensor Labbet
+tagline:             'A blog of deep learnings'
+description:         '<b>Tensor Labbet</b> presents a captivating blog with articles, reviews and unsolicited opinion pieces on the state of artificial intelligence research in academia and the industry'
+url:                 tensorlabbet.com
+baseurl:             ''
+paginate:            5
+permalink:           pretty
+
+# About/contact
+author:
+  name:              Taro Langner
+  url:               tensorlabbet.com
+  email:             taro.langner [at] tensorlabbet.com
+
+# Gems
+plugins:
+  - jekyll-paginate
+
+# Custom vars
+version:             1.1.0
+google_analytics_id: #UA-XXXX-Y

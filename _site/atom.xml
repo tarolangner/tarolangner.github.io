@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Tensor Labbet</title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2024-09-24T19:00:43+02:00</updated>
+ <id>http://localhost:4000</id>
+ <author>
+   <name>Taro Langner</name>
+   <email>taro.langner [at] tensorlabbet.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Summary of Ilya Sutskevers AI Reading List</title>
+   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
+   <updated>2024-09-24T00:00:00+02:00</updated>
+   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: Ilya Sutskevers AI Reading list in ~120 words per item &lt;br /&gt;
+    
+    &lt;i&gt;(15 min read)&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Earlier this year, a reading list with about 30 papers &lt;a href=&quot;https://x.com/andrew_n_carr/status/1752526711311507526&quot;&gt;was shared on Twitter&lt;/a&gt;.&lt;br /&gt;
+ It reportedly forms part of a longer version originally compiled by Ilya Sutskever, co-founder and chief scientist of OpenAI at the time, for John Carmack in 2020 with the remark:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://dallasinnovates.com/exclusive-qa-john-carmacks-different-path-to-artificial-general-intelligence/?utm_source=www.turingpost.com&amp;amp;utm_medium=referral&amp;amp;utm_campaign=the-mysterious-ai-reading-list-ilya-sutskever-s-recommendations&quot;&gt;&lt;em&gt;‘If you really learn all of these, you’ll know 90% of what matters’&lt;/em&gt;.&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While &lt;a href=&quot;https://arc.net/folder/D0472A20-9C20-4D3F-B145-D2865C0A9FEE&quot;&gt;the list&lt;/a&gt; is fragmentary and much has happened in the field since, this endorsement and the claim that it was part of onboarding at OpenAI quickly made it go &lt;a href=&quot;https://news.ycombinator.com/item?id=40397806&quot;&gt;somewhat&lt;/a&gt; &lt;a href=&quot;https://old.reddit.com/r/ArtificialInteligence/comments/1cpbh1s/ilya_sutskever_if_you_really_learn_all_of_these/&quot;&gt;viral&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;At about 300,000 words total, the combined content nonetheless corresponds to around one thousand book pages of dense, technical text and requires a decent investment in time and energy for self-study. 
+After doing just that, I therefore dedicate this blog post to all those of us who provisionally bookmarked it (“for later”) and are still curious. What follows is my own condensed and structured summary with about 120 words per item, free of mathematical notation, to capture the essential key points, context and some perspective gained from reading it with the surrounding literature.&lt;/p&gt;
+
+&lt;h1 id=&quot;in-a-nutshell&quot;&gt;In a Nutshell&lt;/h1&gt;
+
+&lt;p&gt;The list contains 27 reading items, with papers, blog posts, courses, one dissertation and two book chapters, all originally dating from 1993 to 2020.&lt;/p&gt;
+
+&lt;p&gt;The contents can be roughly broken down as follows:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Methodology&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Items&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Share&lt;a href=&quot;##&quot; title=&quot;Percentage of total word count&quot;&gt;*&lt;/a&gt;&lt;/th&gt;
+      &lt;th&gt;Topics&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Convolutional Neural Networks (CNNs)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;25%&lt;/td&gt;
+      &lt;td&gt;image recognition, semantic segmentation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Recurrent Neural Networks (RNNs)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;19%&lt;/td&gt;
+      &lt;td&gt;language modeling, speech-to-text, machine translation, combinatorial optimization, visual question answering, content-based attention&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Transformers&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;6%&lt;/td&gt;
+      &lt;td&gt;multi-head and dot-product attention, language model scaling&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Information Theory&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;42%&lt;/td&gt;
+      &lt;td&gt;Kolmogorov complexity, compression, Minimum Description Length&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Miscellaneous&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;8%&lt;/td&gt;
+      &lt;td&gt;variational inference, representation learning, graph neural networks, distributed training&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Using these categories, the next sections summarize the gist of each item, roughly sorted by how they build on each other.&lt;/p&gt;
+
+&lt;h1 id=&quot;convolutional-neural-networks&quot;&gt;Convolutional Neural Networks&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;CS231, 2017&lt;/summary&gt; 
+Stanford University Course &lt;br /&gt; 
+Length: ~50,000 words, forming 11 blocks of 2 modules &lt;br /&gt; 
+Instructors: Fei-Fei Li, Andrej Karpathy and Justin Johnson &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cs231n.github.io/&quot;&gt;[CS231, 2017]&lt;/a&gt; is a classic course on deep learning fundamentals from Stanford University. It builds up from linear classifiers and their ability to learn a given task based on mathematical optimization, or training, which adjusts their internal parameter weights such that applying them to input data will produce more desirable outputs. This basic concept is developed into backpropagation for training of neural networks, in which trainable parameters are typically arranged into multiple layers together with other modules such as activation functions and pooling layers. &lt;em&gt;Convolutional Neural Networks&lt;/em&gt; (CNNs) are introduced as a specialized architecture for image recognition, as used in modern computer vision systems to this day. Extended video lectures are &lt;a href=&quot;https://www.youtube.com/watch?v=vT1JzLTH4G4&amp;amp;list=PLC1qU-LWwrF64f4QKQT-Vg5Wr4qEE1Zxk&quot;&gt;available on youtube&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If you are starting from zero, this course and newer resources by e.g. &lt;a href=&quot;(https://www.coursera.org/specializations/deep-learning)&quot;&gt;DeepLearning.AI on Coursera&lt;/a&gt; or &lt;a href=&quot;https://course.fast.ai/&quot;&gt;FastAI&lt;/a&gt; will help you to get more out of the remaining list.&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;AlexNet, 2012&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Alex Krizhevsky, Ilya Sutskever and Geoffrey E. Hinton &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://dl.acm.org/doi/abs/10.1145/3065386&quot;&gt;[AlexNet, 2012]&lt;/a&gt; established CNNs as state of the art for image recognition and arguably initiated the widespread hype around deep learning. It outperformed its competitors in the 2012 ImageNet benchmark challenge, predicting whether a given input image contained e.g. a cat, dog, ship or any other of 1,000 possible classes, so conclusively that the real-world dominance of deep learning became commonly accepted. An important factor was its early* CUDA implementation that enabled unusually fast training on GPUs.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;*Note: Earlier GPU implementations are documented in &lt;a href=&quot;https://www.deeplearningbook.org/contents/applications.html&quot;&gt;section 12.1.2&lt;/a&gt; of the book &lt;a href=&quot;https://www.deeplearningbook.org/&quot;&gt;Deep Learning&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;ResNet, 2015&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html&quot;&gt;[ResNet, 2015]&lt;/a&gt; succeeded AlexNet as a more modern CNN architecture, reaching first place on the ImageNet challenge in 2015. It remains a popular CNN architecture to this day and is &lt;a href=&quot;https://openaccess.thecvf.com/content/CVPR2022/html/Liu_A_ConvNet_for_the_2020s_CVPR_2022_paper.html&quot;&gt;subject of ongoing research&lt;/a&gt;. It introduced residual connections into CNN architectures that had become ever deeper, stacking more convolutional layers to achieve higher representational power. By allowing residual connections to skip or bypass entire blocks of layers, ResNet architectures suffered less from gradient degradation effects in training and could thus be robustly trained at previously unseen depth.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;ResNet identity mappings, 2016&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.05027&quot;&gt;[ResNet identity mappings, 2016]&lt;/a&gt; were later proposed by the ResNet authors as a ‘clean’ information path and best design for the skip connections, so that their contents are merely added to the results of a bypassed block without any further modification. Whereas earlier designs placed an activation layer on the skip path after the addition, the proposed pre-activation design moves this layer to the start of the bypassed block instead. The skip connections can thus form a shortcut through the entire neural network that is only interrupted by additions, allowing improved propagation of gradient signals that make it possible for even deeper neural networks to be trained.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Dilated convolutions, 2015&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Fisher Yu and Vladlen Koltun &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1511.07122&quot;&gt;[Dilated convolutions, 2015]&lt;/a&gt; (or &lt;em&gt;à trous&lt;/em&gt; convolutions) were proposed as a new type of module for dense prediction with CNNs in tasks like semantic image segmentation, where class labels are assigned to any given pixel of an input image. Architectures such as AlexNet and ResNet condense input images to lower-dimensional representations via strided convolutions or pooling layers to predict one class label for an entire image. Related architectures for dense prediction therefore typically restore the original input image resolution from these downsampled, intermediate representations via upsampling operations. Whereas e.g. &lt;a href=&quot;](https://link.springer.com/chapter/10.1007/978-3-319-24574-4_28)&quot;&gt;transpose convolutions&lt;/a&gt; achieve this with competitive results, dilated convolutions avoid downsampling entirely. Instead, they space out the filter kernel of a convolutional layer to skip one or more neighboring input pixels, thereby providing a larger receptive field without any reduction in resolution.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;recurrent-neural-networks&quot;&gt;Recurrent Neural Networks&lt;/h1&gt;
+
+&lt;p&gt;Today, &lt;em&gt;Recurrent Neural Networks&lt;/em&gt; (RNNs) have been largely superseded by Transformers and date from what Ilya Sutskever himself would later call the &lt;a href=&quot;Link: https://www.youtube.com/watch?v=Ft0gTO2K85A&amp;amp;t=625s&quot;&gt;“[pre-2017] stone age”&lt;/a&gt; of machine learning. They nonetheless remain &lt;a href=&quot;https://arxiv.org/abs/2405.04517&quot;&gt;subject of active research&lt;/a&gt; and see continued use in certain applications. Forming a substantial part of the reading list, they showcase the evolution of early insights and architectural developments that lead up to the systems of today. Most of the RNNs listed below are &lt;a href=&quot;https://link.springer.com/chapter/10.1007/978-3-642-24797-2_4&quot;&gt;&lt;em&gt;Long Short-Term Memory&lt;/em&gt; (LSTM)&lt;/a&gt; architectures. Some designs furthermore include &lt;em&gt;Feedforward Networks&lt;/em&gt; with no recurrent connections, usually trained end-to-end as part of the model.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Understanding LSTM Networks, 2015&lt;/summary&gt; 
+Blog Post &lt;br /&gt; 
+Length: ~2,000 words&lt;br /&gt; 
+Author: Christopher Olah &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://colah.github.io/posts/2015-08-Understanding-LSTMs/&quot;&gt;[Understanding LSTM Networks, 2015]&lt;/a&gt; provides a brief introduction to RNNs and LSTMs in particular. RNNs can process a sequence of inputs, one step at a time, while evolving a hidden state vector that is (re-)ingested, updated and returned again at each step along the input sequence. The hidden state vector thereby allows for information to persist and be passed to subsequent processing steps. Nonetheless, simpler RNNs typically struggle with long-term dependencies. LSTMs alleviate this by introducing a cell state as additional recurrent in- and output, acting as a memory pathway for addition, update or removal of information along each processing step via trainable gating mechanisms.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;The Unreasonable Effectiveness of RNNs, 2015&lt;/summary&gt; 
+Blog Post &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Author: Andrej Karpathy &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://karpathy.github.io/2015/05/21/rnn-effectiveness/&quot;&gt;[The Unreasonable Effectiveness of RNNs, 2015]&lt;/a&gt; shows use cases and results of RNNs in action. They are distinguished by their ability to both process and predict variable-sized sequences while also maintaining an internal state, prompting the author Andrej Karpathy to state &lt;em&gt;“If training vanilla neural nets is optimization over functions, training recurrent nets is optimization over programs.”&lt;/em&gt;. He showcases results for image captioning and character-level language modeling that enables RNNs to automatically generate prose and articles. Early code generation capabilities are noted, with convincing syntax but failure to compile and a tendency to suffer from &lt;em&gt;hallucinations&lt;/em&gt; where the model provides outputs as most probable that are evidently incorrect. The blog post also includes &lt;a href=&quot;https://gist.github.com/karpathy/d4dee566867f8291f086&quot;&gt;a minimal RNN code example&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;RNN Regularization, 2014&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~3,500 words&lt;br /&gt; 
+Authors: Wojciech Zaremba, Ilya Sutskever and Oriol Vinyals &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1409.2329&quot;&gt;[RNN regularization, 2014]&lt;/a&gt; addresses the challenge of training large RNNs without overfitting, where a model would excessively adapt to, or even memorize, its training samples and fail to generalize to new data. A technique for regularization, which aims to reduce this effect, was proposed that applies &lt;em&gt;dropout&lt;/em&gt;, which omits randomly selected outputs of a given neural network layer. Dropout had been known for several years and was used e.g. in AlexNet. Here, the key insight was to utilize dropout only within a given RNN cell, but to avoid it on the recurrent connections that carried the hidden state vector. In this way, larger RNNs could avoid overfitting while preserving long-term dependencies.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Neural Turing Machines, 2014&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~7,500 words&lt;br /&gt; 
+Authors: Alex Graves, Greg Wayne and Ivo Danihelka &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1410.5401&quot;&gt;[Neural Turing Machines, 2014]&lt;/a&gt; were proposed as a form of memory-augmented neural network, with an external memory bank on which an RNN controller could write or erase information with a ‘blurry’, differentiable, attention-based focus. Equipped with this working memory, the Neural Turing Machine outperformed a baseline RNN in experiments involving associative recall, copying and sorting sequences and generalized more robustly to sequence lengths that exceeded those encountered in training.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Deep Speech 2, 2016&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~7,000 words&lt;br /&gt; 
+Authors: Dario Amodei, Sundaram Ananthanarayanan, Rishita Anubhai, Jingliang Bai, Eric Battenberg, Carl Case, Jared Casper, Bryan Catanzaro, Qiang Cheng, Guoliang Chen, Jie Chen, Jingdong Chen, Zhijie Chen, Mike Chrzanowski, Adam Coates, Greg Diamos, Ke Ding, Niandong Du, Erich Elsen, Jesse Engel, Weiwei Fang, Linxi Fan, Christopher Fougner, Liang Gao, Caixia Gong, Awni Hannun, Tony Han, Lappi Johannes, Bing Jiang, Cai Ju, Billy Jun, Patrick LeGresley, Libby Lin, Junjie Liu, Yang Liu, Weigao Li, Xiangang Li, Dongpeng Ma, Sharan Narang, Andrew Ng, Sherjil Ozair, Yiping Peng, Ryan Prenger, Sheng Qian, Zongfeng Quan, Jonathan Raiman, Vinay Rao, Sanjeev Satheesh, David Seetapun, Shubho Sengupta, Kavya Srinet, Anuroop Sriram, Haiyuan Tang, Liliang Tang, Chong Wang, Jidong Wang, Kaifu Wang, Yi Wang, Zhijian Wang, Zhiqian Wang, Shuang Wu, Likai Wei, Bo Xiao, Wen Xie, Yan Xie, Dani Yogatama, Bin Yuan, Jun Zhan, Zhenyao Zhu  &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://proceedings.mlr.press/v48/amodei16.html?ref=https://codemonkey.link&quot;&gt;[Deep Speech 2, 2016]&lt;/a&gt; proposed an automatic speech recognition system to convert audio recordings into text by processing log-spectrograms representing the audio with RNNs to predict sequences of characters of either English or Mandarin. The authors utilized batch normalization instead of dropout for regularization on the non-recurrent layers and &lt;em&gt;Gated Recurrent Units&lt;/em&gt; (GRUs) as a somewhat simplified alternative to LSTMs used in most of the other papers examined so far, together with a plethora of other engineering tweaks, including batched processing for low-latency streaming output.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;RNNsearch, 2015&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~8,000 words&lt;br /&gt; 
+Authors: Dzmitry Bahdanau, KyungHyun Cho and Yoshua Bengio &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1409.0473&quot;&gt;[RNNsearch]&lt;/a&gt; is credited with introducing the first attention mechanism into &lt;em&gt;Natural Language Processing&lt;/em&gt; (NLP), proposing additive, &lt;em&gt;content-based attention&lt;/em&gt; for neural machine translation. Its encoder-decoder architecture encodes an input sequence of English words with an RNN encoder into a &lt;em&gt;context vector&lt;/em&gt; used by an RNN &lt;em&gt;de&lt;/em&gt;coder to predict an output sequence of French words. In prior work this context vector was simply the final hidden state of the encoder, which therefore had to contain all relevant information about the input sequence. RNNsearch addresses this bottleneck by making the context vector a weighted sum over &lt;em&gt;all&lt;/em&gt; encoder hidden states, or &lt;em&gt;annotations&lt;/em&gt;. When predicting a target word, the decoder can thereby rely on context from arbitrary parts of the encoded input sequence by (re-)calculating the context vector as a weighted sum of annotations. The weighting is determined by an &lt;em&gt;alignment model&lt;/em&gt;, a feedforward network that receives the current decoder hidden state together with an annotation and assigns a score to the latter.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Pointer Networks, 2015&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~4,500 words&lt;br /&gt; 
+Authors: Oriol Vinyals, Meire Fortunato and Navdeep Jaitly&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://proceedings.neurips.cc/paper_files/paper/2015/file/29921001f2f04bd3baee84a12e98098f-Paper.pdf&quot;&gt;[Pointer Networks]&lt;/a&gt; repurpose the concept of content-based attention to solve combinatorial optimization problems. Here, content-based attention is used to ‘point’ at elements of the input sequence in a specific order. The output sequence is therefore an indexing of the input elements. Given a set of two-dimensional points as input, Pointer Net was trained to solve for their &lt;a href=&quot;https://en.wikipedia.org/wiki/Convex_hull&quot;&gt;convex hull&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Delaunay_triangulation&quot;&gt;Delaunay triangulation&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Travelling_salesman_problem&quot;&gt;Traveling Salesman Problem&lt;/a&gt; by predicting in which order these points should be visited. With no limitation to the length of the output sequence or dictionary, this approach was found to generalize beyond the longest sequence length encountered in training.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Set2Set, 2016&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,500 words&lt;br /&gt; 
+Authors: Oriol Vinyals, Samy Bengio and Manjunath Kudlur&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1511.06391&quot;&gt;[Set2Set]&lt;/a&gt; extends sequence-to-sequences methods as examined above to enable order-invariant processing of sets. These methods are shown to strongly depend on the specific order of both an input and output sequence (e.g. the exact order of random points provided to Pointer Networks for convex hull prediction). The authors propose Set2Set as a solution, with the encoder forming a &lt;em&gt;memory bank&lt;/em&gt; (that resembles &lt;em&gt;annotations&lt;/em&gt; of RNNSearch) to create a context vector. This memory bank, however, is sampled more than just once. Instead, a &lt;em&gt;process block&lt;/em&gt; introduces a new LSTM, which evolves a &lt;em&gt;query vector&lt;/em&gt; for repeated, content-based attention readouts of the memory. Finally, the &lt;em&gt;write block&lt;/em&gt; (a Pointer Network) can add even more attention steps in the form of &lt;em&gt;glimpses&lt;/em&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Relation Networks, 2017&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: 5,000 words&lt;br /&gt; 
+Authors: Adam Santoro, David Raposo, David G. Barrett, Mateusz Malinowski, Razvan Pascanu, Peter Battaglia, Timothy Lillicrap &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://proceedings.neurips.cc/paper_files/paper/2017/hash/e6acf4b0f69f6f6e60e9a815938aa1ff-Abstract.html&quot;&gt;[Relation Network, 2017]&lt;/a&gt; modules were proposed as a method for relational inference tasks such as visual and text-based question answering. The &lt;em&gt;Relation Network&lt;/em&gt; module ingests a pair of feature vectors, for example an LSTM hidden state for a word or sentence in text or the values at a specific pixel position in feature maps produced by a CNN for image data. A given pairing is processed with one or more neural network layers before forming an element-wise sum and creating an output with a second stack of layers. By doing this for all pairs of inputs, this approach outperformed the human baseline in answering textual questions regarding the size, position and color of 3D generated shapes relative to each other.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Relational Recurrent Neural Networks, 2018&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: 6,000 words&lt;br /&gt; 
+Authors: Adam Santoro, Ryan Faulkner, David Raposo, Jack Rae, Mike Chrzanowski, Theophane Weber, Daan Wierstra, Oriol Vinyals, Razvan Pascanu, Timothy Lillicrap &lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://proceedings.neurips.cc/paper/2018/hash/e2eabaf96372e20a9e3d4b5f83723a61-Abstract.html&quot;&gt;[Relational Recurrent Neural Networks, 2018]&lt;/a&gt; proposed a &lt;em&gt;Relational Memory Core&lt;/em&gt; module in which an attention mechanism allows memories to interact with each other and be recurrently refined as a fixed-size matrix. This approach was adapted for several tasks requiring relational reasoning and outperformed multiple baseline methods. Given a random set of vectors of which an arbitrary one was marked, it predicted which other vector had the highest Euclidean distance to it. It also learned to execute short code snippets involving variable manipulation, performed language modeling and scored well in a toy reinforcement learning task. The &lt;em&gt;self-attention&lt;/em&gt; mechanism that enabled its memory interactions is described in the following section.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;transformers&quot;&gt;Transformers&lt;/h1&gt;
+
+&lt;p&gt;The previous section tracks the rise of attention mechanisms as an increasingly potent tool for providing context in sequence-to-sequence prediction tasks. Eventually, these developments yielded the Transformer as a neural network architecture that predominantly relies on attention and discards both recurrent and convolutional layers entirely. The excellent scalability of this approach, together with growing compute resources and extensive training data, established Transformers as dominant method for language modeling, forming the backbone of systems like ChatGPT and performing well even on image and multimodal data.&lt;/p&gt;
+
+&lt;p&gt;New attention mechanisms enabled &lt;a href=&quot;https://ai.stackexchange.com/a/31584&quot;&gt;substantial speed and efficiency advantages&lt;/a&gt;:&lt;br /&gt;
+The &lt;em&gt;additive attention&lt;/em&gt; mechanism of the previous section compared an encoder and decoder hidden state to each other by applying an alignment model to each such pair for scoring. Internally, the alignment model formed linear projections of both vectors and added them together to calculate a score, which was normalized over all encoder hidden states to form a context vector as their weighted average.&lt;br /&gt;
+With &lt;em&gt;multiplicative attention&lt;/em&gt;, Transformers compare multiple pairings of hidden states at once by forming a dot product of their linear projections, which can be implemented with faster, highly optimized matrix multiplications.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Attention Is All You Need, 2017&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~4,500 words&lt;br /&gt; 
+Authors: Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser and Illia Polosukhin&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://user.phil.hhu.de/~cwurm/wp-content/uploads/2020/01/7181-attention-is-all-you-need.pdf&quot;&gt;[Attention Is All You Need]&lt;/a&gt; proposed the Transformer architecture. In an encoder-decoder structure for machine translation, embedding layers convert each input token into a feature vector, to which positional encodings are added. The proposed &lt;em&gt;Scaled Dot-Product Attention&lt;/em&gt; computes a weighted average over multiple &lt;em&gt;value&lt;/em&gt; vectors, each weighted by comparing its associated &lt;em&gt;key&lt;/em&gt; vector to a given &lt;em&gt;query&lt;/em&gt; vector using the dot product. The result is scaled (for numerical stability) and then normalized over all keys with a softmax function. &lt;em&gt;Multi-head attention&lt;/em&gt; conducts this process in parallel with different, learned projections of each input.&lt;br /&gt;
+ Three variants of this mechanism are used. In &lt;em&gt;self-attention&lt;/em&gt; used by the encoder, the &lt;em&gt;query&lt;/em&gt;, &lt;em&gt;key&lt;/em&gt; and &lt;em&gt;value&lt;/em&gt; are distinct linear projections of the same output vector from the previous layer. In &lt;em&gt;masked self-attention&lt;/em&gt; the decoder furthermore masks out the weights for future tokens. Finally, in &lt;em&gt;encoder-decoder attention&lt;/em&gt;, each decoder block obtains only the &lt;em&gt;query&lt;/em&gt; from the preceding decoder layer, whereas &lt;em&gt;key&lt;/em&gt; and &lt;em&gt;value&lt;/em&gt; originate from the final encoder layer. The experiments exceeded state-of-the-art results, with two orders of magnitude lower compute resources than previous approaches.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;The Annotated Transformer, 2020&lt;/summary&gt; 
+Blog Post (2022 version)&lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Austin Huang, Suraj Subramanian, Jonathan Sum, Khalid Almubarak, and Stella Biderman (2020 original by Sasha Rush)&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nlp.seas.harvard.edu/annotated-transformer/&quot;&gt;[The Annotated Transformer]&lt;/a&gt; implements the Transformer as described in &lt;em&gt;‘Attention is All You Need’&lt;/em&gt; line by line as a fully functional Jupyter Notebook using PyTorch, with all &lt;a href=&quot;https://github.com/harvardnlp/annotated-transformer/&quot;&gt;code available on GitHub&lt;/a&gt;. Text segments of the original paper feature alongside the code, together with comments and visualizations that clarify various aspects of the architecture beyond the contents of the paper. The notebook also implements examples for data formatting, training and inference that show the Transformer applied in practice.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: &lt;a href=&quot;https://jalammar.github.io/illustrated-transformer/&quot;&gt;The Illustrated Transformer by Jay Alammar&lt;/a&gt; is yet another in-depth guide.&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Scaling Laws for Neural Language Models, 2020&lt;/summary&gt; 
+Paper&lt;br /&gt; 
+Length: ~9,000 words&lt;br /&gt; 
+Authors: Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu and Dario Amodei&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2001.08361&quot;&gt;[Scaling Laws for Neural Language Models]&lt;/a&gt; explores the predictive performance of Transformers for language modeling as a function of model size, data quantity and available compute resources. Extensive empirical results enable the authors to establish formulas that relate these factors to each other over seven orders of magnitude and enable several recommendations as to their optimal configuration. While each of these can form a bottleneck, model size (i.e. the number of trainable parameters) forms the single most impactful factor. Larger models reach higher sample-efficiency and better generalization earlier on in training. The specific model architecture has little effect. An eight-fold increase in model size requires a five-fold increase in training data. Given a fixed compute budget, the authors accordingly recommend to prioritize first model size, then batch size and only then the number of training steps, with early stopping before convergence typically providing the best trade-off in their experiments.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;information-theory&quot;&gt;Information Theory&lt;/h1&gt;
+
+&lt;p&gt;A substantial portion of the reading list is dedicated to more abstract material on theoretical informatics. Rather than proposing specific architectures or engineering solutions for concrete applications, these works are concerned with more fundamental study of the limits of computability, probability and intelligence. Recurring themes are principles for inductive inference such as &lt;a href=&quot;https://en.wikipedia.org/wiki/Occam%27s_razor&quot;&gt;Occam’s razor&lt;/a&gt;, which states a preference for simplicity when choosing between competing explanations (be they theories, hypotheses or models) for some given evidence or data. Another core concept is &lt;a href=&quot;https://en.wikipedia.org/wiki/Kolmogorov_complexity&quot;&gt;Kolmogorov complexity&lt;/a&gt;* for quantifying the amount of information, or potential for compression, of a given input.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;*Note: Kolmogorov complexity of a sequence can be defined as the length of the shortest program that prints it and then halts. While uncomputable in practice, it can be approximated with compression software such as gzip.&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;A Tutorial Introduction to the Minimum Description Length Principle, 2004&lt;/summary&gt; 
+Book Chapter &lt;br /&gt; 
+Length: ~30,000 words&lt;br /&gt; 
+Author: Peter Grünwald&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/math/0406077&quot;&gt;[A Tutorial Introduction to the Minimum Description Length Principle, 2004]&lt;/a&gt; 
+describes an approach for model selection that mathematically formalizes Occam’s razor, defining a preference for the most simple model among all those that explain the available data. The principle relates learning to data compression, as the ability to exploit regularity for achieving a shortest possible description. This description is defined by codes, and codelength functions are noted as corresponding to probability mass functions. The &lt;em&gt;two-part code version&lt;/em&gt; of the Minimum Description Length (MDL) principle measures the simplicity of a model instance as the length of its description (in bits) added to the length of the data description as encoded with it. The &lt;em&gt;refined, one-part code version&lt;/em&gt; examines entire families of models based on their goodness-of-fit and complexity.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Kolmogorov Complexity and Algorithmic Randomness &lt;br /&gt; (Chapter 14), 2017&lt;/summary&gt; 
+Book Chapter&lt;br /&gt; 
+Length: ~35,000 words&lt;br /&gt; 
+Authors: Alexander Shen, Vladimir A. Uspensky and Nikolay Vereshchagin&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.lirmm.fr/~ashen/kolmbook-eng-scan.pdf&quot;&gt;[Kolmogorov Complexity and Algorithmic Randomness]&lt;/a&gt; features a final chapter on algorithmic statistics. In this framework, a given sequence of observations is encoded as one binary string. Kolmogorov complexity provides formal means of quantifying its randomness and regularity, as well as the expected and desired properties of a theory or model that can explain it. Such a model should preferably be simple, as indicated by low Kolmogorov complexity. It should also explain as much regularity in the data as possible, making the data “typical” for the model. This property is formally quantified by low &lt;em&gt;randomness deficiency&lt;/em&gt; of the data relative to the model. Together, these two properties are also related to the two-part code of the Minimum Description Length principle. The chapter closes by drawing parallels between good models and good compressors, together with the potential of lossy compression to perform effective denoising.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;The First Law of Complexodynamics, 2011&lt;/summary&gt; 
+Blog Post &lt;br /&gt; 
+Length: ~2,000 words&lt;br /&gt; 
+Author: Scott Aaronson&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://scottaaronson.blog/?p=762&quot;&gt;[The First Law of Complexodynamics]&lt;/a&gt; explores the relationship between entropy and complexity. Whereas the second law of thermodynamics dictates that entropy of closed systems increases over time, their complexity of ‘interestingness’ is noted to first rise and then fall again. Giving the example of coffee and milk mixing in a glass, the highest such ‘complextropy’ is noted to occur midway, when tendrils of milk result from both liquids no longer being cleanly separated but also not yet forming a homogenous blend. Kolmogorov complexity is explored as a way to express both entropy and this ‘complextropy’, with the conjecture that a resource-bounded definition could provide a suitable theoretical framework.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Quantifying the Rise and Fall of Complexity in Closed Systems: The Coffee Automaton, 2014&lt;/summary&gt; 
+Paper&lt;br /&gt; 
+Length: ~8,500 words&lt;br /&gt; 
+Authors: Scott Aaronson, Sean M. Carroll and Lauren Ouellette&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1405.6903&quot;&gt;[Quantifying the Rise and Fall of Complexity]&lt;/a&gt; explores these ideas in further depth. Covering various theoretical notions of complexity, it eventually settles on ‘apparent complexity’ as a way of modeling the separate phenomena of entropy and the ‘interestingness’ of a closed system. Practical experiments inspired by the blending of coffee and milk fill a 2D array with a clean split of binary values and perturb these over multiple time steps to represent random mixing. This array forms an image which is compressed by gzip to approximate Kolmogorov complexity via file size. At each time step, this is done with the image itself to approximate entropy, but also with a coarse-grained, blurred version to estimate its apparent complexity. As envisioned, the increasingly noisy image values yield rising entropy whereas their blurred representation first raises and then decreases the apparent complexity measure as the mix gets more homogeneous.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Machine Super Intelligence, 2008&lt;/summary&gt; 
+Dissertation &lt;br /&gt; 
+Length: ~50,000 words&lt;br /&gt; 
+Author: Shane Legg, supervised by Marcus Hutter&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://sonar.ch/usi/documents/317954&quot;&gt;[Machine Super Intelligence, 2008]&lt;/a&gt; explores universal artificial intelligence under aspects of algorithmic complexity, probability and information theory. It covers inductive inference from Epicurus principle of multiple explanations, Occam’s razor, Bayes rule and priors to complexity measures and agent-environment models as examined in reinforcement learning. Discussing various definitions and established tests for intelligence, it proposes a formal definition and measure for universal intelligence* as the ability of an agent to achieve specific goals in a wide range of environments. While the proposed measure itself is uncomputable in practice, it enables theoretical conclusions, such as the requirement that powerful agents be proportionally complex, and motivates several practical experiments in which a downscaled version of a hypothetically optimal agent is deployed for reinforcement learning.&lt;/p&gt;
+
+&lt;p&gt;*&lt;em&gt;Note: This measure would accordingly score the universal intelligence of specialized, ‘narrow’ machine learning systems that form the bulk of the papers examined in this blog post as comparatively low.&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;miscellaneous&quot;&gt;Miscellaneous&lt;/h1&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Keeping Neural Networks Simple by Minimizing
+the Description Length of the Weights, 1993&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Geoffrey E. Hinton and Drew van Camp&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cs.toronto.edu/~hinton/absps/colt93.pdf&quot;&gt;[Keeping Neural Networks Simple by Minimizing the Description Length of the Weights]&lt;/a&gt; introduced the concept of Variational Inference with neural networks.  This approach enables neural network training to approximate the otherwise computationally prohibitive concept of Bayesian inference. The authors propose a regularization technique that represents each weight of a neural network as a Gaussian probability distribution described by a mean and a variance value. Inspired by the Minimum Description Length principle, the cost function used during training penalizes the description length of the weights and the data misfits. The authors argue that this representation allows for a substantial reduction in the description length of the weights. Their &lt;em&gt;Bits-Back Coding&lt;/em&gt; argument states that the distribution of each weight can be sampled with random bits at no additional cost, as the random bits can be reconstructed given a fixed learning algorithm, architecture and initial probability distribution for each weight.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Variational Lossy Autencoder, 2017&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Xi Chen, Diederik P. Kingma, Tim Salimans, Yan Duan, Prafulla Dhariwal, John Schulman, Ilya Sutskever and Pieter Abbeel&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1611.02731&quot;&gt;[Variational Lossy Autoencoders]&lt;/a&gt; provide a way for data compression with control over which aspects of the data should be retained or discarded. In experimental results, this enables 2D image compression that discards local texture while retaining global structure. Autencoders use an inference model to compresses input data to a compact &lt;em&gt;latent code&lt;/em&gt;, from which a generative model decodes the original input. This latent code should accordingly represent all information relevant for describing the input. When using sufficiently powerful autoregressive models like RNNs however, decoders had been previously found capable of predicting the output while ignoring the latent code entirely. Here, a theoretical explanation for this phenomenon is provided based on Bits Back Coding. The proposed approach weakens the decoder (e.g. limiting it to reconstruct small receptive fields) such that it depends on the missing information (e.g. global structure) being fully provided by the latent code to which the input is compressed.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;GPipe, 2018&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~5,000 words&lt;br /&gt; 
+Authors: Yanping Huang, Youlong Cheng, Ankur Bapna, Orhan Firat, Mia Xu Chen, Dehao Chen, HyoukJoong Lee, Jiquan Ngiam, Quoc V. Le, Yonghui Wu and Zhifeng Chen&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1811.06965&quot;&gt;[GPipe]&lt;/a&gt; is* a library for distributed training of neural networks on more than one accelerator (e.g. GPUs). It subdivides the neural network architecture into &lt;em&gt;cells&lt;/em&gt; formed by one or more consecutive layers and assigns each cell to a separate accelerator. It furthermore employs pipeline parallelism by also splitting each mini-batch of training samples into several &lt;em&gt;micro&lt;/em&gt;-batches that are pipelined through, so that multiple accelerators can work on different micro batches concurrently. The gradients for all micro-batches are aggregated for one synchonous update per mini-batch. Training thus remains consistent regardless of cell count or micro-batch size.&lt;/p&gt;
+
+&lt;p&gt;*&lt;em&gt;Note: As for the library itself, &lt;a href=&quot;https://github.com/kakaobrain/torchgpipe&quot;&gt;GitHub&lt;/a&gt; shows that its most recent commit for the final version v0.0.7 occurred in September 2020.&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;details&gt;
+&lt;summary&gt;Neural Message Passing for Quantum Chemistry, 2017&lt;/summary&gt; 
+Paper &lt;br /&gt; 
+Length: ~6,000 words&lt;br /&gt; 
+Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals and George E. Dahl&lt;br /&gt;
+&lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1704.01212&quot;&gt;[Neural Message Passing for Quantum Chemistry]&lt;/a&gt; explores the application of graph neural networks to predict quantum mechanical properties of organic molecules. The commonalities between several related works that utilize neural networks for graph data are first discussed and abstracted into a new concept of &lt;em&gt;Message Passing Neural Networks&lt;/em&gt;. This framework considers undirected graphs composed of edges and nodes, both of which can have features. Each forward pass performs one or more steps of a message passing phase in which the hidden state of each given node is updated based on messages that depend on the hidden states and connecting edges with all adjacent nodes. Next, a readout phase calculates one hidden state for the entire graph using a readout function that is invariant to the order of graph nodes. Using the &lt;a href=&quot;https://arxiv.org/abs/1511.05493&quot;&gt;Gated Graph Neural Network&lt;/a&gt; architecture, the authors present experimental results on graph data of molecular structures that achieved state-of-the-art results at the time.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;concluding-thoughts&quot;&gt;Concluding Thoughts&lt;/h1&gt;
+
+&lt;p&gt;Whereas this summary was written by hand, the described technology is approaching a point where its language modeling capabilities are hard to distinguish from human writing already now in 2024. Eventually, Large Language Models may indeed become self-explanatory in a literal sense. Prompting e.g. ChatGPT to summarize this material nonetheless still yields explanations that &lt;em&gt;seem&lt;/em&gt; very convincing but can also be largely hallucinated and often misleading. Perhaps that will already improve once this article is ingested into the training data?&lt;/p&gt;
+
+&lt;p&gt;Although low-quality, generated content was a recurring theme I encountered while researching this list, there are also several independent summaries of the reading list worth sharing here:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aman.ai/primers/ai/top-30-papers/&quot;&gt;Aman Chadha’s &lt;em&gt;Distilled AI&lt;/em&gt;&lt;/a&gt; (~12,000 words, includes other papers)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=oF6vcYHs6rw&amp;amp;list=PL8hTotro6aVGtPgLJ_TMKe8C8MDhHBZ4W&quot;&gt;DataMListic’s youtube video playlist&lt;/a&gt; (about 25 min total)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With this blog post, the known contents of the reading list are compressed to barely more than one percent of the original word count. This leaves a lot more to be discussed, but hopefully it still has something to offer for the interested reader. My own, subjective review will be saved for another post in the future.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+
+</feed>
