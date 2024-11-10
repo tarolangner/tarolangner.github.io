@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
- <link href="https://tensorlabbet.com/"/>
- <updated>2024-09-24T20:40:32+02:00</updated>
- <id>https://tensorlabbet.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2024-11-10T23:35:05+01:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -13,12 +13,12 @@
 
  
  <entry>
-   <title>Summary of Ilya Sutskevers AI Reading List</title>
-   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
+   <title>Summary of Ilya Sutskever's AI Reading List</title>
+   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
+   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
-    In this post: Ilya Sutskevers AI Reading list in ~120 words per item &lt;br /&gt;
+    In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     
     &lt;i&gt;(15 min read)&lt;/i&gt;
 &lt;/p&gt;
@@ -89,10 +89,11 @@ After doing just that, I therefore dedicate this blog post to all those of us wh
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;CS231, 2017&lt;/summary&gt; 
+&lt;summary&gt;CS231, 2017 &lt;a name=&quot;CS231&quot;&gt;&lt;/a&gt; &lt;/summary&gt; 
 Stanford University Course &lt;br /&gt; 
 Length: ~50,000 words, forming 11 blocks of 2 modules &lt;br /&gt; 
 Instructors: Fei-Fei Li, Andrej Karpathy and Justin Johnson &lt;br /&gt;
+&lt;a href=&quot;#CS231&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -104,10 +105,11 @@ Instructors: Fei-Fei Li, Andrej Karpathy and Justin Johnson &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;AlexNet, 2012&lt;/summary&gt; 
+&lt;summary&gt;AlexNet, 2012 &lt;a name=&quot;AlexNet&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Alex Krizhevsky, Ilya Sutskever and Geoffrey E. Hinton &lt;br /&gt;
+&lt;a href=&quot;#AexNet&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -119,11 +121,16 @@ Authors: Alex Krizhevsky, Ilya Sutskever and Geoffrey E. Hinton &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;ResNet, 2015&lt;/summary&gt; 
+&lt;summary&gt;ResNet, 2015 &lt;a name=&quot;ResNet&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
+&lt;a href=&quot;#ResNet&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html&quot;&gt;[ResNet, 2015]&lt;/a&gt; succeeded AlexNet as a more modern CNN architecture, reaching first place on the ImageNet challenge in 2015. It remains a popular CNN architecture to this day and is &lt;a href=&quot;https://openaccess.thecvf.com/content/CVPR2022/html/Liu_A_ConvNet_for_the_2020s_CVPR_2022_paper.html&quot;&gt;subject of ongoing research&lt;/a&gt;. It introduced residual connections into CNN architectures that had become ever deeper, stacking more convolutional layers to achieve higher representational power. By allowing residual connections to skip or bypass entire blocks of layers, ResNet architectures suffered less from gradient degradation effects in training and could thus be robustly trained at previously unseen depth.&lt;/p&gt;
@@ -132,10 +139,11 @@ Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;ResNet identity mappings, 2016&lt;/summary&gt; 
+&lt;summary&gt;ResNet identity mappings, 2016 &lt;a name=&quot;ResNetIdentity&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
+&lt;a href=&quot;#ResNetIdentity&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -145,10 +153,11 @@ Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Dilated convolutions, 2015&lt;/summary&gt; 
+&lt;summary&gt;Dilated convolutions, 2015 &lt;a name=&quot;DilatedConv&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Fisher Yu and Vladlen Koltun &lt;br /&gt;
+&lt;a href=&quot;#DilatedConv&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -164,10 +173,11 @@ Authors: Fisher Yu and Vladlen Koltun &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Understanding LSTM Networks, 2015&lt;/summary&gt; 
+&lt;summary&gt;Understanding LSTM Networks, 2015 &lt;a name=&quot;UnderstandingLSTMs&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Blog Post &lt;br /&gt; 
 Length: ~2,000 words&lt;br /&gt; 
 Author: Christopher Olah &lt;br /&gt;
+&lt;a href=&quot;#UnderstandingLSTMs&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -177,10 +187,11 @@ Author: Christopher Olah &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;The Unreasonable Effectiveness of RNNs, 2015&lt;/summary&gt; 
+&lt;summary&gt;The Unreasonable Effectiveness of RNNs, 2015 &lt;a name=&quot;EffectiveRNNs&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Blog Post &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Author: Andrej Karpathy &lt;br /&gt;
+&lt;a href=&quot;#EffectiveRNNs&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -190,10 +201,11 @@ Author: Andrej Karpathy &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;RNN Regularization, 2014&lt;/summary&gt; 
+&lt;summary&gt;RNN Regularization, 2014 &lt;a name=&quot;RNNRegularization&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~3,500 words&lt;br /&gt; 
 Authors: Wojciech Zaremba, Ilya Sutskever and Oriol Vinyals &lt;br /&gt;
+&lt;a href=&quot;#RNNRegularization&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -203,10 +215,11 @@ Authors: Wojciech Zaremba, Ilya Sutskever and Oriol Vinyals &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Neural Turing Machines, 2014&lt;/summary&gt; 
+&lt;summary&gt;Neural Turing Machines, 2014 &lt;a name=&quot;NTM&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~7,500 words&lt;br /&gt; 
 Authors: Alex Graves, Greg Wayne and Ivo Danihelka &lt;br /&gt;
+&lt;a href=&quot;#NTM&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -216,10 +229,11 @@ Authors: Alex Graves, Greg Wayne and Ivo Danihelka &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Deep Speech 2, 2016&lt;/summary&gt; 
+&lt;summary&gt;Deep Speech 2, 2016 &lt;a name=&quot;DeepSpeech&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~7,000 words&lt;br /&gt; 
 Authors: Dario Amodei, Sundaram Ananthanarayanan, Rishita Anubhai, Jingliang Bai, Eric Battenberg, Carl Case, Jared Casper, Bryan Catanzaro, Qiang Cheng, Guoliang Chen, Jie Chen, Jingdong Chen, Zhijie Chen, Mike Chrzanowski, Adam Coates, Greg Diamos, Ke Ding, Niandong Du, Erich Elsen, Jesse Engel, Weiwei Fang, Linxi Fan, Christopher Fougner, Liang Gao, Caixia Gong, Awni Hannun, Tony Han, Lappi Johannes, Bing Jiang, Cai Ju, Billy Jun, Patrick LeGresley, Libby Lin, Junjie Liu, Yang Liu, Weigao Li, Xiangang Li, Dongpeng Ma, Sharan Narang, Andrew Ng, Sherjil Ozair, Yiping Peng, Ryan Prenger, Sheng Qian, Zongfeng Quan, Jonathan Raiman, Vinay Rao, Sanjeev Satheesh, David Seetapun, Shubho Sengupta, Kavya Srinet, Anuroop Sriram, Haiyuan Tang, Liliang Tang, Chong Wang, Jidong Wang, Kaifu Wang, Yi Wang, Zhijian Wang, Zhiqian Wang, Shuang Wu, Likai Wei, Bo Xiao, Wen Xie, Yan Xie, Dani Yogatama, Bin Yuan, Jun Zhan, Zhenyao Zhu  &lt;br /&gt;
+&lt;a href=&quot;#DeepSpeech&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -229,10 +243,11 @@ Authors: Dario Amodei, Sundaram Ananthanarayanan, Rishita Anubhai, Jingliang Bai
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;RNNsearch, 2015&lt;/summary&gt; 
+&lt;summary&gt;RNNsearch, 2015 &lt;a name=&quot;RNNsearch&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~8,000 words&lt;br /&gt; 
 Authors: Dzmitry Bahdanau, KyungHyun Cho and Yoshua Bengio &lt;br /&gt;
+&lt;a href=&quot;#RNNsearch&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -242,10 +257,11 @@ Authors: Dzmitry Bahdanau, KyungHyun Cho and Yoshua Bengio &lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Pointer Networks, 2015&lt;/summary&gt; 
+&lt;summary&gt;Pointer Networks, 2015 &lt;a name=&quot;PtrNet&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~4,500 words&lt;br /&gt; 
 Authors: Oriol Vinyals, Meire Fortunato and Navdeep Jaitly&lt;br /&gt;
+&lt;a href=&quot;#PtrNet&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -255,10 +271,11 @@ Authors: Oriol Vinyals, Meire Fortunato and Navdeep Jaitly&lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Set2Set, 2016&lt;/summary&gt; 
+&lt;summary&gt;Set2Set, 2016 &lt;a name=&quot;Set2Set&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,500 words&lt;br /&gt; 
 Authors: Oriol Vinyals, Samy Bengio and Manjunath Kudlur&lt;br /&gt;
+&lt;a href=&quot;#Set2Set&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -268,10 +285,11 @@ Authors: Oriol Vinyals, Samy Bengio and Manjunath Kudlur&lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Relation Networks, 2017&lt;/summary&gt; 
+&lt;summary&gt;Relation Networks, 2017 &lt;a name=&quot;RelationNetworks&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: 5,000 words&lt;br /&gt; 
 Authors: Adam Santoro, David Raposo, David G. Barrett, Mateusz Malinowski, Razvan Pascanu, Peter Battaglia, Timothy Lillicrap &lt;br /&gt;
+&lt;a href=&quot;#RelationNetworks&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -281,10 +299,11 @@ Authors: Adam Santoro, David Raposo, David G. Barrett, Mateusz Malinowski, Razva
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Relational Recurrent Neural Networks, 2018&lt;/summary&gt; 
+&lt;summary&gt;Relational Recurrent Neural Networks, 2018 &lt;a name=&quot;RelationalRNNs&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: 6,000 words&lt;br /&gt; 
 Authors: Adam Santoro, Ryan Faulkner, David Raposo, Jack Rae, Mike Chrzanowski, Theophane Weber, Daan Wierstra, Oriol Vinyals, Razvan Pascanu, Timothy Lillicrap &lt;br /&gt;
+&lt;a href=&quot;#RelationalRNNs&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -304,10 +323,11 @@ With &lt;em&gt;multiplicative attention&lt;/em&gt;, Transformers compare multipl
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Attention Is All You Need, 2017&lt;/summary&gt; 
+&lt;summary&gt;Attention Is All You Need, 2017 &lt;a name=&quot;AttentionIsAllYouNeed&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~4,500 words&lt;br /&gt; 
 Authors: Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser and Illia Polosukhin&lt;br /&gt;
+&lt;a href=&quot;#AttentionIsAllYouNeed&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -318,10 +338,11 @@ Authors: Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;The Annotated Transformer, 2020&lt;/summary&gt; 
+&lt;summary&gt;The Annotated Transformer, 2020 &lt;a name=&quot;AnnotatedTransformer&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Blog Post (2022 version)&lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Austin Huang, Suraj Subramanian, Jonathan Sum, Khalid Almubarak, and Stella Biderman (2020 original by Sasha Rush)&lt;br /&gt;
+&lt;a href=&quot;#AnnotatedTransformer&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -333,10 +354,11 @@ Authors: Austin Huang, Suraj Subramanian, Jonathan Sum, Khalid Almubarak, and St
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Scaling Laws for Neural Language Models, 2020&lt;/summary&gt; 
+&lt;summary&gt;Scaling Laws for Neural Language Models, 2020 &lt;a name=&quot;ScalingLaws&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper&lt;br /&gt; 
 Length: ~9,000 words&lt;br /&gt; 
 Authors: Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu and Dario Amodei&lt;br /&gt;
+&lt;a href=&quot;#ScalingLaws&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -354,10 +376,11 @@ Authors: Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Ches
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;A Tutorial Introduction to the Minimum Description Length Principle, 2004&lt;/summary&gt; 
+&lt;summary&gt;A Tutorial Introduction to the Minimum Description Length Principle, 2004 &lt;a name=&quot;MDL&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Book Chapter &lt;br /&gt; 
 Length: ~30,000 words&lt;br /&gt; 
 Author: Peter Grünwald&lt;br /&gt;
+&lt;a href=&quot;#MDL&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -368,10 +391,11 @@ describes an approach for model selection that mathematically formalizes Occam�
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Kolmogorov Complexity and Algorithmic Randomness &lt;br /&gt; (Chapter 14), 2017&lt;/summary&gt; 
+&lt;summary&gt;Kolmogorov Complexity and Algorithmic Randomness &lt;a name=&quot;KomogorovComplexity&quot;&gt;&lt;/a&gt; &lt;br /&gt; (Chapter 14), 2017&lt;/summary&gt; 
 Book Chapter&lt;br /&gt; 
 Length: ~35,000 words&lt;br /&gt; 
 Authors: Alexander Shen, Vladimir A. Uspensky and Nikolay Vereshchagin&lt;br /&gt;
+&lt;a href=&quot;#KolmogorovComplexity&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -381,10 +405,11 @@ Authors: Alexander Shen, Vladimir A. Uspensky and Nikolay Vereshchagin&lt;br /&g
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;The First Law of Complexodynamics, 2011&lt;/summary&gt; 
+&lt;summary&gt;The First Law of Complexodynamics, 2011 &lt;a name=&quot;Complexodynamics&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Blog Post &lt;br /&gt; 
 Length: ~2,000 words&lt;br /&gt; 
 Author: Scott Aaronson&lt;br /&gt;
+&lt;a href=&quot;#Complexodynamics&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -394,10 +419,11 @@ Author: Scott Aaronson&lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Quantifying the Rise and Fall of Complexity in Closed Systems: The Coffee Automaton, 2014&lt;/summary&gt; 
+&lt;summary&gt;Quantifying the Rise and Fall of Complexity in Closed Systems: The Coffee Automaton, 2014 &lt;a name=&quot;RiseAndFallOfComplexity&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper&lt;br /&gt; 
 Length: ~8,500 words&lt;br /&gt; 
 Authors: Scott Aaronson, Sean M. Carroll and Lauren Ouellette&lt;br /&gt;
+&lt;a href=&quot;#RiseAndFallOfComplexity&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -407,10 +433,11 @@ Authors: Scott Aaronson, Sean M. Carroll and Lauren Ouellette&lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Machine Super Intelligence, 2008&lt;/summary&gt; 
+&lt;summary&gt;Machine Super Intelligence, 2008 &lt;a name=&quot;MachineSuperIntelligence&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Dissertation &lt;br /&gt; 
 Length: ~50,000 words&lt;br /&gt; 
 Author: Shane Legg, supervised by Marcus Hutter&lt;br /&gt;
+&lt;a href=&quot;#MachineSuperIntelligence&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -426,11 +453,11 @@ Author: Shane Legg, supervised by Marcus Hutter&lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Keeping Neural Networks Simple by Minimizing
-the Description Length of the Weights, 1993&lt;/summary&gt; 
+&lt;summary&gt;Keeping Neural Networks Simple by Minimizing the Description Length of the Weights, 1993 &lt;a name=&quot;NNMDL&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Geoffrey E. Hinton and Drew van Camp&lt;br /&gt;
+&lt;a href=&quot;#NNMDL&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -440,10 +467,11 @@ Authors: Geoffrey E. Hinton and Drew van Camp&lt;br /&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Variational Lossy Autencoder, 2017&lt;/summary&gt; 
+&lt;summary&gt;Variational Lossy Autencoder, 2017 &lt;a name=&quot;LossyVAE&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Xi Chen, Diederik P. Kingma, Tim Salimans, Yan Duan, Prafulla Dhariwal, John Schulman, Ilya Sutskever and Pieter Abbeel&lt;br /&gt;
+&lt;a href=&quot;#LossyVAE&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -453,10 +481,11 @@ Authors: Xi Chen, Diederik P. Kingma, Tim Salimans, Yan Duan, Prafulla Dhariwal,
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;GPipe, 2018&lt;/summary&gt; 
+&lt;summary&gt;GPipe, 2018 &lt;a name=&quot;GPipe&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~5,000 words&lt;br /&gt; 
 Authors: Yanping Huang, Youlong Cheng, Ankur Bapna, Orhan Firat, Mia Xu Chen, Dehao Chen, HyoukJoong Lee, Jiquan Ngiam, Quoc V. Le, Yonghui Wu and Zhifeng Chen&lt;br /&gt;
+&lt;a href=&quot;#GPipe&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -468,10 +497,11 @@ Authors: Yanping Huang, Youlong Cheng, Ankur Bapna, Orhan Firat, Mia Xu Chen, De
 
 &lt;blockquote&gt;
   &lt;details&gt;
-&lt;summary&gt;Neural Message Passing for Quantum Chemistry, 2017&lt;/summary&gt; 
+&lt;summary&gt;Neural Message Passing for Quantum Chemistry, 2017 &lt;a name=&quot;NeuralMessagePassing&quot;&gt;&lt;/a&gt;&lt;/summary&gt; 
 Paper &lt;br /&gt; 
 Length: ~6,000 words&lt;br /&gt; 
 Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals and George E. Dahl&lt;br /&gt;
+&lt;a href=&quot;#NeuralMessagePassing&quot;&gt;🔗&lt;/a&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
@@ -490,11 +520,6 @@ Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals an
 &lt;/ul&gt;
 
 &lt;p&gt;With this blog post, the known contents of the reading list are compressed to barely more than one percent of the original word count. This leaves a lot more to be discussed, but hopefully it still has something to offer for the interested reader. My own, subjective review will be saved for another post in the future.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;em&gt;As a concluding note, I dedicate this post to Virginia Coronel and the GoFundMe campaign to pay for her important surgery in her home country of Venezuela. You can find the fundraiser under the following link:&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;a href=&quot;https://www.gofundme.com/f/support-virginias-urgent-brain-surgery&quot;&gt;https://www.gofundme.com/f/support-virginias-urgent-brain-surgery&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content>
  </entry>
  
