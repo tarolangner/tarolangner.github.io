@@ -98,6 +98,147 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="http://localhost:4000/2024/11/11/lost-reading-items/">
+        The Lost Reading Items
+      </a>
+    </h1>
+
+    <span class="post-date">11 Nov 2024, Taro Langner</span>
+
+    <p class="message">
+    In this post: An attempt to reconstruct Ilya Sutskever's 2020 AI reading list <br />
+    <i>(8 min read)</i><br />
+    
+</p>
+
+<p>I recently <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/">shared a summary</a> of a <a href="https://arc.net/folder/D0472A20-9C20-4D3F-B145-D2865C0A9FEE">viral AI reading list</a> attributed to Ilya Sutskever, which laid claim to covering ‘<em>90% of what matters</em>’ back in 2020. It boils down the reading items to barely one percent of the original word count to form the TL;DR I would have wished for before reading.</p>
+
+<p>The viral version of the list as shared online is known to be incomplete, however, and includes <a href="https://x.com/andrew_n_carr/status/1752526711311507526">only 27</a> of <a href="https://dallasinnovates.com/exclusive-qa-john-carmacks-different-path-to-artificial-general-intelligence/?utm_source=www.turingpost.com&amp;utm_medium=referral&amp;utm_campaign=the-mysterious-ai-reading-list-ilya-sutskever-s-recommendations">about 40</a> original reading items.
+The rest <a href="https://news.ycombinator.com/item?id=34641359">allegedly</a> fell victim to the E-Mail deletion policy at OpenAI. These missing reading items have inspired some good discussions in the past, with many different ideas as to which papers would have been important enough to include.</p>
+
+<p>This post is an attempt to identify these lost reading items. It builds on clues gathered from the viral list, contemporary presentations given by Ilya Sutskever, resources shared by OpenAI and more.</p>
+
+<h1 id="filling-the-gaps">Filling the Gaps</h1>
+
+<p>The main piece of evidence is <a href="https://x.com/andrew_n_carr/status/1752526711311507526">a claim shared along with the list</a> according to which an entire selection of <em>meta-learning</em> papers was lost.</p>
+
+<p>Meta-learning is often said to pursue <em>‘learning to learn’</em>, with neural networks being trained for a general ability to adapt more easily to new tasks for which only few training samples are available. A network should thus be able benefit from its existing weights without requiring an entirely new training from scratch on the new data. <em>One-shot learning</em> provides just a single training sample to a model from which it is expected to learn a new downstream task, whereas <em>zero-shot</em> settings provide no annotated training samples at all.</p>
+
+<p>For some of the candidate papers listed below, the case can be strengthened further by evidence in the form of an endorsement straight from OpenAI itself. Ilya Sutskever was chief scientist at a time when OpenAI published the educational resource <a href="https://spinningup.openai.com/en/latest/index.html">‘Spinning Up in Deep RL’</a> which includes several of these candidates in an entirely separate reading list of 105 <a href="https://spinningup.openai.com/en/latest/spinningup/keypapers.html#meta-rl">‘Key Papers in Deep RL’</a>. Below, the papers which also appear in that list are marked with a symbol (⚛).</p>
+
+<h2 id="clues-from-the-preserved-reading-items">Clues from the Preserved Reading Items</h2>
+
+<p>Some meta-learning concepts can be found even in the known parts of the list.
+The preserved reading items can be arranged into a narrative arc around a related branch of research on <a href="https://arxiv.org/abs/1410.3916">Memory-Augmented Neural Networks (MANNs)</a>. Following the <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/#NTM">‘Neural Turing Machine’ (NTM)</a> paper, <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/#Set2Set">‘Set2Set’</a> and <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/#RelationalRNN">‘Relational RNNs’</a> experimented with external memory banks that an RNN could read and write information on. They directly cite or closely relate to several papers which may well have been part of the original list:</p>
+
+<p><strong>Potential Reading Items (Part 1):</strong></p>
+
+<ul>
+  <li><a href="http://proceedings.mlr.press/v48/santoro16.pdf">‘Meta-learning with memory-augmented neural networks’</a> <br />
+<em>from 2016</em> 
+<!-- <span style="color:gray">Adapts NTM for one-shot classification of [Omniglot](https://www.cs.cmu.edu/~rsalakhu/papers/LakeEtAl2015Science.pdf) characters</span> --></li>
+  <li><a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/cb8da6767461f2812ae4290eac7cbc42-Paper.pdf">‘Prototypical networks for few-shot learning’</a> <br /> 
+<em>from 2017</em> 
+<!-- Learn embedding spaces for few- and zero-shot classification  --></li>
+  <li><a href="http://proceedings.mlr.press/v70/finn17a/finn17a.pdf">‘Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks’</a>⚛ <br />
+<em>from 2017</em></li>
+</ul>
+
+<h2 id="clues-from-contemporary-presentations">Clues from Contemporary Presentations</h2>
+
+<p>Certain papers about meta-learning and <em>competitive self-play</em> also feature repeatedly in a series of presentations held by Ilya Sutskever around this time and may well have eventually been included in the reading list too.</p>
+
+<p class="message">
+
+<b>Recorded Presentations:</b> <br />
+
+<a href="https://www.youtube.com/watch?v=BCzFs9Xb9_o">- Meta Learning and Self Play - Ilya Sutskever, OpenAI (YouTube)</a>, 2017 <br />
+<a href="https://www.youtube.com/watch?v=AopSlxNYqX8">- OpenAI - Meta Learning &amp; Self Play - Ilya Sutskever (YouTube)</a>, 2018 <br />
+<a href="https://www.youtube.com/watch?v=9EN_HoEk3KY">- Ilya Sutskever: OpenAI Meta-Learning and Self-Play (YouTube)</a>, 2018 <br />
+</p>
+
+<p>These presentations largely overlap and repeatedly reference known contents of the reading list. They open with a fundamental motivation of why deep learning works, framing backpropagation with neural networks as a search for <em>small circuits</em> that relate to the <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/#MDL">Minimum Description Length principle</a>, according to which the shortest program that can explain given data will reach the best generalization possible.</p>
+
+<p>Next, all three presentations reference the following meta-learning papers:</p>
+
+<p><strong>Potential Reading Items (Part 2):</strong></p>
+<ul>
+  <li><a href="https://amygdala.psychdept.arizona.edu/labspace/JclubLabMeetings/Lijuan-Science-2015-Lake-1332-8.pdf">‘Human-level concept learning through probabilistic program induction’</a> <br /> 
+as <em>Lake et al., 2016</em></li>
+  <li><a href="https://arxiv.org/pdf/1611.01578">‘Neural Architecture Search with Reinforcement Learning’</a> <br /> 
+as <em>Zoph and Le, 2017</em></li>
+  <li><a href="https://arxiv.org/pdf/1707.03141">‘A Simple Neural Attentive Meta-Learner’</a>⚛ <br /> 
+as <em>Mishra et al., 2017</em></li>
+</ul>
+
+<p>Reinforcement Learning (RL) also features heavily in all three presentations, with close links to meta-learning. One key concept is <em>competitive self-play</em> in which agents interact in a simulated environment to reach specific, typically adversarial objectives. As a way to <em>‘turn compute into data’</em>, this approach enabled simulated agents to outperform human champions and invent new moves in rule-based games. Ilya Sutskever presents an evolutionary biology perspective that relates competitive self-play to the impact of social interaction on brain size <a href="https://www.science.org/doi/10.1126/science.1098410">(pay-walled link)</a>.
+He goes on to suggest that rapid competence gain in a simulated <em>‘agent society’</em> may ultimately, according to his judgement, provide <a href="https://www.youtube.com/watch?v=9EN_HoEk3KY&amp;t=2325s">a plausible path towards a form of AGI</a>.</p>
+
+<p>Given the significance he ascribes to these concepts, it seems plausible that some of the cited papers on self-play may have later also been included in the reading list. They may form a sizeable chunk of the missing items, especially as RL is otherwise mentioned by <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/#MachineSuperIntelligence">only one</a> of the preserved reading items.</p>
+
+<p><strong>Potential Reading Items (Part 3):</strong></p>
+
+<ul>
+  <li><a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/453fadbd8a1a3af50a9df4df899537b5-Paper.pdf">‘Hindsight Experience Replay’</a>⚛ <br /> 
+as <em>Andrychowicz et al., 2017</em></li>
+  <li><a href="https://arxiv.org/abs/1509.02971">‘Continuous control with deep reinforcement learning’</a>⚛ <br />
+as <em>DDPG: Deep Deterministic Policy Gradients, 2015</em></li>
+  <li><a href="https://arxiv.org/abs/1710.06537">‘Sim-to-Real Transfer of Robotic Control with Dynamics Randomization’</a> <br />
+as <em>Peng et al., 2017</em></li>
+  <li><a href="https://arxiv.org/abs/1710.09767">‘Meta Learning Shared Hierarchies’</a> <br />
+as <em>Frans et al., 2017</em></li>
+  <li><a href="https://www.csd.uwo.ca/~xling/cs346a/extra/tdgammon.pdf">‘Temporal Difference Learning and TD-Gammon [1995]’</a> <br />
+as <em>Tesauro et al., 1992</em></li>
+  <li><a href="https://www.youtube.com/watch?v=JBgG_VSP7f8&amp;t=2s">‘Karl Sims - Evolved Virtual Creatures, Evolution Simulation, 1994’</a> <br />
+as <em>Carl Sims, 1994 (YouTube video [4:09])</em></li>
+  <li><a href="https://arxiv.org/abs/1710.03748">‘Emergent Complexity via Multi-Agent Competition’</a> <br /> 
+as <em>Bansal et al., 2017</em></li>
+  <li><a href="https://arxiv.org/abs/1706.03741">‘Deep reinforcement learning from human preferences’</a>⚛ <br /> 
+as <em>Christiano et al., 2017</em> (Note: Introduces RLHF)</li>
+</ul>
+
+<p>Even today, these presentations from around 2018 are still worth watching. Next to fascinating bits of knowledge, they also include gems such as the statement:</p>
+<blockquote>
+  <p><a href="https://www.youtube.com/watch?v=BCzFs9Xb9_o&amp;t=2532s">‘Just like in the human world: The reason humans find life difficult is because of other humans’</a></p>
+  <div style="text-align: right">-Ilya Sutskever </div>
+</blockquote>
+
+<p>While some concepts in computer science accordingly appear timeless, other points may seem surprising today, like the casual remark of an audience member in the Q&amp;A session:</p>
+<blockquote>
+  <p><a href="https://www.youtube.com/watch?v=9EN_HoEk3KY&amp;t=3082s">‘It seems like an important sub-problem on the path to AGI will be understanding language, and the state of generative language modelling right now is pretty abysmal.’</a></p>
+  <div style="text-align: right">-Audience member </div>
+</blockquote>
+
+<p>To which Ilya Sutskever responds:</p>
+<blockquote>
+  <p><a href="https://www.youtube.com/watch?v=9EN_HoEk3KY&amp;t=3106s">‘Even without any particular innovations beyond models that exist today, simply scaling up models that exist today on larger datasets is going to go surprisingly far.’</a></p>
+  <div style="text-align: right">-Ilya Sutskever (in 2018)</div>
+</blockquote>
+
+<p>This response was later confirmed by experimental results in the reading item <a href="https://tensorlabbet.com/2024/09/24/ai-reading-list/#ScalingLaws">‘Scaling Laws for Neural Language Models’</a> (which echoes the <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">‘Bitter Lesson’</a> by Rich Sutton). It was ultimately proven true, as he would oversee Transformer architectures scaled up to <a href="https://the-decoder.com/gpt-4-architecture-datasets-costs-and-more-leaked/">an estimated 1.8 trillion parameters and costing over $60 million to train on 128 GPUs</a> forming Large Language Models (LLMs) which are today capable of generating text that is increasingly difficult to distinguish from human writing.</p>
+
+<h1 id="honorable-mentions">Honorable Mentions</h1>
+
+<p>Many other works and authors may have featured on the original list, but the evidence wears increasingly thin from here on.</p>
+
+<p>Overall, the preserved reading items manage to strike an impressive balance between covering different model classes, applications and theory while also including many famous authors of the field. Perhaps the exceptions to this rule are worth noting, even if they may have slipped among the <em>‘10% of what matters’</em> that didn’t make the original list.</p>
+
+<p>As such, it would have seemed plausible to include:</p>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Yann_LeCun">Yann LeCun</a> with <a href="https://hal.science/hal-03926082/document">pioneering work on CNNs</a> for real-world use</li>
+  <li><a href="https://en.wikipedia.org/wiki/Ian_Goodfellow">Ian Goodfellow</a> with <a href="https://proceedings.neurips.cc/paper_files/paper/2014/hash/5ca3e9b122f61f8f06494c97b1afccf3-Abstract.html">Generative Adversarial Networks (GANs)</a> that dominated image generation at the time and</li>
+  <li><a href="https://en.wikipedia.org/wiki/Demis_Hassabis">Demis Hassabis</a> for <a href="https://daiwk.github.io/assets/dqn.pdf">RL research</a> towards <a href="https://ccsp.hms.harvard.edu/wp-content/uploads/2020/11/AlphaFold-at-CASP13-AlQuraishi.pdf">AlphaFold</a> that earned a Nobel prize</li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This post will remain largely speculative until more becomes known. After all, even the viral list itself was never officially confirmed to be authentic. Nonetheless, the potential candidates for the lost reading items listed above seemed worth sharing. Taken together, they may well fill a gap in the viral version of the list that would, in the words of the author, corresponded roughly to a missing <em>‘30% of what matters’</em> at its time.</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="http://localhost:4000/2024/09/24/ai-reading-list/">
         Summary of Ilya Sutskever's AI Reading List
       </a>
