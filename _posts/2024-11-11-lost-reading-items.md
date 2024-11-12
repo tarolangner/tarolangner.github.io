@@ -13,9 +13,11 @@ author: Taro Langner
 I recently [shared a summary](https://tensorlabbet.com/2024/09/24/ai-reading-list/) of a [viral AI reading list](https://arc.net/folder/D0472A20-9C20-4D3F-B145-D2865C0A9FEE) attributed to Ilya Sutskever, which laid claim to covering ‘*90% of what matters*’ back in 2020. It boils down the reading items to barely one percent of the original word count to form the TL;DR I would have wished for before reading. 
 
 The viral version of the list as shared online is known to be incomplete, however, and includes [only 27](https://x.com/andrew_n_carr/status/1752526711311507526) of [about 40](https://dallasinnovates.com/exclusive-qa-john-carmacks-different-path-to-artificial-general-intelligence/?utm_source=www.turingpost.com&utm_medium=referral&utm_campaign=the-mysterious-ai-reading-list-ilya-sutskever-s-recommendations) original reading items.
-The rest [allegedly](https://news.ycombinator.com/item?id=34641359) fell victim to the E-Mail deletion policy at OpenAI. These missing reading items have inspired some good discussions in the past, with many different ideas as to which papers would have been important enough to include.
+The rest [allegedly](https://news.ycombinator.com/item?id=34641359) fell victim to the E-Mail deletion policy at Meta¹. These missing reading items have inspired some good discussions in the past, with many different ideas as to which papers would have been important enough to include.
 
 This post is an attempt to identify these lost reading items. It builds on clues gathered from the viral list, contemporary presentations given by Ilya Sutskever, resources shared by OpenAI and more. 
+
+¹*Correction: An earlier version mistakenly referred to OpenAI here instead of Meta*
 
 # Filling the Gaps
 

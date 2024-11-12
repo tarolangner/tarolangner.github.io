@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2024-11-11T08:58:26+01:00</updated>
- <id>http://localhost:4000</id>
+ <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
+ <link href="https://tensorlabbet.com/"/>
+ <updated>2024-11-12T15:50:50+01:00</updated>
+ <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>The Lost Reading Items</title>
-   <link href="http://localhost:4000/2024/11/11/lost-reading-items/"/>
+   <link href="https://tensorlabbet.com/2024/11/11/lost-reading-items/"/>
    <updated>2024-11-11T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2024/11/11/lost-reading-items</id>
+   <id>https://tensorlabbet.com/2024/11/11/lost-reading-items</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: An attempt to reconstruct Ilya Sutskever&apos;s 2020 AI reading list &lt;br /&gt;
     &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;
@@ -26,9 +26,11 @@
 &lt;p&gt;I recently &lt;a href=&quot;https://tensorlabbet.com/2024/09/24/ai-reading-list/&quot;&gt;shared a summary&lt;/a&gt; of a &lt;a href=&quot;https://arc.net/folder/D0472A20-9C20-4D3F-B145-D2865C0A9FEE&quot;&gt;viral AI reading list&lt;/a&gt; attributed to Ilya Sutskever, which laid claim to covering ‘&lt;em&gt;90% of what matters&lt;/em&gt;’ back in 2020. It boils down the reading items to barely one percent of the original word count to form the TL;DR I would have wished for before reading.&lt;/p&gt;
 
 &lt;p&gt;The viral version of the list as shared online is known to be incomplete, however, and includes &lt;a href=&quot;https://x.com/andrew_n_carr/status/1752526711311507526&quot;&gt;only 27&lt;/a&gt; of &lt;a href=&quot;https://dallasinnovates.com/exclusive-qa-john-carmacks-different-path-to-artificial-general-intelligence/?utm_source=www.turingpost.com&amp;amp;utm_medium=referral&amp;amp;utm_campaign=the-mysterious-ai-reading-list-ilya-sutskever-s-recommendations&quot;&gt;about 40&lt;/a&gt; original reading items.
-The rest &lt;a href=&quot;https://news.ycombinator.com/item?id=34641359&quot;&gt;allegedly&lt;/a&gt; fell victim to the E-Mail deletion policy at OpenAI. These missing reading items have inspired some good discussions in the past, with many different ideas as to which papers would have been important enough to include.&lt;/p&gt;
+The rest &lt;a href=&quot;https://news.ycombinator.com/item?id=34641359&quot;&gt;allegedly&lt;/a&gt; fell victim to the E-Mail deletion policy at Meta¹. These missing reading items have inspired some good discussions in the past, with many different ideas as to which papers would have been important enough to include.&lt;/p&gt;
 
 &lt;p&gt;This post is an attempt to identify these lost reading items. It builds on clues gathered from the viral list, contemporary presentations given by Ilya Sutskever, resources shared by OpenAI and more.&lt;/p&gt;
+
+&lt;p&gt;¹&lt;em&gt;Correction: An earlier version mistakenly referred to OpenAI here instead of Meta&lt;/em&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;filling-the-gaps&quot;&gt;Filling the Gaps&lt;/h1&gt;
 
@@ -151,9 +153,9 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
  
  <entry>
    <title>Summary of Ilya Sutskever's AI Reading List</title>
-   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
+   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
+   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     
