@@ -29,7 +29,7 @@ After doing just that, I therefore dedicate this blog post to all those of us wh
 [5]: https://old.reddit.com/r/ArtificialInteligence/comments/1cpbh1s/ilya_sutskever_if_you_really_learn_all_of_these/
 
 
-# In a Nutshell
+## In a Nutshell
 
 The list contains 27 reading items, with papers, blog posts, courses, one dissertation and two book chapters, all originally dating from 1993 to 2020.  
 
@@ -47,7 +47,7 @@ The contents can be roughly broken down as follows:
 Using these categories, the next sections summarize the gist of each item, roughly sorted by how they build on each other.
 
 
-# Convolutional Neural Networks
+## Convolutional Neural Networks
 
 
 
@@ -89,7 +89,6 @@ _*Note: Earlier GPU implementations are documented in [section 12.1.2](https://w
 >Length: ~6,000 words<br> 
 >Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun <br>
 > <a href="#ResNet">🔗</a>
-
 ></details>
 
 [[ResNet, 2015]](https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html) succeeded AlexNet as a more modern CNN architecture, reaching first place on the ImageNet challenge in 2015. It remains a popular CNN architecture to this day and is [subject of ongoing research](https://openaccess.thecvf.com/content/CVPR2022/html/Liu_A_ConvNet_for_the_2020s_CVPR_2022_paper.html). It introduced residual connections into CNN architectures that had become ever deeper, stacking more convolutional layers to achieve higher representational power. By allowing residual connections to skip or bypass entire blocks of layers, ResNet architectures suffered less from gradient degradation effects in training and could thus be robustly trained at previously unseen depth.
@@ -120,7 +119,7 @@ _*Note: Earlier GPU implementations are documented in [section 12.1.2](https://w
 
 ---
 
-# Recurrent Neural Networks
+## Recurrent Neural Networks
 
 Today, _Recurrent Neural Networks_ (RNNs) have been largely superseded by Transformers and date from what Ilya Sutskever himself would later call the ["[pre-2017] stone age"](Link: https://www.youtube.com/watch?v=Ft0gTO2K85A&t=625s) of machine learning. They nonetheless remain [subject of active research](https://arxiv.org/abs/2405.04517) and see continued use in certain applications. Forming a substantial part of the reading list, they showcase the evolution of early insights and architectural developments that lead up to the systems of today. Most of the RNNs listed below are [_Long Short-Term Memory_ (LSTM)](https://link.springer.com/chapter/10.1007/978-3-642-24797-2_4) architectures. Some designs furthermore include _Feedforward Networks_ with no recurrent connections, usually trained end-to-end as part of the model.
 
@@ -249,7 +248,7 @@ Today, _Recurrent Neural Networks_ (RNNs) have been largely superseded by Transf
 
 ---
 
-# Transformers
+## Transformers
 
 The previous section tracks the rise of attention mechanisms as an increasingly potent tool for providing context in sequence-to-sequence prediction tasks. Eventually, these developments yielded the Transformer as a neural network architecture that predominantly relies on attention and discards both recurrent and convolutional layers entirely. The excellent scalability of this approach, together with growing compute resources and extensive training data, established Transformers as dominant method for language modeling, forming the backbone of systems like ChatGPT and performing well even on image and multimodal data.  
 
@@ -304,7 +303,7 @@ _Note: [The Illustrated Transformer by Jay Alammar](https://jalammar.github.io/i
 
 ---
 
-# Information Theory
+## Information Theory
 
 A substantial portion of the reading list is dedicated to more abstract material on theoretical informatics. Rather than proposing specific architectures or engineering solutions for concrete applications, these works are concerned with more fundamental study of the limits of computability, probability and intelligence. Recurring themes are principles for inductive inference such as [Occam's razor](https://en.wikipedia.org/wiki/Occam%27s_razor), which states a preference for simplicity when choosing between competing explanations (be they theories, hypotheses or models) for some given evidence or data. Another core concept is [Kolmogorov complexity](https://en.wikipedia.org/wiki/Kolmogorov_complexity)* for quantifying the amount of information, or potential for compression, of a given input.
 
@@ -387,7 +386,7 @@ describes an approach for model selection that mathematically formalizes Occam's
 
 ---
 
-# Miscellaneous
+## Miscellaneous
 
 ---
 
@@ -443,7 +442,7 @@ describes an approach for model selection that mathematically formalizes Occam's
 
 ---
 
-# Concluding Thoughts
+## Concluding Thoughts
 
 Whereas this summary was written by hand, the described technology is approaching a point where its language modeling capabilities are hard to distinguish from human writing already now in 2024. Eventually, Large Language Models may indeed become self-explanatory in a literal sense. Prompting e.g. ChatGPT to summarize this material nonetheless still yields explanations that _seem_ very convincing but can also be largely hallucinated and often misleading. Perhaps that will already improve once this article is ingested into the training data?
 

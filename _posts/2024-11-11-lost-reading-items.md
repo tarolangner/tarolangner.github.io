@@ -19,7 +19,7 @@ This post is an attempt to identify these lost reading items. It builds on clues
 
 ¹*Correction: An earlier version mistakenly referred to OpenAI here instead of Meta*
 
-# Filling the Gaps
+## Filling the Gaps
 
 The main piece of evidence is [a claim shared along with the list](https://x.com/andrew_n_carr/status/1752526711311507526) according to which an entire selection of *meta-learning* papers was lost. 
 
@@ -30,7 +30,7 @@ For some of the candidate papers listed below, the case can be strengthened furt
 
 
 
-## Clues from the Preserved Reading Items
+### Clues from the Preserved Reading Items
 
 Some meta-learning concepts can be found even in the known parts of the list.
 The preserved reading items can be arranged into a narrative arc around a related branch of research on [Memory-Augmented Neural Networks (MANNs)](https://arxiv.org/abs/1410.3916). Following the [‘Neural Turing Machine’ (NTM)](https://tensorlabbet.com/2024/09/24/ai-reading-list/#NTM) paper, ['Set2Set'](https://tensorlabbet.com/2024/09/24/ai-reading-list/#Set2Set) and ['Relational RNNs'](https://tensorlabbet.com/2024/09/24/ai-reading-list/#RelationalRNN) experimented with external memory banks that an RNN could read and write information on. They directly cite or closely relate to several papers which may well have been part of the original list: 
@@ -47,7 +47,7 @@ The preserved reading items can be arranged into a narrative arc around a relate
 *from 2017*
 
 
-## Clues from Contemporary Presentations
+### Clues from Contemporary Presentations
 
 Certain papers about meta-learning and *competitive self-play* also feature repeatedly in a series of presentations held by Ilya Sutskever around this time and may well have eventually been included in the reading list too.
 
@@ -115,7 +115,7 @@ To which Ilya Sutskever responds:
 This response was later confirmed by experimental results in the reading item ['Scaling Laws for Neural Language Models'](https://tensorlabbet.com/2024/09/24/ai-reading-list/#ScalingLaws) (which echoes the ['Bitter Lesson'](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) by Rich Sutton). It was ultimately proven true, as he would oversee Transformer architectures scaled up to [an estimated 1.8 trillion parameters and costing over $60 million to train on 128 GPUs](https://the-decoder.com/gpt-4-architecture-datasets-costs-and-more-leaked/) forming Large Language Models (LLMs) which are today capable of generating text that is increasingly difficult to distinguish from human writing.
 
 
-# Honorable Mentions
+## Honorable Mentions
 
 Many other works and authors may have featured on the original list, but the evidence wears increasingly thin from here on. 
 
@@ -126,7 +126,7 @@ As such, it would have seemed plausible to include:
 - [Ian Goodfellow](https://en.wikipedia.org/wiki/Ian_Goodfellow) with [Generative Adversarial Networks (GANs)](https://proceedings.neurips.cc/paper_files/paper/2014/hash/5ca3e9b122f61f8f06494c97b1afccf3-Abstract.html) that dominated image generation at the time and
 - [Demis Hassabis](https://en.wikipedia.org/wiki/Demis_Hassabis) for [RL research](https://daiwk.github.io/assets/dqn.pdf) towards [AlphaFold](https://ccsp.hms.harvard.edu/wp-content/uploads/2020/11/AlphaFold-at-CASP13-AlQuraishi.pdf) that earned a Nobel prize
 
-# Conclusion
+## Conclusion
 
 This post will remain largely speculative until more becomes known. After all, even the viral list itself was never officially confirmed to be authentic. Nonetheless, the potential candidates for the lost reading items listed above seemed worth sharing. Taken together, they may well fill a gap in the viral version of the list that would, in the words of the author, corresponded roughly to a missing _'30% of what matters'_ at its time.
 

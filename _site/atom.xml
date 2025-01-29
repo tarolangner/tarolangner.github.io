@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
- <link href="https://tensorlabbet.com/"/>
- <updated>2024-11-12T15:50:50+01:00</updated>
- <id>https://tensorlabbet.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2025-01-29T23:01:43+01:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -13,10 +13,120 @@
 
  
  <entry>
+   <title>What Deep Learning can do for Image Segmentation in Radiology</title>
+   <link href="http://localhost:4000/2025/01/29/radiology-image-segmentation/"/>
+   <updated>2025-01-29T00:00:00+01:00</updated>
+   <id>http://localhost:4000/2025/01/29/radiology-image-segmentation</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: From Fully Convolutional Networks to TotalSegmentator &lt;br /&gt;
+    &lt;i&gt;(10 min read)&lt;/i&gt;&lt;br /&gt;
+    
+&lt;/p&gt;
+
+&lt;p&gt;Amidst the ongoing hype around the growing capabilities of large language models, it can be curious to note how earlier predictions about machine learning have stood the test of time.&lt;/p&gt;
+
+&lt;p&gt;Autonomous driving and radiology in particular were considered obvious candidates for automation, starting with the deep learning boom for image recognition around 2012. Geoffrey Hinton famously suggested in 2016 that training of radiologists should be discontinued altogether, arguing that they &lt;a href=&quot;https://www.youtube.com/watch?v=2HMPRXstSvQ&quot;&gt;would be obsolete within five years&lt;/a&gt;.&lt;/p&gt;
+
+&lt;details&gt;
+&lt;summary&gt;And yet, things turned out quite different... (click to expand)&lt;/summary&gt; 
+&lt;img src=&quot;/assets/radiologists_in_regular_cars.jpeg&quot; alt=&quot;Radiologist Jobs in 2025&quot; /&gt;
+
+&lt;i&gt;
+&lt;a href=&quot;https://x.com/olexandr/status/1809670998746161426&quot;&gt;(Source)&lt;/a&gt;.
+And once at work, a US radiologist in 2025  &lt;a href=&quot;https://www.glassdoor.com/Salaries/physician-radiologist-salary-SRCH_KO0,21.html&quot;&gt;may earn $265-495k per year&lt;/a&gt; or pick from a number of job openings that actually &lt;a href=&quot;https://x.com/erikbryn/status/1662564885589561344/photo/1&quot;&gt;appears to be increasing&lt;/a&gt;.
+&lt;/i&gt;
+&lt;br /&gt;
+
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is a sobering reminder that many real-world problems turned out to be much harder to crack than expected at first. Although the AI hype has since mostly turned elsewhere, a closer look at what happened in these fields can be rather interesting.&lt;/p&gt;
+
+&lt;p&gt;This blog post examines one of their most active, and arguably most successful research areas and reviews one decade worth of progress around deep learning methods for semantic segmentation of medical images in radiology.&lt;/p&gt;
+
+&lt;h2 id=&quot;semantic-segmentation-for-radiology&quot;&gt;Semantic Segmentation for Radiology&lt;/h2&gt;
+
+&lt;p&gt;From magnetic resonance imaging (MRI) to computed tomography (CT), medical imaging offers various modalities for visualising the human body. Just like the anatomy itself, these images are often three-dimensional and thus composed of volumetric pixels, or voxels, similar to the block worlds of Minecraft.&lt;/p&gt;
+
+&lt;p&gt;Early on, measurements and findings were often reported from two-dimensional X-ray images. With increasingly affordable imaging technology, the data has since grown both in quantity and resolution, leaving &lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S1076633215002457?casa_token=Pud-r9Fq_0wAAAAA:2Vb-4PygjIL9U4FDzfmQ_I9g1cqrvSo-UP1KK9tanNCZalCEN_OUtMCwKdFXgCliL0bXCb9TErwI&quot;&gt;mere seconds on average&lt;/a&gt; for a radiologist to inspect images that can each consist of millions of voxels.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Semantic segmentation&lt;/em&gt; is one type of image analysis that is commonly performed in research and industry on these images. It aims to assign a class label to every pixel or voxel, typically to mark all parts of the image that contain a certain tissue or structure. Once complete, a segmentation mask can be used to measure volumes, render surface models or plan radiation treatments.&lt;/p&gt;
+
+&lt;p class=&quot;message&quot;&gt;
+
+&lt;b&gt;Video Example:&lt;/b&gt; &lt;br /&gt;
+
+&lt;a href=&quot;https://www.youtube.com/watch?v=ZRYMItzwg8g&amp;amp;t=220s&quot;&gt;- Manual CT Image Segmentation in 3D Slicer (YouTube)&lt;/a&gt; [7:43 minutes] &lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;When done by hand, a given volumetric image is typically segmented by drawing on it as a stack of dozens or hundreds of two-dimensional slices. This can take from minutes to hours or &lt;a href=&quot;https://www.cell.com/neuron/fulltext/S0896-6273(02)00569-X?cc=y%3Fcc%3Dy&quot;&gt;even days&lt;/a&gt;. Results may vary not only between different operators but also when the same image is analysed repeatedly by the same person. This becomes a challenge in studies where hundreds or even thousands of scans are to be analysed in this way.&lt;/p&gt;
+
+&lt;p&gt;Despite its many issues, manual segmentation remains the method of choice for many real-world projects that operate in risk-averse settings under restrictive regulatory constraints. On the flip side, these same regulations and concerns have helped to reduce the number of scenarios where malfunctioning software would &lt;a href=&quot;https://en.wikipedia.org/wiki/Therac-25&quot;&gt;burn patients with radiation&lt;/a&gt; or &lt;a href=&quot;https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfRes/res.cfm?id=171315&quot;&gt;confuse surgeons with misleading 3d navigation views&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Risk-averse skeptics were furthermore proven right on several occasions before when they doubted claims about technology being superior to medical experts. In the late 90s, computer-aided detection (CAD) systems were funded with millions of dollars per year but later reported to provide no benefit or &lt;a href=&quot;https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2443369&quot;&gt;perhaps even cause harm&lt;/a&gt;. The deep learning boom later caused an entire flood of such claims, like in the 2017 &lt;a href=&quot;https://arxiv.org/abs/1711.05225&quot;&gt;CheXNet paper&lt;/a&gt; co-authored by Andrew Ng, the issues of which are discussed with many insights in the &lt;a href=&quot;https://laurenoakdenrayner.com/2018/01/24/chexnet-an-in-depth-review/&quot;&gt;blog of Lauren Oakden-Rayner&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Despite this history of overpromising, the work done by a multitude of researchers and engineers over the years has nonetheless achieved some impressive progress. Especially deep learning systems for semantic segmentation of medical images have a lot to offer and are worth a closer look.&lt;/p&gt;
+
+&lt;h2 id=&quot;deep-learning-for-semantic-image-segmentation&quot;&gt;Deep Learning for Semantic Image Segmentation&lt;/h2&gt;
+
+&lt;p&gt;In the ImageNet challenge of 2012, &lt;a href=&quot;https://tensorlabbet.com/#AexNet&quot;&gt;AlexNet&lt;/a&gt; famously set a new benchmark result for image recognition by assigning one of 1,000 possible class labels to a given input image with unprecedented accuracy.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sliding window segmentation&lt;/em&gt; used such image classifiers for semantic segmentation, applying them to each position of an image to receive as input a patch around the current position and predict a class label for the central pixel. This approach suffered from inefficiencies, however, with redundant processing wherever a given image area appeared in multiple, adjacent patches.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content_cvpr_2015/html/Long_Fully_Convolutional_Networks_2015_CVPR_paper.html&quot;&gt;[Fully Convolutional Networks, 2015]&lt;/a&gt; were proposed as a neural network architecture for dense prediction of pixel-wise labels. This approach removes any fully-connected layers from established architectures for image classification. The remaining convolutional and pooling layers act as an encoder, producing feature maps that retain spatial image information at different resolutions. From these, a 1x1 convolution produces one feature map for each class, to be upsampled by transposed convolution layers to restore the original image dimensions.&lt;/p&gt;
+
+&lt;p class=&quot;message&quot;&gt;
+
+&lt;b&gt;Transposed Convolution (Animations)&lt;/b&gt; &lt;br /&gt;
+
+&lt;a href=&quot;https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md&quot;&gt;- Convolution arithmetic (GitHub)&lt;/a&gt; by Vincent Dumoulin,  Francesco Visin &lt;br /&gt;
+&lt;br /&gt;
+
+Note: Transposed convolutions differ from dilated (or à trous) convolutions &lt;a href=&quot;https://tensorlabbet.com/#DilatedConv&quot;&gt;that featured in a previous blog post&lt;/a&gt;.
+
+&lt;/p&gt;
+
+&lt;p&gt;With skip connections, these upsampled feature maps are obtained not only from the final, most low-resolution output, but also from earlier steps and fused together by summation to incorporate more high-resolution features.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://miai.ha.edu.cn/Essays/8Medical%20image%20segmentation/U-Net.pdf&quot;&gt;[U-Net, 2015]&lt;/a&gt; built on this approach by proposing a symmetric encoder-decoder architecture with even more skip connections. The encoder part forms the left half of its U-shape, with successive network layers producing feature maps of decreasing resolution. The decoder path then gradually restores the original resolution with transposed convolution layers. Long skip connections provide shortcuts that concatenate feature maps of the encoder to their counterparts in the decoder.
+This enables U-Nets to consider both coarse, low-resolution features as well as detailed, high-resolution features.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://lmb.informatik.uni-freiburg.de/Publications/2016/CABR16/cicek16miccai.pdf&quot;&gt;[3D U-Net, 2016]&lt;/a&gt; later extended these concepts to volumetric, voxel-based input data by using 3D variants of both pooling and convolution layers.&lt;/p&gt;
+
+&lt;p&gt;U-Net architectures enjoyed enormous success and remain competitive options for medical image segmentation to this day. They tend to be robust and reliable, with 2D variants training within minutes on modern GPUs and being lightweight enough for inference even on laptop CPUs.
+They can also perform well even with just a few dozen training images, as each pixel or voxel effectively forms one training sample. Hundreds of U-Net variants were subsequently proposed in the literature, including &lt;a href=&quot;https://arxiv.org/abs/1810.11654&quot;&gt;SegResNet&lt;/a&gt; with short skip connections and &lt;a href=&quot;https://arxiv.org/abs/1801.05746&quot;&gt;2.5D approaches&lt;/a&gt; that stack adjacent slices to form RGB colour images suitable for encoders pre-trained on ImageNet.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1809.10486&quot;&gt;[nnU-Net, 2018]&lt;/a&gt; (‘no-new-Net’) was ultimately proposed as a self-adapting framework for training effective U-Net architectures. It enables the training of both 2D and 3D U-Nets, as well as cascades with subsequent segmentation steps. Instead of focusing on modifications of the model architecture, it adjusts the preprocessing, training, inference and post-processing with many domain-specific heuristics and also enables cross-validations for evaluation.&lt;/p&gt;
+
+&lt;p&gt;For example, as imaging devices of different vendors can vary in contrast, the preprocessing first standardizes or at least scales the image intensities. Some segmentation tasks suffer from extreme class imbalances (for example when small cancerous lesions are to be segmented) and the sampling strategy therefore tries to balance the foreground and background samples for each minibatch in training. Variations in patient anatomy and position are simulated by augmentation with rotation, scaling and mirroring during training. Test-time augmentation furthermore presents each sample with its mirrored copy and averages the predictions for increased robustness. Contemporary GPUs were often limited to 11GB, and so the inference processes larger images by blending patch-wise predictions.&lt;/p&gt;
+
+&lt;p&gt;Its authors at the German Cancer Research Center (DKFZ) published an open-source implementation. Its &lt;a href=&quot;https://github.com/MIC-DKFZ/nnUNet&quot;&gt;research code&lt;/a&gt; (which purportedly &lt;a href=&quot;https://github.com/MIC-DKFZ/batchgenerators/blob/1185d57bbc002f4b88c03fdea885dc28537ad8e7/batchgenerators/augmentations/noise_augmentations.py#L55&quot;&gt;left Godzilla dead&lt;/a&gt;, whereas I was merely scarred) enabled many to reproduce these techniques. So successful was this framework both in benchmark challenges and various research papers that even in summer 2024 it &lt;a href=&quot;https://arxiv.org/pdf/2404.09556&quot;&gt;still lays claim&lt;/a&gt; to dominance in this domain.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://pmc.ncbi.nlm.nih.gov/articles/PMC10546353/&quot;&gt;[TotalSegmentator, 2023]&lt;/a&gt; was later released as a freely available, already trained nnU-Net model for segmentation of 104 different structures in CT images, such as organs, bones, muscle and blood vessels. Up to this point, it was common that segmentation models trained on one dataset would not perform as well on data from other sources due to distribution shifts from different imaging devices, protocols or patient demographics. By training on a varied dataset of over one thousand real-world CT images with different age groups, sites, and protocols, TotalSegmentator made a substantial leap in generalization across arbitrary CT data. Notably, the model was made highly accessible with a Python package, integration into 3D Slicer and even a &lt;a href=&quot;https://totalsegmentator.com/&quot;&gt;free web interface&lt;/a&gt;. In 2024, &lt;a href=&quot;https://arxiv.org/pdf/2405.194929&quot;&gt;an extended version&lt;/a&gt; was released for segmentation of 59 structures in even more variable images from MRI.&lt;/p&gt;
+
+&lt;h2 id=&quot;concluding-thoughts&quot;&gt;Concluding Thoughts&lt;/h2&gt;
+
+&lt;p&gt;From early Fully Convolutional Networks of 2014 to TotalSegmentator in 2024 for MRI, these papers trace the evolution of deep learning for semantic segmentation of radiology images over an entire decade. As an open research question it motivated thousands of papers with varied methodologies. Their insights were gradually distilled into the later publications and methods. Today, no programming or deep learning knowledge is required for anyone to simply drag and drop an image into &lt;a href=&quot;https://totalsegmentator.com/&quot;&gt;TotalSegmentator&lt;/a&gt; with impressive results. &lt;br /&gt;
+That is progress!&lt;/p&gt;
+
+&lt;p&gt;Medical image segmentation still remains an active field of research, with various benchmark challenges (beyond the scope of TotalSegmentator) in conferences like &lt;a href=&quot;https://miccai.org/index.php/&quot;&gt;MICCAI&lt;/a&gt; and &lt;a href=&quot;https://www.kaggle.com/competitions/rsna-2024-lumbar-spine-degenerative-classification&quot;&gt;Kaggle challenges with monetary prizes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The convolutional neural network architectures reviewed so far in this post also remain a competitive option especially for limited training data, as is common for medical images. Methods that utilise Transformers have emerged too, such as &lt;a href=&quot;https://arxiv.org/abs/2201.01266&quot;&gt;SwinUNETR&lt;/a&gt; (also see the open-source &lt;a href=&quot;https://github.com/Project-MONAI/tutorials/blob/main/auto3dseg/README.md&quot;&gt;MONAI&lt;/a&gt; framework) and &lt;a href=&quot;https://www.nature.com/articles/s41467-024-44824-z&quot;&gt;MedSAM&lt;/a&gt; as a medical version of the &lt;a href=&quot;https://openaccess.thecvf.com/content/ICCV2023/html/Kirillov_Segment_Anything_ICCV_2023_paper.html&quot;&gt;Segment Anything Model&lt;/a&gt;. More recently, even multimodal &lt;a href=&quot;https://pubs.rsna.org/doi/pdf/10.1148/radiol.232756&quot;&gt;large language models are being considered for radiology tasks&lt;/a&gt; which may warrant an entire blog post of their own.&lt;/p&gt;
+
+&lt;p&gt;So with all these innovations, then, why has radiology not been automated yet? While there is a growing number of success stories of FDA-approved and CE marked supporting tools entering the market, these systems have to overcome numerous obstacles. Next to regulatory hurdles, workflow integration and acceptance issues, the technical challenge is just one of them.&lt;/p&gt;
+
+&lt;p&gt;However, even the technical challenges in this space have not been truly automated yet. I received a taste of this myself when working on &lt;a href=&quot;https://www.nature.com/articles/s41598-020-77981-4&quot;&gt;kidney segmentations in MRI of UK Biobank&lt;/a&gt;. Before my results for 40,000 participants could be uploaded to the &lt;a href=&quot;https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=159&quot;&gt;official data catalogue&lt;/a&gt;, I skimmed through thousands of these images to identify and understand outlier cases where my U-Net had failed to accurately segment both kidneys.&lt;/p&gt;
+
+&lt;p&gt;This taught me about &lt;a href=&quot;https://en.wikipedia.org/wiki/Horseshoe_kidney&quot;&gt;horseshoe kidneys&lt;/a&gt;, or renal fusion, in which both kidneys are connected from birth. In this large dataset over a dozen such cases occurred, and without any training examples for this rare condition, the model had not learned how to handle them well at first. Mel Gibson is often given as a famous case of renal fusion, and if he had participated in UK Biobank, my system would have likely failed him. But who knows, perhaps today TotalSegmentator would have succeeded even for him?&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>The Lost Reading Items</title>
-   <link href="https://tensorlabbet.com/2024/11/11/lost-reading-items/"/>
+   <link href="http://localhost:4000/2024/11/11/lost-reading-items/"/>
    <updated>2024-11-11T00:00:00+01:00</updated>
-   <id>https://tensorlabbet.com/2024/11/11/lost-reading-items</id>
+   <id>http://localhost:4000/2024/11/11/lost-reading-items</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: An attempt to reconstruct Ilya Sutskever&apos;s 2020 AI reading list &lt;br /&gt;
     &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;
@@ -32,7 +142,7 @@ The rest &lt;a href=&quot;https://news.ycombinator.com/item?id=34641359&quot;&gt
 
 &lt;p&gt;¹&lt;em&gt;Correction: An earlier version mistakenly referred to OpenAI here instead of Meta&lt;/em&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;filling-the-gaps&quot;&gt;Filling the Gaps&lt;/h1&gt;
+&lt;h2 id=&quot;filling-the-gaps&quot;&gt;Filling the Gaps&lt;/h2&gt;
 
 &lt;p&gt;The main piece of evidence is &lt;a href=&quot;https://x.com/andrew_n_carr/status/1752526711311507526&quot;&gt;a claim shared along with the list&lt;/a&gt; according to which an entire selection of &lt;em&gt;meta-learning&lt;/em&gt; papers was lost.&lt;/p&gt;
 
@@ -40,7 +150,7 @@ The rest &lt;a href=&quot;https://news.ycombinator.com/item?id=34641359&quot;&gt
 
 &lt;p&gt;For some of the candidate papers listed below, the case can be strengthened further by evidence in the form of an endorsement straight from OpenAI itself. Ilya Sutskever was chief scientist at a time when OpenAI published the educational resource &lt;a href=&quot;https://spinningup.openai.com/en/latest/index.html&quot;&gt;‘Spinning Up in Deep RL’&lt;/a&gt; which includes several of these candidates in an entirely separate reading list of 105 &lt;a href=&quot;https://spinningup.openai.com/en/latest/spinningup/keypapers.html#meta-rl&quot;&gt;‘Key Papers in Deep RL’&lt;/a&gt;. Below, the papers which also appear in that list are marked with a symbol (⚛).&lt;/p&gt;
 
-&lt;h2 id=&quot;clues-from-the-preserved-reading-items&quot;&gt;Clues from the Preserved Reading Items&lt;/h2&gt;
+&lt;h3 id=&quot;clues-from-the-preserved-reading-items&quot;&gt;Clues from the Preserved Reading Items&lt;/h3&gt;
 
 &lt;p&gt;Some meta-learning concepts can be found even in the known parts of the list.
 The preserved reading items can be arranged into a narrative arc around a related branch of research on &lt;a href=&quot;https://arxiv.org/abs/1410.3916&quot;&gt;Memory-Augmented Neural Networks (MANNs)&lt;/a&gt;. Following the &lt;a href=&quot;https://tensorlabbet.com/2024/09/24/ai-reading-list/#NTM&quot;&gt;‘Neural Turing Machine’ (NTM)&lt;/a&gt; paper, &lt;a href=&quot;https://tensorlabbet.com/2024/09/24/ai-reading-list/#Set2Set&quot;&gt;‘Set2Set’&lt;/a&gt; and &lt;a href=&quot;https://tensorlabbet.com/2024/09/24/ai-reading-list/#RelationalRNN&quot;&gt;‘Relational RNNs’&lt;/a&gt; experimented with external memory banks that an RNN could read and write information on. They directly cite or closely relate to several papers which may well have been part of the original list:&lt;/p&gt;
@@ -58,7 +168,7 @@ The preserved reading items can be arranged into a narrative arc around a relate
 &lt;em&gt;from 2017&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;clues-from-contemporary-presentations&quot;&gt;Clues from Contemporary Presentations&lt;/h2&gt;
+&lt;h3 id=&quot;clues-from-contemporary-presentations&quot;&gt;Clues from Contemporary Presentations&lt;/h3&gt;
 
 &lt;p&gt;Certain papers about meta-learning and &lt;em&gt;competitive self-play&lt;/em&gt; also feature repeatedly in a series of presentations held by Ilya Sutskever around this time and may well have eventually been included in the reading list too.&lt;/p&gt;
 
@@ -131,7 +241,7 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
 
 &lt;p&gt;This response was later confirmed by experimental results in the reading item &lt;a href=&quot;https://tensorlabbet.com/2024/09/24/ai-reading-list/#ScalingLaws&quot;&gt;‘Scaling Laws for Neural Language Models’&lt;/a&gt; (which echoes the &lt;a href=&quot;http://www.incompleteideas.net/IncIdeas/BitterLesson.html&quot;&gt;‘Bitter Lesson’&lt;/a&gt; by Rich Sutton). It was ultimately proven true, as he would oversee Transformer architectures scaled up to &lt;a href=&quot;https://the-decoder.com/gpt-4-architecture-datasets-costs-and-more-leaked/&quot;&gt;an estimated 1.8 trillion parameters and costing over $60 million to train on 128 GPUs&lt;/a&gt; forming Large Language Models (LLMs) which are today capable of generating text that is increasingly difficult to distinguish from human writing.&lt;/p&gt;
 
-&lt;h1 id=&quot;honorable-mentions&quot;&gt;Honorable Mentions&lt;/h1&gt;
+&lt;h2 id=&quot;honorable-mentions&quot;&gt;Honorable Mentions&lt;/h2&gt;
 
 &lt;p&gt;Many other works and authors may have featured on the original list, but the evidence wears increasingly thin from here on.&lt;/p&gt;
 
@@ -144,7 +254,7 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Demis_Hassabis&quot;&gt;Demis Hassabis&lt;/a&gt; for &lt;a href=&quot;https://daiwk.github.io/assets/dqn.pdf&quot;&gt;RL research&lt;/a&gt; towards &lt;a href=&quot;https://ccsp.hms.harvard.edu/wp-content/uploads/2020/11/AlphaFold-at-CASP13-AlQuraishi.pdf&quot;&gt;AlphaFold&lt;/a&gt; that earned a Nobel prize&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;This post will remain largely speculative until more becomes known. After all, even the viral list itself was never officially confirmed to be authentic. Nonetheless, the potential candidates for the lost reading items listed above seemed worth sharing. Taken together, they may well fill a gap in the viral version of the list that would, in the words of the author, corresponded roughly to a missing &lt;em&gt;‘30% of what matters’&lt;/em&gt; at its time.&lt;/p&gt;
 
@@ -153,9 +263,9 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
  
  <entry>
    <title>Summary of Ilya Sutskever's AI Reading List</title>
-   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
+   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
+   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     
@@ -173,7 +283,7 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
 &lt;p&gt;At about 300,000 words total, the combined content nonetheless corresponds to around one thousand book pages of dense, technical text and requires a decent investment in time and energy for self-study. 
 After doing just that, I therefore dedicate this blog post to all those of us who provisionally bookmarked it (“for later”) and are still curious. What follows is my own condensed and structured summary with about 120 words per item, free of mathematical notation, to capture the essential key points, context and some perspective gained from reading it with the surrounding literature.&lt;/p&gt;
 
-&lt;h1 id=&quot;in-a-nutshell&quot;&gt;In a Nutshell&lt;/h1&gt;
+&lt;h2 id=&quot;in-a-nutshell&quot;&gt;In a Nutshell&lt;/h2&gt;
 
 &lt;p&gt;The list contains 27 reading items, with papers, blog posts, courses, one dissertation and two book chapters, all originally dating from 1993 to 2020.&lt;/p&gt;
 
@@ -224,7 +334,7 @@ After doing just that, I therefore dedicate this blog post to all those of us wh
 
 &lt;p&gt;Using these categories, the next sections summarize the gist of each item, roughly sorted by how they build on each other.&lt;/p&gt;
 
-&lt;h1 id=&quot;convolutional-neural-networks&quot;&gt;Convolutional Neural Networks&lt;/h1&gt;
+&lt;h2 id=&quot;convolutional-neural-networks&quot;&gt;Convolutional Neural Networks&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;details&gt;
@@ -268,10 +378,6 @@ Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun &lt;br /&gt;
 &lt;/details&gt;
 &lt;/blockquote&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
 &lt;p&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html&quot;&gt;[ResNet, 2015]&lt;/a&gt; succeeded AlexNet as a more modern CNN architecture, reaching first place on the ImageNet challenge in 2015. It remains a popular CNN architecture to this day and is &lt;a href=&quot;https://openaccess.thecvf.com/content/CVPR2022/html/Liu_A_ConvNet_for_the_2020s_CVPR_2022_paper.html&quot;&gt;subject of ongoing research&lt;/a&gt;. It introduced residual connections into CNN architectures that had become ever deeper, stacking more convolutional layers to achieve higher representational power. By allowing residual connections to skip or bypass entire blocks of layers, ResNet architectures suffered less from gradient degradation effects in training and could thus be robustly trained at previously unseen depth.&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -304,7 +410,7 @@ Authors: Fisher Yu and Vladlen Koltun &lt;br /&gt;
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;recurrent-neural-networks&quot;&gt;Recurrent Neural Networks&lt;/h1&gt;
+&lt;h2 id=&quot;recurrent-neural-networks&quot;&gt;Recurrent Neural Networks&lt;/h2&gt;
 
 &lt;p&gt;Today, &lt;em&gt;Recurrent Neural Networks&lt;/em&gt; (RNNs) have been largely superseded by Transformers and date from what Ilya Sutskever himself would later call the &lt;a href=&quot;Link: https://www.youtube.com/watch?v=Ft0gTO2K85A&amp;amp;t=625s&quot;&gt;“[pre-2017] stone age”&lt;/a&gt; of machine learning. They nonetheless remain &lt;a href=&quot;https://arxiv.org/abs/2405.04517&quot;&gt;subject of active research&lt;/a&gt; and see continued use in certain applications. Forming a substantial part of the reading list, they showcase the evolution of early insights and architectural developments that lead up to the systems of today. Most of the RNNs listed below are &lt;a href=&quot;https://link.springer.com/chapter/10.1007/978-3-642-24797-2_4&quot;&gt;&lt;em&gt;Long Short-Term Memory&lt;/em&gt; (LSTM)&lt;/a&gt; architectures. Some designs furthermore include &lt;em&gt;Feedforward Networks&lt;/em&gt; with no recurrent connections, usually trained end-to-end as part of the model.&lt;/p&gt;
 
@@ -450,7 +556,7 @@ Authors: Adam Santoro, Ryan Faulkner, David Raposo, Jack Rae, Mike Chrzanowski, 
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;transformers&quot;&gt;Transformers&lt;/h1&gt;
+&lt;h2 id=&quot;transformers&quot;&gt;Transformers&lt;/h2&gt;
 
 &lt;p&gt;The previous section tracks the rise of attention mechanisms as an increasingly potent tool for providing context in sequence-to-sequence prediction tasks. Eventually, these developments yielded the Transformer as a neural network architecture that predominantly relies on attention and discards both recurrent and convolutional layers entirely. The excellent scalability of this approach, together with growing compute resources and extensive training data, established Transformers as dominant method for language modeling, forming the backbone of systems like ChatGPT and performing well even on image and multimodal data.&lt;/p&gt;
 
@@ -505,7 +611,7 @@ Authors: Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Ches
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;information-theory&quot;&gt;Information Theory&lt;/h1&gt;
+&lt;h2 id=&quot;information-theory&quot;&gt;Information Theory&lt;/h2&gt;
 
 &lt;p&gt;A substantial portion of the reading list is dedicated to more abstract material on theoretical informatics. Rather than proposing specific architectures or engineering solutions for concrete applications, these works are concerned with more fundamental study of the limits of computability, probability and intelligence. Recurring themes are principles for inductive inference such as &lt;a href=&quot;https://en.wikipedia.org/wiki/Occam%27s_razor&quot;&gt;Occam’s razor&lt;/a&gt;, which states a preference for simplicity when choosing between competing explanations (be they theories, hypotheses or models) for some given evidence or data. Another core concept is &lt;a href=&quot;https://en.wikipedia.org/wiki/Kolmogorov_complexity&quot;&gt;Kolmogorov complexity&lt;/a&gt;* for quantifying the amount of information, or potential for compression, of a given input.&lt;/p&gt;
 
@@ -586,7 +692,7 @@ Author: Shane Legg, supervised by Marcus Hutter&lt;br /&gt;
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;miscellaneous&quot;&gt;Miscellaneous&lt;/h1&gt;
+&lt;h2 id=&quot;miscellaneous&quot;&gt;Miscellaneous&lt;/h2&gt;
 
 &lt;hr /&gt;
 
@@ -648,7 +754,7 @@ Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals an
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;concluding-thoughts&quot;&gt;Concluding Thoughts&lt;/h1&gt;
+&lt;h2 id=&quot;concluding-thoughts&quot;&gt;Concluding Thoughts&lt;/h2&gt;
 
 &lt;p&gt;Whereas this summary was written by hand, the described technology is approaching a point where its language modeling capabilities are hard to distinguish from human writing already now in 2024. Eventually, Large Language Models may indeed become self-explanatory in a literal sense. Prompting e.g. ChatGPT to summarize this material nonetheless still yields explanations that &lt;em&gt;seem&lt;/em&gt; very convincing but can also be largely hallucinated and often misleading. Perhaps that will already improve once this article is ingested into the training data?&lt;/p&gt;
 

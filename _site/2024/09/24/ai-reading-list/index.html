@@ -14,19 +14,19 @@
   </title>
 
   
-  <link rel="canonical" href="https://tensorlabbet.com/2024/09/24/ai-reading-list/">
+  <link rel="canonical" href="http://localhost:4000/2024/09/24/ai-reading-list/">
   
 
-  <link rel="stylesheet" href="https://tensorlabbet.com/public/css/poole.css">
-  <link rel="stylesheet" href="https://tensorlabbet.com/public/css/syntax.css">
-  <link rel="stylesheet" href="https://tensorlabbet.com/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/syntax.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/lanyon.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://tensorlabbet.com/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="https://tensorlabbet.com/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
 
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://tensorlabbet.com/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://localhost:4000/atom.xml">
 
 
   
@@ -46,7 +46,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="https://tensorlabbet.com/">Home</a>
+    <a class="sidebar-nav-item" href="http://localhost:4000/">Home</a>
 
     
 
@@ -62,7 +62,7 @@
     
       
         
-          <a class="sidebar-nav-item" href="https://tensorlabbet.com/about/">About</a>
+          <a class="sidebar-nav-item" href="http://localhost:4000/about/">About</a>
         
       
     
@@ -75,7 +75,7 @@
 
   <div class="sidebar-item">
     <p>
-      &copy; 2024. All rights reserved.
+      &copy; 2025. All rights reserved.
     </p>
   </div>
 </div>
@@ -114,7 +114,7 @@
 <p>At about 300,000 words total, the combined content nonetheless corresponds to around one thousand book pages of dense, technical text and requires a decent investment in time and energy for self-study. 
 After doing just that, I therefore dedicate this blog post to all those of us who provisionally bookmarked it (“for later”) and are still curious. What follows is my own condensed and structured summary with about 120 words per item, free of mathematical notation, to capture the essential key points, context and some perspective gained from reading it with the surrounding literature.</p>
 
-<h1 id="in-a-nutshell">In a Nutshell</h1>
+<h2 id="in-a-nutshell">In a Nutshell</h2>
 
 <p>The list contains 27 reading items, with papers, blog posts, courses, one dissertation and two book chapters, all originally dating from 1993 to 2020.</p>
 
@@ -165,7 +165,7 @@ After doing just that, I therefore dedicate this blog post to all those of us wh
 
 <p>Using these categories, the next sections summarize the gist of each item, roughly sorted by how they build on each other.</p>
 
-<h1 id="convolutional-neural-networks">Convolutional Neural Networks</h1>
+<h2 id="convolutional-neural-networks">Convolutional Neural Networks</h2>
 
 <blockquote>
   <details>
@@ -209,10 +209,6 @@ Authors: Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun <br />
 </details>
 </blockquote>
 
-<blockquote>
-  <p>&lt;/details&gt;</p>
-</blockquote>
-
 <p><a href="https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html">[ResNet, 2015]</a> succeeded AlexNet as a more modern CNN architecture, reaching first place on the ImageNet challenge in 2015. It remains a popular CNN architecture to this day and is <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Liu_A_ConvNet_for_the_2020s_CVPR_2022_paper.html">subject of ongoing research</a>. It introduced residual connections into CNN architectures that had become ever deeper, stacking more convolutional layers to achieve higher representational power. By allowing residual connections to skip or bypass entire blocks of layers, ResNet architectures suffered less from gradient degradation effects in training and could thus be robustly trained at previously unseen depth.</p>
 
 <hr />
@@ -245,7 +241,7 @@ Authors: Fisher Yu and Vladlen Koltun <br />
 
 <hr />
 
-<h1 id="recurrent-neural-networks">Recurrent Neural Networks</h1>
+<h2 id="recurrent-neural-networks">Recurrent Neural Networks</h2>
 
 <p>Today, <em>Recurrent Neural Networks</em> (RNNs) have been largely superseded by Transformers and date from what Ilya Sutskever himself would later call the <a href="Link: https://www.youtube.com/watch?v=Ft0gTO2K85A&amp;t=625s">“[pre-2017] stone age”</a> of machine learning. They nonetheless remain <a href="https://arxiv.org/abs/2405.04517">subject of active research</a> and see continued use in certain applications. Forming a substantial part of the reading list, they showcase the evolution of early insights and architectural developments that lead up to the systems of today. Most of the RNNs listed below are <a href="https://link.springer.com/chapter/10.1007/978-3-642-24797-2_4"><em>Long Short-Term Memory</em> (LSTM)</a> architectures. Some designs furthermore include <em>Feedforward Networks</em> with no recurrent connections, usually trained end-to-end as part of the model.</p>
 
@@ -391,7 +387,7 @@ Authors: Adam Santoro, Ryan Faulkner, David Raposo, Jack Rae, Mike Chrzanowski, 
 
 <hr />
 
-<h1 id="transformers">Transformers</h1>
+<h2 id="transformers">Transformers</h2>
 
 <p>The previous section tracks the rise of attention mechanisms as an increasingly potent tool for providing context in sequence-to-sequence prediction tasks. Eventually, these developments yielded the Transformer as a neural network architecture that predominantly relies on attention and discards both recurrent and convolutional layers entirely. The excellent scalability of this approach, together with growing compute resources and extensive training data, established Transformers as dominant method for language modeling, forming the backbone of systems like ChatGPT and performing well even on image and multimodal data.</p>
 
@@ -446,7 +442,7 @@ Authors: Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Ches
 
 <hr />
 
-<h1 id="information-theory">Information Theory</h1>
+<h2 id="information-theory">Information Theory</h2>
 
 <p>A substantial portion of the reading list is dedicated to more abstract material on theoretical informatics. Rather than proposing specific architectures or engineering solutions for concrete applications, these works are concerned with more fundamental study of the limits of computability, probability and intelligence. Recurring themes are principles for inductive inference such as <a href="https://en.wikipedia.org/wiki/Occam%27s_razor">Occam’s razor</a>, which states a preference for simplicity when choosing between competing explanations (be they theories, hypotheses or models) for some given evidence or data. Another core concept is <a href="https://en.wikipedia.org/wiki/Kolmogorov_complexity">Kolmogorov complexity</a>* for quantifying the amount of information, or potential for compression, of a given input.</p>
 
@@ -527,7 +523,7 @@ Author: Shane Legg, supervised by Marcus Hutter<br />
 
 <hr />
 
-<h1 id="miscellaneous">Miscellaneous</h1>
+<h2 id="miscellaneous">Miscellaneous</h2>
 
 <hr />
 
@@ -589,7 +585,7 @@ Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals an
 
 <hr />
 
-<h1 id="concluding-thoughts">Concluding Thoughts</h1>
+<h2 id="concluding-thoughts">Concluding Thoughts</h2>
 
 <p>Whereas this summary was written by hand, the described technology is approaching a point where its language modeling capabilities are hard to distinguish from human writing already now in 2024. Eventually, Large Language Models may indeed become self-explanatory in a literal sense. Prompting e.g. ChatGPT to summarize this material nonetheless still yields explanations that <em>seem</em> very convincing but can also be largely hallucinated and often misleading. Perhaps that will already improve once this article is ingested into the training data?</p>
 
@@ -607,6 +603,15 @@ Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals an
 <div class="related">
   <h2>Related posts</h2>
   <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2025/01/29/radiology-image-segmentation/">
+            What Deep Learning can do for Image Segmentation in Radiology
+            <small>29 Jan 2025, Taro Langner</small>
+          </a>
+        </h3>
+      </li>
     
       <li>
         <h3>
