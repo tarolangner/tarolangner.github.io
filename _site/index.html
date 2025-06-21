@@ -98,6 +98,55 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="http://localhost:4000/2025/05/25/review-ai-engineering/">
+        Reviewing “AI Engineering” by Chip Huyen
+      </a>
+    </h1>
+
+    <span class="post-date">25 May 2025, Taro Langner</span>
+
+    <p class="message">
+    In this post: A book review <br />
+    <i>(5 min read)</i><br />
+    
+</p>
+
+<p>In January this year, <a href="https://huyenchip.com/">Chip Huyen</a> published her newest book <a href="https://www.amazon.com/dp/1098166302?&amp;linkCode=sl1&amp;tag=chiphuyen-20&amp;linkId=0a4e5ad4b14080d44c42640550a9291e&amp;language=en_US&amp;ref_=as_li_ss_tl"><em>‘AI Engineering’</em></a>, which quickly <a href="https://www.youtube.com/watch?v=98o_L3jlixw&amp;pp=ygUscHJhZ21hdGljIGVuZ2luZWVyIGFpIGVuZ2luZWVyaW5nIGNoaXAgaHV5ZW4%3D">made waves</a> online.</p>
+
+<p>Having read her previous book <a href="https://www.amazon.com/Designing-Machine-Learning-Systems-Production-Ready/dp/1098107969?&amp;_encoding=UTF8&amp;tag=chiphuyen-20&amp;linkCode=ur2&amp;linkId=0a1dbab0e76f5996e29e1a97d45f14a5&amp;camp=1789&amp;creative=9325"><em>‘Designing Machine Learning Systems’</em> (2022)</a>, which I warmly recommend, I wondered what could possible remain to be covered in 500+ additional pages. It really turned out to be something entirely different, and this blog post will attempt a short review for anyone still curious about the book.</p>
+
+<h2 id="machine-learning-vs-ai-engineering">Machine Learning vs AI Engineering</h2>
+<p>Her previous book, <em>‘Designing Machine Learning Systems’</em>, was a gentle but comprehensive overview of machine learning terms, techniques and applications that went easy on mathematical notation. While it briefly mentioned Large Language Models (LLMs) and remains highly relevant, it was published about half a year before the release of ChatGPT in November 2022, pre-dating its impact on the field.</p>
+
+<p>The new book <em>‘AI Engineering’</em> is now entirely dedicated to working with LLMs. Subtitled <em>‘Building Applications with Foundation Models’</em>, it addresses a much wider audience than just ML Engineers or Researchers with a technical or scientific interest. Indeed, it clearly sets apart ML from the scope of the book and expects little prior knowledge of the field. The contents have therefore hardly any overlap with the previous book and are mostly complementary.</p>
+
+<h2 id="format-and-style">Format and Style</h2>
+<p>The field is now moving faster than anyone could hope to read about, with sensational new announcements almost every week. Technical specifics are quickly outdated and the book accordingly sticks to more timeless high-level concepts, insights and approaches. These are nonetheless often supported by hard evidence from statistics or relevant papers and first-hand accounts from industry experts. However, this also tends to make it a quite verbose, lighter read of often more ‘qualitative’ nature, with plenty of examples and a minimum of mathematical notation and formulas.</p>
+
+<h2 id="content">Content</h2>
+<p>The author has an hopeful but grounded take on the capabilities of LLMs, with the credentials to back it up. The book provides many use cases and guides, but also known failure modes backed by the scientific literature, along with techniques to mitigate them.</p>
+
+<p>The contents include concepts such as pre- and post-training, retrieval-augmented generation (RAG), agents, tool-use, evaluation techniques, emergent properties and quirks of the models. It offers strategies for application development, an in-depth chapter on fine-tuning with techniques such as Low-Rank Adaptation (LoRA) as well as optimization strategies for inference and more.</p>
+
+<p>The facts laid out in the book are well-researched and appear solid overall. Only one assertion struck me as wrong, which is the often repeated claim that the 2012 <a href="https://dl.acm.org/doi/abs/10.1145/3065386">AlexNet paper</a> was the first to utilize GPUs for training of neural networks. As mentioned in my previous <a href="https://tensorlabbet.com/#AlexNet">summary on AlexNet</a> the truth seems <a href="https://www.deeplearningbook.org/contents/applications.html">somewhat more nuanced</a>. Chances are that the author already has a rebuttal waiting in their inbox by 
+<a href="https://arxiv.org/abs/2212.11279">Jürgen Schmidhuber</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The book provides a comprehensive overview and also offers many insights that were new to me, from the <a href="https://arxiv.org/html/2403.18932v1">mapped-out political leanings of LLMs</a> over the availability of <a href="https://commoncrawl.github.io/cc-crawl-statistics/plots/languages.html">training material in different languages</a> to prompt injection attacks that could leak sensitive training data when tasked to merely <a href="https://arxiv.org/abs/2311.17035">repeat the word ‘poem’ an infinite number of times</a>.</p>
+
+<p>The distinction between ML and AI Engineering itself is thought-provoking. It illustrates how ML-based capabilities which used to be academic research topics are rapidly becoming applicable, abstracted and commoditized via APIs.</p>
+
+<p>As with any other API, these capabilities thereby become accessible even without any deeper understanding of the field. The latter nonetheless helps, as simple LLM wrappers still encounter many limitations which are laid out in the book (hallucinations, costs, prompt injection attacks etc) and are still rarely competitive for hard engineering challenges (as seen e.g. in Kaggle challenges).</p>
+
+<p>The book provides a solid foundation in this regard. Even with a more technical background, its balance between breadth and depth covered many gaps in my knowledge and makes it likely to remain relevant for years to come, so that it was well worth reading for me.</p>
+
+<p><em>Disclaimer: I have no affiliation with the author and this review is not monetized, sponsored or funded in any other way. Originally, this post was meant to also review the book <a href="https://www.sscardapane.it/alice-book/">‘Alice’s Adventures in a Differentiable Wonderland’</a> by Simone Scardapane that I read earlier, but that will remain for a future post.</em></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="http://localhost:4000/2025/01/29/radiology-image-segmentation/">
         What Deep Learning can do for Image Segmentation in Radiology
       </a>
