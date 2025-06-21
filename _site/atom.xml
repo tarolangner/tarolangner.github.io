@@ -4,7 +4,7 @@
  <title>Tensor Labbet</title>
  <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
  <link href="https://tensorlabbet.com/"/>
- <updated>2025-06-21T16:42:30+02:00</updated>
+ <updated>2025-06-21T17:04:12+02:00</updated>
  <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
@@ -40,7 +40,7 @@
 
 &lt;p&gt;The contents include concepts such as pre- and post-training, retrieval-augmented generation (RAG), agents, tool-use, evaluation techniques, emergent properties and quirks of the models. It offers strategies for application development, an in-depth chapter on fine-tuning with techniques such as Low-Rank Adaptation (LoRA) as well as optimization strategies for inference and more.&lt;/p&gt;
 
-&lt;p&gt;The facts laid out in the book are well-researched and appear solid overall. Only one assertion struck me as wrong, which is the often repeated claim that the 2012 &lt;a href=&quot;https://dl.acm.org/doi/abs/10.1145/3065386&quot;&gt;AlexNet paper&lt;/a&gt; was the first to utilize GPUs for training of neural networks. As mentioned in my previous &lt;a href=&quot;https://tensorlabbet.com/#AlexNet&quot;&gt;summary on AlexNet&lt;/a&gt; the truth seems &lt;a href=&quot;https://www.deeplearningbook.org/contents/applications.html&quot;&gt;somewhat more nuanced&lt;/a&gt;. Chances are that the author already has a rebuttal waiting in their inbox by 
+&lt;p&gt;The facts laid out in the book are well-researched and appear solid overall. However, it does repeat the common claim that the 2012 &lt;a href=&quot;https://dl.acm.org/doi/abs/10.1145/3065386&quot;&gt;AlexNet paper&lt;/a&gt; was the first to utilize GPUs for training of neural networks. As mentioned in my previous &lt;a href=&quot;https://tensorlabbet.com/#AlexNet&quot;&gt;summary on AlexNet&lt;/a&gt; the truth seems &lt;a href=&quot;https://www.deeplearningbook.org/contents/applications.html&quot;&gt;somewhat more nuanced&lt;/a&gt;. Chances are that the author already has a rebuttal waiting in their inbox by 
 &lt;a href=&quot;https://arxiv.org/abs/2212.11279&quot;&gt;Jürgen Schmidhuber&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;

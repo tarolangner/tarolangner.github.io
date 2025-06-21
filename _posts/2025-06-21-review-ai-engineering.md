@@ -28,7 +28,7 @@ The author has an hopeful but grounded take on the capabilities of LLMs, with th
 
 The contents include concepts such as pre- and post-training, retrieval-augmented generation (RAG), agents, tool-use, evaluation techniques, emergent properties and quirks of the models. It offers strategies for application development, an in-depth chapter on fine-tuning with techniques such as Low-Rank Adaptation (LoRA) as well as optimization strategies for inference and more.
 
-The facts laid out in the book are well-researched and appear solid overall. Only one assertion struck me as wrong, which is the often repeated claim that the 2012 [AlexNet paper](https://dl.acm.org/doi/abs/10.1145/3065386) was the first to utilize GPUs for training of neural networks. As mentioned in my previous [summary on AlexNet](https://tensorlabbet.com/#AlexNet) the truth seems [somewhat more nuanced](https://www.deeplearningbook.org/contents/applications.html). Chances are that the author already has a rebuttal waiting in their inbox by 
+The facts laid out in the book are well-researched and appear solid overall. However, it does repeat the common claim that the 2012 [AlexNet paper](https://dl.acm.org/doi/abs/10.1145/3065386) was the first to utilize GPUs for training of neural networks. As mentioned in my previous [summary on AlexNet](https://tensorlabbet.com/#AlexNet) the truth seems [somewhat more nuanced](https://www.deeplearningbook.org/contents/applications.html). Chances are that the author already has a rebuttal waiting in their inbox by 
 [Jürgen Schmidhuber](https://arxiv.org/abs/2212.11279).
 
 
