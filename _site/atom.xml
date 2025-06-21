@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2025-06-21T14:16:49+02:00</updated>
- <id>http://localhost:4000</id>
+ <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
+ <link href="https://tensorlabbet.com/"/>
+ <updated>2025-06-21T14:18:40+02:00</updated>
+ <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Reviewing “AI Engineering” by Chip Huyen</title>
-   <link href="http://localhost:4000/2025/05/25/review-ai-engineering/"/>
-   <updated>2025-05-25T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2025/05/25/review-ai-engineering</id>
+   <link href="https://tensorlabbet.com/2025/06/21/review-ai-engineering/"/>
+   <updated>2025-06-21T00:00:00+02:00</updated>
+   <id>https://tensorlabbet.com/2025/06/21/review-ai-engineering</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A book review &lt;br /&gt;
     &lt;i&gt;(5 min read)&lt;/i&gt;&lt;br /&gt;
@@ -59,9 +59,9 @@
  
  <entry>
    <title>What Deep Learning can do for Image Segmentation in Radiology</title>
-   <link href="http://localhost:4000/2025/01/29/radiology-image-segmentation/"/>
+   <link href="https://tensorlabbet.com/2025/01/29/radiology-image-segmentation/"/>
    <updated>2025-01-29T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2025/01/29/radiology-image-segmentation</id>
+   <id>https://tensorlabbet.com/2025/01/29/radiology-image-segmentation</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: From Fully Convolutional Networks to TotalSegmentator &lt;br /&gt;
     &lt;i&gt;(10 min read)&lt;/i&gt;&lt;br /&gt;
@@ -169,9 +169,9 @@ That is progress!&lt;/p&gt;
  
  <entry>
    <title>The Lost Reading Items</title>
-   <link href="http://localhost:4000/2024/11/11/lost-reading-items/"/>
+   <link href="https://tensorlabbet.com/2024/11/11/lost-reading-items/"/>
    <updated>2024-11-11T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2024/11/11/lost-reading-items</id>
+   <id>https://tensorlabbet.com/2024/11/11/lost-reading-items</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: An attempt to reconstruct Ilya Sutskever&apos;s 2020 AI reading list &lt;br /&gt;
     &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;
@@ -308,9 +308,9 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
  
  <entry>
    <title>Summary of Ilya Sutskever's AI Reading List</title>
-   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
+   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
+   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     
