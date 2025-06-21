@@ -36,7 +36,7 @@ The facts laid out in the book are well-researched and appear solid overall. Onl
 
 ## Conclusion
 
-The book provides a comprehensive overview and also offers many insights that were new to me, from the [mapped-out political leanings of LLMs](https://arxiv.org/html/2403.18932v1) over the availability of [training material in different languages](https://commoncrawl.github.io/cc-crawl-statistics/plots/languages.html) to prompt injection attacks that could leak sensitive training data when tasked to merely [repeat the word ‘poem’ an infinite number of times](https://arxiv.org/abs/2311.17035).
+The book provides a comprehensive overview and also offers many insights that were new to me, from the [mapped-out political leanings of LLMs](https://aclanthology.org/2023.acl-long.656/) over the availability of [training material in different languages](https://commoncrawl.github.io/cc-crawl-statistics/plots/languages.html) to prompt injection attacks that could leak sensitive training data when tasked to merely [repeat the word ‘poem’ an infinite number of times](https://arxiv.org/abs/2311.17035).
 
 The distinction between ML and AI Engineering itself is thought-provoking. It illustrates how ML-based capabilities which used to be academic research topics are rapidly becoming applicable, abstracted and commoditized via APIs.
 

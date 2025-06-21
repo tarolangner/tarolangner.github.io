@@ -4,7 +4,7 @@
  <title>Tensor Labbet</title>
  <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
  <link href="https://tensorlabbet.com/"/>
- <updated>2025-06-21T14:21:23+02:00</updated>
+ <updated>2025-06-21T16:42:30+02:00</updated>
  <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
@@ -45,7 +45,7 @@
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;The book provides a comprehensive overview and also offers many insights that were new to me, from the &lt;a href=&quot;https://arxiv.org/html/2403.18932v1&quot;&gt;mapped-out political leanings of LLMs&lt;/a&gt; over the availability of &lt;a href=&quot;https://commoncrawl.github.io/cc-crawl-statistics/plots/languages.html&quot;&gt;training material in different languages&lt;/a&gt; to prompt injection attacks that could leak sensitive training data when tasked to merely &lt;a href=&quot;https://arxiv.org/abs/2311.17035&quot;&gt;repeat the word ‘poem’ an infinite number of times&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The book provides a comprehensive overview and also offers many insights that were new to me, from the &lt;a href=&quot;https://aclanthology.org/2023.acl-long.656/&quot;&gt;mapped-out political leanings of LLMs&lt;/a&gt; over the availability of &lt;a href=&quot;https://commoncrawl.github.io/cc-crawl-statistics/plots/languages.html&quot;&gt;training material in different languages&lt;/a&gt; to prompt injection attacks that could leak sensitive training data when tasked to merely &lt;a href=&quot;https://arxiv.org/abs/2311.17035&quot;&gt;repeat the word ‘poem’ an infinite number of times&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The distinction between ML and AI Engineering itself is thought-provoking. It illustrates how ML-based capabilities which used to be academic research topics are rapidly becoming applicable, abstracted and commoditized via APIs.&lt;/p&gt;
 
