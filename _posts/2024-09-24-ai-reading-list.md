@@ -450,4 +450,7 @@ Although low-quality, generated content was a recurring theme I encountered whil
 - [Aman Chadha's _Distilled AI_](https://aman.ai/primers/ai/top-30-papers/) (~12,000 words, includes other papers)
 - [DataMListic's youtube video playlist](https://www.youtube.com/watch?v=oF6vcYHs6rw&list=PL8hTotro6aVGtPgLJ_TMKe8C8MDhHBZ4W) (about 25 min total)
 
+**October 2025 Update:** By now, an entire book has been dedicated to this list by the author Richard Heimann, with additional depth and context:
+- [Sutskever's List: Foundational ideas of modern AI (affiliate link)](https://www.manning.com/books/sutskevers-list?utm_source=tensorlabbet&utm_medium=affiliate&utm_campaign=book_heimann&a_aid=tensorlabbet&a_bid=7b3f555a)
+
 With this blog post, the known contents of the reading list are compressed to barely more than one percent of the original word count. This leaves a lot more to be discussed, but hopefully it still has something to offer for the interested reader. My own, subjective review will be saved for another post in the future.
