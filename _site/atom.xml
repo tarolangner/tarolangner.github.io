@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
- <link href="https://tensorlabbet.com/"/>
- <updated>2025-06-21T17:04:12+02:00</updated>
- <id>https://tensorlabbet.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2026-04-25T12:40:37+02:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -13,10 +13,168 @@
 
  
  <entry>
+   <title>It's Hard to Feel the AGI</title>
+   <link href="http://localhost:4000/2025/11/30/hard-to-feel-agi/"/>
+   <updated>2025-11-30T00:00:00+01:00</updated>
+   <id>http://localhost:4000/2025/11/30/hard-to-feel-agi</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: A reality check from leading researchers &lt;br /&gt;
+    &lt;i&gt;(6 min read)&lt;/i&gt;&lt;br /&gt;
+    
+&lt;/p&gt;
+
+&lt;p&gt;In the heat of the ongoing AI summer, a chilling effect is starting to spread from the growing cracks between marketing claims and the underlying technology. To a backdrop of comparisons with the dot com bubble, some of the most accomplished minds of the field are beginning to revise their projections for what can realistically be expected for the near future.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Ilya_Sutskever&quot;&gt;Ilya Sutskever&lt;/a&gt;&lt;/strong&gt; shared his view on &lt;a href=&quot;https://www.dwarkesh.com/p/ilya-sutskever-2&quot;&gt;a recent podcast&lt;/a&gt; that the current approach around transformer-based LLMs is likely to stall out in the coming years as the scaling paradigm hits a ceiling. He notes a remarkable discrepancy in their excellent performance in evaluations despite inadequate generalization and low economic impact in practice. He argues that fundamentally new research insights are needed to break through this plateau.&lt;/p&gt;
+
+&lt;p&gt;Moreover, he expresses doubts about the future profitability of the current business models around LLMs, despite massive potential revenues, due to lacking differentiation between competitors.
+Ultimately, he revises his estimate for the emergence of systems with human-like learning abilities back by 5-20 years. His startup, &lt;em&gt;Safe Superintelligence Inc.&lt;/em&gt;, is currently exploring research ideas that may identify viable new approaches towards this goal.&lt;/p&gt;
+
+&lt;p&gt;As former chief scientist of OpenAI, his doubts about the future direction and profitability of their business model should raise concerns. OpenAI plays a central role in what has been described as circular investment dealings related to enormous investments into hardware and data centers. The latter have been claimed to &lt;a href=&quot;https://fortune.com/2025/10/07/data-centers-gdp-growth-zero-first-half-2025-jason-furman-harvard-economist/&quot;&gt;account for over 90% of growth in US GDP&lt;/a&gt; over the first half of 2025.&lt;/p&gt;
+
+&lt;p&gt;They are now seeking unprecedented funding for future spending commitments, with controversy around their CFO publicly commenting on their financial innovations and seemingly floating the idea that &lt;a href=&quot;https://fortune.com/2025/11/10/scott-galloway-nowhere-to-hide-ai-bubble-sam-altman/&quot;&gt;the US government could act as a financial backstop&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Andrej_Karpathy&quot;&gt;Andrej Karpathy&lt;/a&gt;&lt;/strong&gt; previously featured &lt;a href=&quot;https://www.dwarkesh.com/p/andrej-karpathy&quot;&gt;on the same podcast&lt;/a&gt;
+and voiced a noteworthy critique of the current industry hype around LLM-based AI Agents. He argues that, while impressive, the technology still needs a decade of work and improvements. Only then could they hope to reach the promised level of performing like an automated employee or coworker, whereas currently &lt;em&gt;“they’re cognitively lacking and it’s just not working”&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;He expects these systems to contribute to gradual economic growth within the ongoing, long-term compounding pattern seen ever since the onset of the industrial revolution rather than a sudden jump in GDP.&lt;/p&gt;
+
+&lt;p&gt;He compares this comparatively slow development to earlier ambitions around automating radiology and self-driving cars. Despite witnessing impressive demos for the latter already in 2014 and contributing as director of AI at Tesla, he argues that neither field reached this goal yet. He points out that current self-driving technology still requires human supervision and frequent manual intervention by remote operators.&lt;/p&gt;
+
+&lt;p&gt;Development efforts over this decade instead faced diminishing returns, with ‘the march of nines’ in reliability requiring a constant amount of effort for the same relative reduction in errors. Ultimately, he revised ‘the year of agents’ to be ‘the decade of agents’ instead.&lt;/p&gt;
+
+&lt;p&gt;In the software industry, widespread reporting posits &lt;a href=&quot;https://fortune.com/2025/07/27/artificial-intelligence-skills-18000-salaries-28-percent/&quot;&gt;AI and automation as the main cause for large-scale layoffs&lt;/a&gt;, but the degree of autonomy vs supervision that tools for agentic code generation require remains controversial. As an example, a recent study deployed frontier AI agent frameworks on projects sourced from online freelancing platforms with &lt;a href=&quot;https://arxiv.org/abs/2510.26787v1&quot;&gt;a success rate of just 2.5%&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://de.wikipedia.org/wiki/Richard_S._Sutton&quot;&gt;Rich Sutton&lt;/a&gt;&lt;/strong&gt; appeared &lt;a href=&quot;https://www.dwarkesh.com/p/richard-sutton&quot;&gt;on the same podcast&lt;/a&gt; in a rather contentious earlier episode to share his view that LLMs are a dead end in AI research.
+He argues that, while surprisingly effective, LLMs have no internal ‘world model’ based on which they could explore potential actions and predict their outcomes, but instead merely mimic human use of language through imitation learning. He points out their lack of any actual goal towards which to take action as opposed to just mechanistically processing tokens.&lt;/p&gt;
+
+&lt;p&gt;He notes that, whereas LLMs gain the ability for next-token prediction in a supervised learning phase, no such thing occurs in nature. Instead, he emphasizes their critical lack of continual learning abilities. According to his &lt;a href=&quot;https://openreview.net/pdf?id=Sv7DazuCn8&quot;&gt;‘Big World Hypothesis’&lt;/a&gt; the world is too complex for any agent to successfully navigate without this ability to adapt and learn from experience.&lt;/p&gt;
+
+&lt;p&gt;He mentions &lt;a href=&quot;https://en.wikipedia.org/wiki/Moravec%27s_paradox&quot;&gt;Moravec’s Paradox&lt;/a&gt;, which contrasts the ease with which machines can imitate more highly evolved, specific cognitive tasks as opposed to their inability to perform lower-order, largely unconscious biological functions such as sensory, motorical and social skills.&lt;/p&gt;
+
+&lt;p&gt;He raises conceptual limitations of deep learning and gradient descent for generalization. While he considers machine superintelligence as ultimately inevitable, he also highlights that even the intelligence exhibited by a squirrel remains fundamentally beyond our current understanding.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Yann_LeCun&quot;&gt;Yann LeCun&lt;/a&gt;&lt;/strong&gt; has been a &lt;a href=&quot;https://openreview.net/pdf?id=BZ5a1r-kVsf&quot;&gt;long&lt;/a&gt;-&lt;a href=&quot;https://lexfridman.com/yann-lecun-3-transcript/&quot;&gt;standing&lt;/a&gt; &lt;a href=&quot;https://www.youtube.com/watch?v=4__gg83s_Do&quot;&gt;critic&lt;/a&gt; of the idea that LLMs could scale to human-level intelligence. Over recent years he shared many insights and concerns in this regard that overlap with those listed above.&lt;/p&gt;
+
+&lt;p&gt;He argues that language is not intelligence. He considers it a low-bandwidth modality, with a discrete and restricted vocabulary that language models can predict probability distributions over to determine which word or symbols are likely to follow each other. The physical world is instead experienced by human vision with high bandwidth in high-dimensional and continuous representations. These cannot be enumerated in the same way to form a probability distribution over. Similar to Rich Sutton, he therefore argues that LLMs fundamentally lack an adequate mental model of the physical world in which they could plan a sequence of actions to arrive at an intended goal. This limits their cognitive abilities to a level below the intelligence of young children or even cats or dogs with no language abilities.&lt;/p&gt;
+
+&lt;p&gt;He expects that a truly intelligent system could acquire common sense and an understanding of the physical world from multimodal inputs like video, operate with persistent memory and perform reasoning and planning. He considers LLMs incapable of inventing solutions to new problems rather than merely performing knowledge retrieval from vast training data.&lt;/p&gt;
+
+&lt;p&gt;To him, the current exuberance around LLMs is not a new phenomenon, with parallels to the hype around &lt;a href=&quot;https://en.wikipedia.org/wiki/Expert_system&quot;&gt;expert systems&lt;/a&gt; of the 80s that set high expectations followed by failures and disillusionment. Although he does not consider it likely that any isolated group could suddenly discover the secret to AGI, he expects the required capabilities to be gradually developed through innovations from industry and academia. Along with his own work on a Joint Embedding Predictive Architecture (JEPA), these may become more viable within the coming 3-5 years.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;These findings may not be entirely unexpected for many who have been following the field for a while. What is more surprising is the consensus that is taking hold even among those who previously presented much more optimistic timelines, sometimes in a context of financial incentives.&lt;/p&gt;
+
+&lt;p&gt;In sober review, there are undoubtedly many tangible achievements that have been reached by LLMs and other generative models. For tasks like generating text, images, video and audio, brainstorming, planning, summarization and agentic tasks with varying degrees for human supervision for software engineering and more, the technology can already provide genuine value for years to come.&lt;/p&gt;
+
+&lt;p&gt;Pinpointing the limits of their autonomy will remain a challenging task with a moving target.
+This nuance will hopefully not be lost if the industry climate drops to a new ‘AI Winter’ among disillusioned investors who may have massively bought into pre-orders for science fiction that conflated machine learning with human-like robots.&lt;/p&gt;
+
+&lt;p&gt;But is it conceivable that the collective wisdom of investors overprovisioned billions of dollars in tech funding in vain? If so, we could take consolation in a thought few have had the courage to consider, round up these hundreds of thousands of GPUs, take a daring bet, and use them instead to finally fire up the Metaverse.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>When Machines that Simulate Intelligence Seemed Like a Summer Project</title>
+   <link href="http://localhost:4000/2025/09/05/dartmouth-ai/"/>
+   <updated>2025-09-05T00:00:00+02:00</updated>
+   <id>http://localhost:4000/2025/09/05/dartmouth-ai</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: A look back at pioneering thoughts on AI research &lt;br /&gt;
+    &lt;i&gt;(7 min read)&lt;/i&gt;&lt;br /&gt;
+    
+&lt;/p&gt;
+
+&lt;p&gt;I recently stumbled upon a research proposal that must have raised a lot of eyebrows and received widespread attention in machine learning circles:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf&quot;&gt;‘We propose that a 2 month, 10 man study of artificial intelligence be carried out […]. The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it. An attempt will be made to find how to make machines use language, form abstractions and concepts, solve kinds of problems now reserved for humans, and improve themselves. We think that a significant advance can be made in one or more of these problems if a carefully selected group of scientists work on it together for a summer.’&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The summer in question was 1956, now almost seventy years ago.
+The resulting &lt;a href=&quot;https://en.wikipedia.org/wiki/Dartmouth_workshop&quot;&gt;meeting at Dartmouth College&lt;/a&gt; in Hanover, New Hampshire, has often been called the time and place that established research on ‘artificial intelligence’ as a scientific field of its own.&lt;/p&gt;
+
+&lt;p&gt;Even today, &lt;a href=&quot;http://jmc.stanford.edu/articles/dartmouth/dartmouth.pdf&quot;&gt;the research proposal&lt;/a&gt; itself still makes for a fascinating read.
+Many of its core themes remain remarkably relevant, whereas others played out in unexpected directions. This blog post is dedicated to some observations on how these pioneering thoughts from over two generations ago are reflected in the technological reality of today.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-conjecture&quot;&gt;The Conjecture&lt;/h2&gt;
+
+&lt;p&gt;Just like in the hype of today, it would only take two years for the media to ascribe human-like intent, abilities and emotions to &lt;a href=&quot;https://en.wikipedia.org/wiki/Perceptron#Mark_I_Perceptron_machine&quot;&gt;early implementations&lt;/a&gt; of these research concepts.&lt;/p&gt;
+
+&lt;p&gt;The proposal itself, however, is remarkably sober. It largely avoids the notion of human-like machines that &lt;em&gt;are&lt;/em&gt; intelligent and instead explicitly aims for machines able to &lt;em&gt;simulate&lt;/em&gt; intelligence.&lt;/p&gt;
+
+&lt;p&gt;As one of the originators of the proposal, &lt;a href=&quot;https://en.wikipedia.org/wiki/Marvin_Minsky&quot;&gt;Marvin Minsky&lt;/a&gt;
+proposes how the actions of a machine &lt;em&gt;“[…] would seem rather clever, and the behaviour would have to be regarded as rather ‘imaginative’.”&lt;/em&gt; if it was designed to build an internal, abstract model of its environment in which to first explore solutions to a given task before taking action.&lt;/p&gt;
+
+&lt;p&gt;Nowadays, there is an ongoing debate about whether multi-modal LLMs form an internal ‘world model’ that mirrors this idea. And it is not the only concept that rings surprisingly familiar from the discourse of today. The proposal specifically lists seven major themes to be examined towards its goal.&lt;/p&gt;
+
+&lt;h2 id=&quot;aspects-of-the-artificial-intelligence-problem&quot;&gt;Aspects of the Artificial Intelligence Problem&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Automatic Computers&lt;/strong&gt;
+are proposed as able to simulate the behaviour of any machine, and ultimately even higher functions of the human brain, limited mainly by lack of efficient algorithms rather than computing resources.&lt;/p&gt;
+
+&lt;p&gt;Looking back today, the jury is still out on the first half of this point and it seems unclear as to whether it will ever be attained. But especially the second part of this assertion turned out exactly opposite to what was proposed here, with the &lt;a href=&quot;http://www.incompleteideas.net/IncIdeas/BitterLesson.html&quot;&gt;‘Bitter Lesson’&lt;/a&gt; by Rich Sutton concluding that, in general, increasing computing power has proven far more impactful than clever design of algorithms.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. How can a computer be programmed to use a language&lt;/strong&gt;
+and perform reasoning based on words, forming sentences that imply one another and resemble human thought?&lt;/p&gt;
+
+&lt;p&gt;Here, the field of natural language processing made substantial progress. Examples include techniques that allow for words to be encoded as embeddings, like &lt;a href=&quot;https://arxiv.org/abs/1301.3781&quot;&gt;word2vec&lt;/a&gt; and language models like &lt;a href=&quot;https://arxiv.org/pdf/1810.04805&quot;&gt;BERT&lt;/a&gt;
+that can furthermore relate embedded words to one another. Today, LLMs can iterate on intermediate processing steps in natural language with techniques like &lt;a href=&quot;https://en.wikipedia.org/wiki/Prompt_engineering#Chain-of-thought&quot;&gt;Chain-of-Thought&lt;/a&gt;, marketed outright as ‘reasoning’ with ‘thinking’ models.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Neuron nets&lt;/strong&gt;
+were proposed as a promising approach, to be arranged so as to form concepts.&lt;/p&gt;
+
+&lt;p&gt;This research direction, among all competing paradigms of the time, proved to be spot on and foreshadowed what would later become known as deep learning. The &lt;a href=&quot;https://en.wikipedia.org/wiki/Artificial_neuron#McCulloch%E2%80%93Pitts_(MCP)_neuron&quot;&gt;McCulloch-Pitts neuron model&lt;/a&gt;
+Had already been invented over a decade earlier. Arranging variants of this neuron model into network architectures with ever more layers would ultimately give rise to deep neural networks that enabled many of the most decisive capabilities within the field of AI research today.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Theory of the size of a calculation&lt;/strong&gt;
+was to be developed, to quantify the efficiency of calculations and the complexity of functions,&lt;/p&gt;
+
+&lt;p&gt;Later work on algorithmic time complexity and space complexity would explore these questions more deeply, from the sixties onwards. Concepts of information theory such as the &lt;a href=&quot;https://tensorlabbet.com/#MDL&quot;&gt;Minimum Description Length principle and Kolmogorov complexity&lt;/a&gt;
+would furthermore be developed providing some theoretical backing to the power of machine learning with neural networks.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. Self-improvement&lt;/strong&gt;
+was expected to be a defining theme of intelligence.&lt;/p&gt;
+
+&lt;p&gt;Here, the reality of today is somewhat mixed. Machine learning emerged as a sub-discipline of AI research, with algorithms designed to adapt to given data. Many methods feature some aspects of self-improvement.&lt;/p&gt;
+
+&lt;p&gt;Generative adversarial networks (GANs) feature two competing networks, with one facilitating the training process of the other. In reinforcement learning, improvements occur dynamically from interaction with an (often simulated) environment. Online learning and related methods also see ongoing improvement, often used in recommender systems. Self-criticism in LLMs enables them to refine their outputs during inference time.&lt;/p&gt;
+
+&lt;p&gt;Nonetheless, as of today, it is still common for many methods to feature a distinct training phase, after which trainable parameters are locked or frozen before deployment. Capabilities for an exponentially compounding self-improvement across varied skill sets still appear out of reach for now.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6. Abstractions&lt;/strong&gt;
+formed by machines from sensory and other data were to be explored.&lt;/p&gt;
+
+&lt;p&gt;This point has seen substantial progress, like the ability to encode language and image data into relatable embeddings with models like &lt;a href=&quot;https://arxiv.org/abs/2410.02746&quot;&gt;CLIP&lt;/a&gt;, which can also be used to control image generation with natural language via CLIP-guided denoising diffusion for image generation as with &lt;a href=&quot;https://arxiv.org/abs/2112.10752&quot;&gt;Stable Diffusion&lt;/a&gt;.
+Likewise, manipulation of the latent space learned by models powers other abstract capabilities, such as image inpainting with generative fill.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;7. Randomness and creativity&lt;/strong&gt;
+were conjectured to be related, with injections of controlled randomness enabling orderly thinking to reach imaginative solutions.&lt;/p&gt;
+
+&lt;p&gt;This direction took a surprising turn, as the success of generative models caught even many experts off guard. Randomness indeed turned out to be an important factor, from the randomized noise that serves as input to image generators like GANs and Stable Diffusion to the temperature setting in LLMs that controls how often less probable outputs are produced.&lt;/p&gt;
+
+&lt;p&gt;Creativity was long considered a defining trait that separated humans from machines. Until recently, a prevailing line of thinking was therefore that machines could eventually automate all menial and administrative tasks and give humans the leisure to socialize and pursue poetry, music, arts and crafts.&lt;/p&gt;
+
+&lt;p&gt;Chances are that the originators of the Dartmouth proposal would have been stunned by haikus generated with LLMs, images from Stable Diffusion, videos from Leo or music from Suno. When looking at the results of &lt;a href=&quot;https://www.youtube.com/watch?v=EICWYazyqu4&quot;&gt;all that put together&lt;/a&gt;, they may have in fact wanted to row things back.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;For many of these ideas, it might be still too early to make a final call, as the ultimate goals of the proposal have arguably still not been fully attained. With time, some approaches that are hyped today may well seem like dead ends in hindsight, whereas others will seem obvious.&lt;/p&gt;
+
+&lt;p&gt;There is much more to the document yet than can be unpacked here, and this does not even include the individual proposals by its originators, 
+&lt;a href=&quot;https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)&quot;&gt;John McCarthy&lt;/a&gt;,
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Marvin_Minsky&quot;&gt;Marvin Minsky&lt;/a&gt;,
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Nathaniel_Rochester_(computer_scientist)&quot;&gt;Nathaniel Rochester&lt;/a&gt; and
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Claude_Shannon&quot;&gt;Claude Shannon&lt;/a&gt;. Many more big names were ultimately involved in this summer project, but all that may well warrant another blog post in the future.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Reviewing “AI Engineering” by Chip Huyen</title>
-   <link href="https://tensorlabbet.com/2025/06/21/review-ai-engineering/"/>
+   <link href="http://localhost:4000/2025/06/21/review-ai-engineering/"/>
    <updated>2025-06-21T00:00:00+02:00</updated>
-   <id>https://tensorlabbet.com/2025/06/21/review-ai-engineering</id>
+   <id>http://localhost:4000/2025/06/21/review-ai-engineering</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A book review &lt;br /&gt;
     &lt;i&gt;(5 min read)&lt;/i&gt;&lt;br /&gt;
@@ -25,7 +183,7 @@
 
 &lt;p&gt;In January this year, &lt;a href=&quot;https://huyenchip.com/&quot;&gt;Chip Huyen&lt;/a&gt; published her newest book &lt;a href=&quot;https://www.amazon.com/dp/1098166302?&amp;amp;linkCode=sl1&amp;amp;tag=chiphuyen-20&amp;amp;linkId=0a4e5ad4b14080d44c42640550a9291e&amp;amp;language=en_US&amp;amp;ref_=as_li_ss_tl&quot;&gt;&lt;em&gt;‘AI Engineering’&lt;/em&gt;&lt;/a&gt;, which quickly &lt;a href=&quot;https://www.youtube.com/watch?v=98o_L3jlixw&amp;amp;pp=ygUscHJhZ21hdGljIGVuZ2luZWVyIGFpIGVuZ2luZWVyaW5nIGNoaXAgaHV5ZW4%3D&quot;&gt;made waves&lt;/a&gt; online.&lt;/p&gt;
 
-&lt;p&gt;Having read her previous book &lt;a href=&quot;https://www.amazon.com/Designing-Machine-Learning-Systems-Production-Ready/dp/1098107969?&amp;amp;_encoding=UTF8&amp;amp;tag=chiphuyen-20&amp;amp;linkCode=ur2&amp;amp;linkId=0a1dbab0e76f5996e29e1a97d45f14a5&amp;amp;camp=1789&amp;amp;creative=9325&quot;&gt;&lt;em&gt;‘Designing Machine Learning Systems’&lt;/em&gt; (2022)&lt;/a&gt;, which I warmly recommend, I wondered what could possible remain to be covered in 500+ additional pages. It really turned out to be something entirely different, and this blog post will attempt a short review for anyone still curious about the book.&lt;/p&gt;
+&lt;p&gt;Having read her previous book &lt;a href=&quot;https://www.amazon.com/Designing-Machine-Learning-Systems-Production-Ready/dp/1098107969?&amp;amp;_encoding=UTF8&amp;amp;tag=chiphuyen-20&amp;amp;linkCode=ur2&amp;amp;linkId=0a1dbab0e76f5996e29e1a97d45f14a5&amp;amp;camp=1789&amp;amp;creative=9325&quot;&gt;&lt;em&gt;‘Designing Machine Learning Systems’&lt;/em&gt; (2022)&lt;/a&gt;, which I warmly recommend, I wondered what could possibly remain to be covered in 500+ additional pages. It really turned out to be something entirely different, and this blog post will attempt a short review for anyone still curious about the book.&lt;/p&gt;
 
 &lt;h2 id=&quot;machine-learning-vs-ai-engineering&quot;&gt;Machine Learning vs AI Engineering&lt;/h2&gt;
 &lt;p&gt;Her previous book, &lt;em&gt;‘Designing Machine Learning Systems’&lt;/em&gt;, was a gentle but comprehensive overview of machine learning terms, techniques and applications that went easy on mathematical notation. While it briefly mentioned Large Language Models (LLMs) and remains highly relevant, it was published about half a year before the release of ChatGPT in November 2022, pre-dating its impact on the field.&lt;/p&gt;
@@ -59,9 +217,9 @@
  
  <entry>
    <title>What Deep Learning can do for Image Segmentation in Radiology</title>
-   <link href="https://tensorlabbet.com/2025/01/29/radiology-image-segmentation/"/>
+   <link href="http://localhost:4000/2025/01/29/radiology-image-segmentation/"/>
    <updated>2025-01-29T00:00:00+01:00</updated>
-   <id>https://tensorlabbet.com/2025/01/29/radiology-image-segmentation</id>
+   <id>http://localhost:4000/2025/01/29/radiology-image-segmentation</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: From Fully Convolutional Networks to TotalSegmentator &lt;br /&gt;
     &lt;i&gt;(10 min read)&lt;/i&gt;&lt;br /&gt;
@@ -169,9 +327,9 @@ That is progress!&lt;/p&gt;
  
  <entry>
    <title>The Lost Reading Items</title>
-   <link href="https://tensorlabbet.com/2024/11/11/lost-reading-items/"/>
+   <link href="http://localhost:4000/2024/11/11/lost-reading-items/"/>
    <updated>2024-11-11T00:00:00+01:00</updated>
-   <id>https://tensorlabbet.com/2024/11/11/lost-reading-items</id>
+   <id>http://localhost:4000/2024/11/11/lost-reading-items</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: An attempt to reconstruct Ilya Sutskever&apos;s 2020 AI reading list &lt;br /&gt;
     &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;
@@ -308,9 +466,9 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
  
  <entry>
    <title>Summary of Ilya Sutskever's AI Reading List</title>
-   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
+   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
+   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     
@@ -807,6 +965,11 @@ Authors: Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals an
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://aman.ai/primers/ai/top-30-papers/&quot;&gt;Aman Chadha’s &lt;em&gt;Distilled AI&lt;/em&gt;&lt;/a&gt; (~12,000 words, includes other papers)&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=oF6vcYHs6rw&amp;amp;list=PL8hTotro6aVGtPgLJ_TMKe8C8MDhHBZ4W&quot;&gt;DataMListic’s youtube video playlist&lt;/a&gt; (about 25 min total)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;October 2025 Update:&lt;/strong&gt; By now, an entire book has been dedicated to this list by the author Richard Heimann, with additional depth and context:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.manning.com/books/sutskevers-list?utm_source=tensorlabbet&amp;amp;utm_medium=affiliate&amp;amp;utm_campaign=book_heimann&amp;amp;a_aid=tensorlabbet&amp;amp;a_bid=7b3f555a&quot;&gt;Sutskever’s List: Foundational ideas of modern AI (affiliate link)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;With this blog post, the known contents of the reading list are compressed to barely more than one percent of the original word count. This leaves a lot more to be discussed, but hopefully it still has something to offer for the interested reader. My own, subjective review will be saved for another post in the future.&lt;/p&gt;
