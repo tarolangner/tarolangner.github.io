@@ -5,15 +5,18 @@ author: Taro Langner
 ---
 
 <p class="message">
-    In this post: Surveying the open LLM ecosystem <br>
+    In this post: A survey of the open LLM ecosystem <br>
     <I>(7 min read)</I><br>
     
 </p>
 
 
-Leading model providers like Anthropic, OpenAI and xAI have been pushing the envelope by developing ever more capable Large Language Models (LLMs). These ‘closed weight’ frontier models are proprietary and served through APIs or subscription plans. 
+Leading model providers like Anthropic, OpenAI and xAI have been pushing the envelope by developing ever more capable Large Language Models (LLMs). These _closed-weight_ frontier models are proprietary and served through APIs or subscription plans. 
 
 The big bet of the AI race, on which over [$1 trillion have been invested](https://www.visualcapitalist.com/visualized-big-tech-ai-spending/), is that substantial returns on investment are possible, especially for a single provider that ‘wins’ and comes to dominate the field. 
+
+
+## Locking In
 
 Whereas OpenAI recently started [introducing ads](https://www.adweek.com/media/exclusive-leaked-deck-reveals-stackadapts-playbook-for-chatgpt-ads/) for some of their usage plans,
 Anthropic has started to adjust the generosity of their offering by limiting third-party access, tightening usage limits and [barring certain users](https://news.ycombinator.com/item?id=47854477) from signing up for Claude Code on Pro subscription plans.

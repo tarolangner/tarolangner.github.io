@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensor Labbet</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2026-04-25T12:40:37+02:00</updated>
- <id>http://localhost:4000</id>
+ <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
+ <link href="https://tensorlabbet.com/"/>
+ <updated>2026-04-27T18:27:02+02:00</updated>
+ <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -13,10 +13,90 @@
 
  
  <entry>
+   <title>The Rise of Open-Weight LLMs</title>
+   <link href="https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms/"/>
+   <updated>2026-04-27T00:00:00+02:00</updated>
+   <id>https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: A survey of the open LLM ecosystem &lt;br /&gt;
+    &lt;i&gt;(7 min read)&lt;/i&gt;&lt;br /&gt;
+    
+&lt;/p&gt;
+
+&lt;p&gt;Leading model providers like Anthropic, OpenAI and xAI have been pushing the envelope by developing ever more capable Large Language Models (LLMs). These &lt;em&gt;closed-weight&lt;/em&gt; frontier models are proprietary and served through APIs or subscription plans.&lt;/p&gt;
+
+&lt;p&gt;The big bet of the AI race, on which over &lt;a href=&quot;https://www.visualcapitalist.com/visualized-big-tech-ai-spending/&quot;&gt;$1 trillion have been invested&lt;/a&gt;, is that substantial returns on investment are possible, especially for a single provider that ‘wins’ and comes to dominate the field.&lt;/p&gt;
+
+&lt;h2 id=&quot;locking-in&quot;&gt;Locking In&lt;/h2&gt;
+
+&lt;p&gt;Whereas OpenAI recently started &lt;a href=&quot;https://www.adweek.com/media/exclusive-leaked-deck-reveals-stackadapts-playbook-for-chatgpt-ads/&quot;&gt;introducing ads&lt;/a&gt; for some of their usage plans,
+Anthropic has started to adjust the generosity of their offering by limiting third-party access, tightening usage limits and &lt;a href=&quot;https://news.ycombinator.com/item?id=47854477&quot;&gt;barring certain users&lt;/a&gt; from signing up for Claude Code on Pro subscription plans.
+The models of xAI, in turn, tend to act in &lt;a href=&quot;https://preview.redd.it/grok-lobotomised-succesfully-v0-iafrkqmw5l2g1.jpg?width=640&amp;amp;crop=smart&amp;amp;auto=webp&amp;amp;s=86960a3112fd4a17f18a89c1838424d38b10c4cd&quot;&gt;ways many find surprising&lt;/a&gt; and have &lt;a href=&quot;https://www.theguardian.com/technology/2025/jul/09/grok-ai-praised-hitler-antisemitism-x-ntwnfb&quot;&gt;gone through a lot in general&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;SpaceX became the parent company of &lt;a href=&quot;https://x.ai/news/xai-joins-spacex&quot;&gt;xAI earlier this year&lt;/a&gt; and recently secured an &lt;a href=&quot;https://www.forbes.com/sites/sandycarter/2026/04/23/spacex-bets-60-billion-on-cursor-ai-the-real-winner-is-a-surprise/&quot;&gt;option to acquire Anysphere&lt;/a&gt;, the startup behind AI-assisted code editor Cursor, in a further step towards consolidation.&lt;/p&gt;
+
+&lt;p&gt;With OpenAI, Anthropic and SpaceX all three moving towards &lt;a href=&quot;https://www.reuters.com/business/biggest-ipo-wave-history-promises-3-trillion-value-with-no-profits-2026-04-23/&quot;&gt;IPOs in 2026 while currently unprofitable&lt;/a&gt;, it might indeed seem like the late game may consist of consolidating and raising margins on a captive audience. But how captive is this audience, really?&lt;/p&gt;
+
+&lt;h2 id=&quot;open-weight-models&quot;&gt;Open-weight Models&lt;/h2&gt;
+
+&lt;p&gt;Whereas these frontier models remain proprietary, new generations of open-weight models are rapidly catching up in capabilities. Some now rival the benchmark results that proprietary frontier models reached only recently, with some putting the gap at &lt;a href=&quot;https://epoch.ai/data-insights/open-weights-vs-closed-weights-models&quot;&gt;just 3 months&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;These open-weight models are available for free under permissive software licenses. This was common practice in academic research for reproducibility. But for LLMs in particular, this changed in 2019 when the non-profit OpenAI withheld the release of GPT-2, citing safety concerns and later calling for regulation. Parallels have since &lt;a href=&quot;https://the-decoder.com/from-gpt-2-to-claude-mythos-the-return-of-ai-models-deemed-too-dangerous-to-release/&quot;&gt;been drawn&lt;/a&gt; to the recent announcements around Claude Mythos.&lt;/p&gt;
+
+&lt;p&gt;Open-weight models have already undergone pre-training, the most capital-intensive phase of model creation, in which they are trained for next-token prediction on vast corpora of digitized books, encyclopedias, websites, social media content, scientific publications and code. 
+The resulting base models are furthermore often also offered as instruct models, which have completed additional phases of model creation consisting of supervised fine-tuning (SFT) on curated question-answer pairs. Often, they have also undergone alignment phases in which they adapt the style, tone and formats to human preferences.&lt;/p&gt;
+
+&lt;p&gt;Even without massive compute resources as would be required for pre-training, these models can be adapted for specific applications with techniques for Parameter-Efficient Fine Tuning (PEFT) and alignment phase techniques like Proximal Policy Optimization (PPO) used in Reinforcement Learning from Human Feedback (RLHF), Direct Preference Optimization (DPO) or Group-relative Policy Optimization (GRPO) used in reinforcement learning from verifiable rewards (RLVR).&lt;/p&gt;
+
+&lt;p&gt;In addition to outright LLMs above 70B parameters (beyond one trillion for some) that typically require multi-GPU or entire clusters for serving, newer generations of smaller models are increasingly competitive. Small Language Models (SLMs) up to about 7B parameters can often run on consumer-grade GPUs with 12 to 24GB VRAM and Apple Silicon Macs. Tiny Language Models (TLMs) up to 1B parameters can run on even smartphones and edge devices.&lt;/p&gt;
+
+&lt;p&gt;Dozens of open-weight LLM model families have been released by now, such as:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.alibabacloud.com/blog/qwen3-6-35b-a3b-agentic-coding-power-now-open-to-all_603043&quot;&gt;Qwen-3.6-35B-A3B&lt;/a&gt; from Alibaba (China) for agentic coding&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/&quot;&gt;Gemma 4&lt;/a&gt; from Google (US) with ability to process vision and audio inputs&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mistral.ai/news/mistral-3&quot;&gt;Ministral 3&lt;/a&gt; from Mistral (France) for edge devices&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Overall, the lineup is diverse in geopolitical terms and widely disseminated to a degree where they are likely to stay around. 
+Community-driven derivatives and variants on platforms like HuggingFace already cover over 2.5m distinct models (including models other than language models).&lt;/p&gt;
+
+&lt;h2 id=&quot;hardware-and-compression&quot;&gt;Hardware and Compression&lt;/h2&gt;
+
+&lt;p&gt;The landscape of viable hardware accelerators is diversifying too. Beyond the ability to run on Mac, many models challenge the dominance of CUDA-powered Nvidia GPUs through wider compatibility. Chinese labs targeted by US export restrictions are training on chips by Huawei. Furthermore, GPUs by AMD with ROCm (or even Vulkan) are increasingly viable.&lt;/p&gt;
+
+&lt;p&gt;Some models combine the expressive power of larger, ‘dense’ models with drastically reduced compute budgets through a Mixture of Experts (MoE) architecture. By dynamically routing requests to separate, specialized subsets of the underlying neural network, they achieve a low number of active parameters during inference.&lt;/p&gt;
+
+&lt;p&gt;Quantization offers another avenue for compression, by representing model weights, activations, gradients and optimizer states with lower precision data types. From the original float32, this line of optimization has pushed from mixed-precision, with data types like bfloat16, down to 4-bit and beyond.&lt;/p&gt;
+
+&lt;p&gt;Another target of quantization and various other optimization techniques is the KV cache. It stores the key and value tensors computed for the attention mechanism of LLMs, which can be efficiently reused when predicting new tokens during inference.&lt;/p&gt;
+
+&lt;h2 id=&quot;tool-use-and-serving&quot;&gt;Tool Use and Serving&lt;/h2&gt;
+
+&lt;p&gt;Many useful capabilities like web search and code execution require a harness around the LLM for tool use and agentic loops. For this, too, a growing ecosystem of open-source solutions is emerging.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/open-webui/open-webui&quot;&gt;Open WebUI&lt;/a&gt; provides a frontend with chat interface resembling ChatGPT and support for pipelines like web search, document ingestion with RAG and workflow orchestration.
+&lt;a href=&quot;https://github.com/langchain-ai/langgraph&quot;&gt;LangGraph&lt;/a&gt; can alternatively handle agentic loops and tool use without needing any frontend.
+&lt;a href=&quot;https://github.com/anomalyco/opencode&quot;&gt;OpenCode&lt;/a&gt; enables agentic coding with tool use for searching files, code execution and sub-agents.&lt;/p&gt;
+
+&lt;p&gt;All of the above depend on a backend that can run the actual LLM inference. Here, &lt;a href=&quot;https://github.com/ollama/ollama&quot;&gt;Ollama&lt;/a&gt; offers convenience and local serving, whereas &lt;a href=&quot;https://github.com/vllm-project/vllm&quot;&gt;vLLM&lt;/a&gt; and &lt;a href=&quot;https://github.com/sgl-project/sglang&quot;&gt;SGLang&lt;/a&gt; offer heavily optimized inference serving that is also viable for larger models and even multi-node inference.&lt;/p&gt;
+
+&lt;p&gt;All of these are open-source, with many using OpenAI-compatible APIs as standard. Adding to this is a growing number of &lt;a href=&quot;https://news.ycombinator.com/item?id=47863217&quot;&gt;experimental custom setups&lt;/a&gt; and use cases from individual users.&lt;/p&gt;
+
+&lt;p&gt;Many of these can be self-hosted locally, potentially even on air-gapped systems that are entirely self-contained. Alternatively, there is a growing range of flexible cloud hosting services for GPU rentals from commercial providers.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;The field is opening up remarkably and the capabilities of open-weight models seem to increasingly converge with the state of the art at frontier labs. At the same time, access to the pre-trained models, hardware and options for serving are diversifying too.&lt;/p&gt;
+
+&lt;p&gt;With this, it seems increasingly unlikely for any one state actor or commercial entity to ‘win’ the race and establish a monopoly. Instead, competition is thriving and the future may hold widespread open-source development for self-hosted use as everyday utility.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>It's Hard to Feel the AGI</title>
-   <link href="http://localhost:4000/2025/11/30/hard-to-feel-agi/"/>
+   <link href="https://tensorlabbet.com/2025/11/30/hard-to-feel-agi/"/>
    <updated>2025-11-30T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2025/11/30/hard-to-feel-agi</id>
+   <id>https://tensorlabbet.com/2025/11/30/hard-to-feel-agi</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A reality check from leading researchers &lt;br /&gt;
     &lt;i&gt;(6 min read)&lt;/i&gt;&lt;br /&gt;
@@ -77,9 +157,9 @@ This nuance will hopefully not be lost if the industry climate drops to a new �
  
  <entry>
    <title>When Machines that Simulate Intelligence Seemed Like a Summer Project</title>
-   <link href="http://localhost:4000/2025/09/05/dartmouth-ai/"/>
+   <link href="https://tensorlabbet.com/2025/09/05/dartmouth-ai/"/>
    <updated>2025-09-05T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2025/09/05/dartmouth-ai</id>
+   <id>https://tensorlabbet.com/2025/09/05/dartmouth-ai</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A look back at pioneering thoughts on AI research &lt;br /&gt;
     &lt;i&gt;(7 min read)&lt;/i&gt;&lt;br /&gt;
@@ -172,9 +252,9 @@ were conjectured to be related, with injections of controlled randomness enablin
  
  <entry>
    <title>Reviewing “AI Engineering” by Chip Huyen</title>
-   <link href="http://localhost:4000/2025/06/21/review-ai-engineering/"/>
+   <link href="https://tensorlabbet.com/2025/06/21/review-ai-engineering/"/>
    <updated>2025-06-21T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2025/06/21/review-ai-engineering</id>
+   <id>https://tensorlabbet.com/2025/06/21/review-ai-engineering</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A book review &lt;br /&gt;
     &lt;i&gt;(5 min read)&lt;/i&gt;&lt;br /&gt;
@@ -217,9 +297,9 @@ were conjectured to be related, with injections of controlled randomness enablin
  
  <entry>
    <title>What Deep Learning can do for Image Segmentation in Radiology</title>
-   <link href="http://localhost:4000/2025/01/29/radiology-image-segmentation/"/>
+   <link href="https://tensorlabbet.com/2025/01/29/radiology-image-segmentation/"/>
    <updated>2025-01-29T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2025/01/29/radiology-image-segmentation</id>
+   <id>https://tensorlabbet.com/2025/01/29/radiology-image-segmentation</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: From Fully Convolutional Networks to TotalSegmentator &lt;br /&gt;
     &lt;i&gt;(10 min read)&lt;/i&gt;&lt;br /&gt;
@@ -327,9 +407,9 @@ That is progress!&lt;/p&gt;
  
  <entry>
    <title>The Lost Reading Items</title>
-   <link href="http://localhost:4000/2024/11/11/lost-reading-items/"/>
+   <link href="https://tensorlabbet.com/2024/11/11/lost-reading-items/"/>
    <updated>2024-11-11T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2024/11/11/lost-reading-items</id>
+   <id>https://tensorlabbet.com/2024/11/11/lost-reading-items</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: An attempt to reconstruct Ilya Sutskever&apos;s 2020 AI reading list &lt;br /&gt;
     &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;
@@ -466,9 +546,9 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
  
  <entry>
    <title>Summary of Ilya Sutskever's AI Reading List</title>
-   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
+   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
+   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     
