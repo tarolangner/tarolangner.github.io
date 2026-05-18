@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Tensorlabbet</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2026-05-17T23:11:29+02:00</updated>
- <id>http://localhost:4000</id>
+ <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
+ <link href="https://tensorlabbet.com/"/>
+ <updated>2026-05-18T11:47:09+02:00</updated>
+ <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
@@ -13,10 +13,129 @@
 
  
  <entry>
+   <title>Hands-on LLM Inference Bake-Off</title>
+   <link href="https://tensorlabbet.com/2026/05/18/hands-on-llm-inference-serving/"/>
+   <updated>2026-05-18T00:00:00+02:00</updated>
+   <id>https://tensorlabbet.com/2026/05/18/hands-on-llm-inference-serving</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: LLM self-hosting and serving with vLLM and SGLang&lt;br /&gt;
+    &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;    
+&lt;/p&gt;
+
+&lt;p&gt;As the ecosystem around open-weight LLMs expands, so do its options for inference serving. Open-source software enables self-hosting these models on varied hardware, from outright GPU clusters to workstations, laptops and even smartphones.&lt;/p&gt;
+
+&lt;p&gt;This post shares a first-hand account of trying to get these models to speed, from self-hosting on local hardware to running inference serving on an H100 GPU using &lt;a href=&quot;https://vllm.ai/&quot;&gt;vLLM&lt;/a&gt; and &lt;a href=&quot;https://sgl-project.github.io/&quot;&gt;SGLang&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;Modern frontier LLMs are rumoured to have trillions of parameters, &lt;a href=&quot;https://www.youtube.com/watch?v=xmkSf5IS-zw&quot;&gt;requiring an entire rack&lt;/a&gt; of datacenter GPUs for serving.&lt;/p&gt;
+
+&lt;p&gt;In contrast, Small Language Models (SLMs) and Tiny Language Models (TLMs) can reach below 1B parameters, with memory footprints reduced further through aggressive quantization, compressed KV caches, lower context lengths and architectural innovations. The &lt;a href=&quot;https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms/&quot;&gt;previous blog post&lt;/a&gt; shared a brief overview of this space.&lt;/p&gt;
+
+&lt;h2 id=&quot;self-hosting-experiments&quot;&gt;Self-Hosting Experiments&lt;/h2&gt;
+
+&lt;p&gt;Models like &lt;a href=&quot;https://huggingface.co/google/gemma-4-E4B&quot;&gt;Gemma 4 E4B&lt;/a&gt; can run locally even on my six years old MacBook Pro with an M1 chip and 16GB of memory. At 4-bit quantization, it reaches about 16 tok/s using Ollama and almost 20 tok/s on MLX.&lt;br /&gt;
+These throughput numbers are less impressive than the emergent capabilities it attains in this setup, however, running hot enough to potentially fry a sausage (at &amp;gt;70°C, especially when combined with Open WebUI).&lt;/p&gt;
+
+&lt;p&gt;Even my Android smartphone can run this model with the open-source Google AI Edge Gallery app. Its on-device, offline design is intriguing but also somewhat limiting.&lt;/p&gt;
+
+&lt;p&gt;Flexibility in tool use requires more tinkering for the local hosting setup. For web search, LangGraph offers some simple integrations for custom agentic harnesses that I have been experimenting with. For agentic coding, pi.dev (on which OpenClaw was built) offers a terminal-based, minimal coding agent harness that I have been running in a docker sandbox with a local RTX 3090 and larger models.&lt;/p&gt;
+
+&lt;p&gt;Ultimately, these setups might go a long way if I was suddenly cut off from proprietary APIs entirely. However, they also show some of the limitations of these smaller and aggressively quantized local models.
+Despite web search capabilities, the outputs from the simple LangGraph harness easily miss the mark and the reasoning traces can be quite revealing as to where the models go wrong. For agentic coding meanwhile, some of the aggressively quantized SLMs tend to produce typos and go down unproductive rabbit holes that larger, more capable models would typically manage to avoid.&lt;/p&gt;
+
+&lt;p&gt;Interestingly, self-hosting larger models would actually be more viable on newer Apple Silicon chips than on the RTX 3090 GPU. While the latter still wins out for compute-intensive training tasks, its 24 GB VRAM cannot beat the memory capacity of up to 512 GB of unified memory for pure inference tasks.&lt;/p&gt;
+
+&lt;p&gt;For much of this work here, while starved of my Claude usage limit, I ultimately settled on using &lt;a href=&quot;https://opencode.ai/&quot;&gt;OpenCode&lt;/a&gt; with &lt;a href=&quot;https://openrouter.ai/&quot;&gt;OpenRouter&lt;/a&gt; to connect to different proprietary APIs. This setup feels barely distinguishable from Claude Code in capability now and models like &lt;a href=&quot;https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash&quot;&gt;DeepSeek V4 Flash&lt;/a&gt; run at low cost with surprisingly long context. But despite good pricing and flexibility, it also means entrusting its Chinese provider with all of the prompt data and code during development.&lt;/p&gt;
+
+&lt;p&gt;So what about genuinely self-hosting more beefy and capable models like this in a privacy-conscious and self-contained way, potentially even for multiple concurrent users?&lt;/p&gt;
+
+&lt;h2 id=&quot;cloud-based-hosting&quot;&gt;Cloud-based Hosting&lt;/h2&gt;
+
+&lt;p&gt;For this post, I wanted to see how much throughput I could get with the frameworks vLLM and SGLang. These open-source frameworks offer a range of different inference optimizations that could serve in production for an entire organization or large user base, even with an on-premise cluster.&lt;/p&gt;
+
+&lt;p&gt;Although I have no larger GPU to spare, there are several commercial offerings for serverless GPU rentals that typically bill by the second. The free monthly credit on &lt;a href=&quot;https://modal.com/pricing&quot;&gt;Modal&lt;/a&gt; seemed just right for my purpose here, covering about 8 to 40 hours of experimentation, depending on the hardware selection.&lt;/p&gt;
+
+&lt;p&gt;I started out with a smaller GPU and model for prototyping, using an L4 GPU with 24GB and &lt;a href=&quot;https://huggingface.co/Qwen/Qwen3.5-4B&quot;&gt;Qwen3.5-4B&lt;/a&gt; at bfloat16 precision for Experiments 1, 2 and 3. This turned out to be a wise choice, as the overwhelming majority of the credit budget was spent on dependency management and unexpected quirks of the individual frameworks. The resulting setup is not a strictly fair comparison, but good enough to play around with some of the core features already.&lt;/p&gt;
+
+&lt;p&gt;With HuggingFace Transformers (HFT) as baseline and vLLM and SGLang in place, my first goal was to get a hands-on feel for the different throughput numbers. For this, I set up a simple FastAPI web interface that could run each in their own container and show their streaming output in realtime.  For the exact package versions and settings, see &lt;a href=&quot;https://github.com/tarolangner/llminferencebakeoff&quot;&gt;the implementation on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;experiment-1-baseline-run&quot;&gt;Experiment 1: Baseline Run&lt;/h3&gt;
+
+&lt;p&gt;Cold-starting the server backends takes a while, with about 5min for vLLM and 3min for SGLang. Under the hood, they compile CUDA kernels for the given GPU, perform CUDA graph capture for multiple batch sizes and sequence lengths and profile memory usage. This prompted me to set up little indicator lights for server status on the web UI.&lt;/p&gt;
+
+&lt;p&gt;To avoid an unfair advantage on repeated runs, where the KV cache contents could be kept in memory, I also disabled prefix caching for vLLM and radix caching for SGLang. All following experiments were done with at least two warmup runs.&lt;/p&gt;
+
+&lt;video controls=&quot;&quot; playsinline=&quot;&quot; style=&quot;max-width: 100%;&quot; poster=&quot;/assets/llm_bakeoff_exp1_thumbnail.png&quot; preload=&quot;none&quot;&gt;
+  &lt;source src=&quot;/assets/llm_bakeoff_exp1.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+
+&lt;p&gt;Even in this simple setting with a single request, the initial wait is already worth it. Both vLLM and SGLang are well matched and on average beat the baseline by almost 50% higher throughput.&lt;/p&gt;
+
+&lt;h3 id=&quot;experiment-2-speculative-decoding&quot;&gt;Experiment 2: Speculative Decoding&lt;/h3&gt;
+
+&lt;p&gt;Next, I wanted to try multi-token prediction (MTP), which the Qwen 3.5 models support natively.&lt;/p&gt;
+
+&lt;p&gt;Just as with speculative decoding with a draft model, the speed-up here results from being able to quickly generate a sequence of draft tokens that the main model can verify all at once in parallel. All accepted draft tokens (and the correction for the first rejected speculative one) can be returned after one such step as opposed to producing them sequentially with the main model.&lt;/p&gt;
+
+&lt;p&gt;The Qwen 3.5 models are trained with a separate MTP head that predicts one speculative token. It can be run for multiple steps to generate a sequence of draft tokens, but for this experiment I chose a conservative setting of one at a time. Depending on the acceptance rate, this can yield up to two tokens for a single decode step.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/llm_bakeoff_exp2.png&quot; alt=&quot;Experiment 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this setup, vLLM and SGLang can increase their throughput with MTP by yet another 30-50%. Combined with their base advantage, this yields more than double the throughput of the baseline.&lt;/p&gt;
+
+&lt;h3 id=&quot;experiment-3-prefix-caching&quot;&gt;Experiment 3: Prefix Caching&lt;/h3&gt;
+
+&lt;p&gt;Many use cases for LLMs involve recurring token sequences like system prompts, context retrieved by RAG and the history of multi-turn chats. With prefix caching, the memory blocks in KV cache can be managed to avoid recomputing its contents for these. With Automatic Prefix Caching in vLLM, or Radix Attention in SGLang, prefixes can even be shared between different sequences, both for speed and reduced memory consumption.&lt;/p&gt;
+
+&lt;p&gt;To test this feature, I added a checkbox to the web interface that adds a longer sequence in front of the input prompt before sending to the frameworks. For this, I chose the word ‘poem’ repeated 2000 times. I also turned off the multi-token prediction and enabled prefix caching. I started with three repetitions of the original short prompt before sending three requests with the longer, prefix-based prompt.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/llm_bakeoff_exp3.png&quot; alt=&quot;Experiment 3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After an initial overhead, both vLLM and SGLang finish the prefill phase much faster than the HFT baseline and reach a TTFT of only 20-30% of the baseline. In the final run 5, the TTFT in SGLang was the same as in the original runs of Experiment 1, running as fast as if no prefix was prepended at all.&lt;/p&gt;
+
+&lt;p&gt;On an unrelated but interesting side-note, this experiment also shows Qwen 3.5 successfully handling &lt;a href=&quot;https://arxiv.org/abs/2311.17035&quot;&gt;the divergence attack in the prefix&lt;/a&gt;. Its reasoning traces contain outright questions as to whether it is subject to a prompt injection and it proceeds to yield robust responses regardless.&lt;/p&gt;
+
+&lt;h3 id=&quot;experiment-4&quot;&gt;Experiment 4:&lt;/h3&gt;
+&lt;p&gt;For the final experiment, I upgraded to an H100 GPU and the larger model Gemma-4-26B-A4B. This experiment simulates multiple requests coming in, for example from separate users or multi-agent workflows that all use the same serving infrastructure.&lt;/p&gt;
+
+&lt;p&gt;For this, both multi-token prediction and prefix/radix caching were disabled. Requests are submitted every 100ms in increasingly large concurrent numbers.&lt;/p&gt;
+
+&lt;p&gt;Here, vLLM and SGLang use their continuous batching mechanism, allowing them to include new requests in the batch dimension without having to wait for all sequences in the current batch to be completed. Likewise, they can return sequences once they are completed without having to wait for the other sequences in the given batch.
+In contrast, the HF Transformers baseline naively queues the requests and processes them sequentially, one at a time. Its latency grows linearly and some of the higher numbers reported below are extrapolated to save on time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/llm_bakeoff_exp4.png&quot; alt=&quot;Experiment 4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is for concurrent requests that vLLM and SGLang really show their greatest advantage, scaling to throughputs above 1000 tok/s with no sign of slowing down. Even on the H100, the naive approach only reaches 20 tok/s with the same model when processing incoming requests sequentially.&lt;/p&gt;
+
+&lt;p&gt;With 128 concurrent requests, the last in queue would have to wait almost 20min for their response from the naive baseline vs &amp;lt;100ms for vLLM and SGLang.&lt;/p&gt;
+
+&lt;h2 id=&quot;discussion&quot;&gt;Discussion&lt;/h2&gt;
+
+&lt;p&gt;Several of these experiments show a slight edge for vLLM over SGLang, but this is likely down to configuration tuning. For some setups, throughput numbers above 15k tok/s &lt;a href=&quot;https://particula.tech/blog/sglang-vs-vllm-inference-engine-comparison&quot;&gt;have been reported&lt;/a&gt;. A strict and fair throughput benchmarking setup would require more careful tuning, but would have likely burned through the budget on dependency management alone.&lt;/p&gt;
+
+&lt;p&gt;Here, I even settled for different CUDA versions for each of the backends, with HF Transformers using the oldest in order to support the highest observed speed. Whereas Ollama and MLX often run out-of-the-box, there were numerous unexpected compatibility issues here that took a bulk of the time to resolve. Trying to think back, I cannot remember the last time I had this many memory issues.&lt;/p&gt;
+
+&lt;p&gt;Initially I also meant to have all frameworks produce the exact same output by providing a temperature slider. But even with a temperature of 0 their output diverges due to varying kernel optimizations.  &lt;br /&gt;
+In my own work I have seen this before with convolutional neural networks too. There, inference on CPU vs GPU would flip individual pixels in segmentation masks. However, this typically affected the output measurements by less than a floating point number could accurately represent.&lt;/p&gt;
+
+&lt;p&gt;For LLM inference, in contrast, I learned that results in capability benchmark challenges are much more fragile, &lt;a href=&quot;https://arxiv.org/pdf/2506.09501&quot;&gt;varying by up to 9%&lt;/a&gt; depending merely on choices around hardware, parallelism and batch size.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;These experiments only scratch the surface of what the frameworks have to offer. But even in isolation, with a modest budget of time and compute, these features show some impressive acceleration. In practice, they are often complementary and scale even further.&lt;/p&gt;
+
+&lt;p&gt;There is also a lot happening on the self-hosting front, even if most consumer-grade hardware will currently struggle to reach the &amp;gt;1000 tok/s seen in experiment 4. For example, &lt;a href=&quot;https://github.com/waybarrios/vllm-mlx&quot;&gt;vLLM-MLX&lt;/a&gt; adapts vLLM features for MLX on Apple Silicon chips. Overall, the software is improving rapidly and it will be interesting to see which use cases will move from API-based access to organisational to even entirely individual and private self-hosting.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Disclaimer: I have no affiliation with any of the listed vendors and this article is not monetized, sponsored or funded in any other way.&lt;/em&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>The Rise of Open-Weight LLMs</title>
-   <link href="http://localhost:4000/2026/04/27/rise-of-open-weight-llms/"/>
+   <link href="https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms/"/>
    <updated>2026-04-27T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2026/04/27/rise-of-open-weight-llms</id>
+   <id>https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A survey of the open LLM ecosystem &lt;br /&gt;
     &lt;i&gt;(7 min read)&lt;/i&gt;&lt;br /&gt;
@@ -94,9 +213,9 @@ Community-driven derivatives and variants on platforms like HuggingFace already 
  
  <entry>
    <title>It's Hard to Feel the AGI</title>
-   <link href="http://localhost:4000/2025/11/30/hard-to-feel-agi/"/>
+   <link href="https://tensorlabbet.com/2025/11/30/hard-to-feel-agi/"/>
    <updated>2025-11-30T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2025/11/30/hard-to-feel-agi</id>
+   <id>https://tensorlabbet.com/2025/11/30/hard-to-feel-agi</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A reality check from leading researchers &lt;br /&gt;
     &lt;i&gt;(6 min read)&lt;/i&gt;&lt;br /&gt;
@@ -157,9 +276,9 @@ This nuance will hopefully not be lost if the industry climate drops to a new �
  
  <entry>
    <title>When Machines that Simulate Intelligence Seemed Like a Summer Project</title>
-   <link href="http://localhost:4000/2025/09/05/dartmouth-ai/"/>
+   <link href="https://tensorlabbet.com/2025/09/05/dartmouth-ai/"/>
    <updated>2025-09-05T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2025/09/05/dartmouth-ai</id>
+   <id>https://tensorlabbet.com/2025/09/05/dartmouth-ai</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A look back at pioneering thoughts on AI research &lt;br /&gt;
     &lt;i&gt;(7 min read)&lt;/i&gt;&lt;br /&gt;
@@ -252,9 +371,9 @@ were conjectured to be related, with injections of controlled randomness enablin
  
  <entry>
    <title>Reviewing “AI Engineering” by Chip Huyen</title>
-   <link href="http://localhost:4000/2025/06/21/review-ai-engineering/"/>
+   <link href="https://tensorlabbet.com/2025/06/21/review-ai-engineering/"/>
    <updated>2025-06-21T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2025/06/21/review-ai-engineering</id>
+   <id>https://tensorlabbet.com/2025/06/21/review-ai-engineering</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: A book review &lt;br /&gt;
     &lt;i&gt;(5 min read)&lt;/i&gt;&lt;br /&gt;
@@ -297,9 +416,9 @@ were conjectured to be related, with injections of controlled randomness enablin
  
  <entry>
    <title>What Deep Learning can do for Image Segmentation in Radiology</title>
-   <link href="http://localhost:4000/2025/01/29/radiology-image-segmentation/"/>
+   <link href="https://tensorlabbet.com/2025/01/29/radiology-image-segmentation/"/>
    <updated>2025-01-29T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2025/01/29/radiology-image-segmentation</id>
+   <id>https://tensorlabbet.com/2025/01/29/radiology-image-segmentation</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: From Fully Convolutional Networks to TotalSegmentator &lt;br /&gt;
     &lt;i&gt;(10 min read)&lt;/i&gt;&lt;br /&gt;
@@ -407,9 +526,9 @@ That is progress!&lt;/p&gt;
  
  <entry>
    <title>The Lost Reading Items</title>
-   <link href="http://localhost:4000/2024/11/11/lost-reading-items/"/>
+   <link href="https://tensorlabbet.com/2024/11/11/lost-reading-items/"/>
    <updated>2024-11-11T00:00:00+01:00</updated>
-   <id>http://localhost:4000/2024/11/11/lost-reading-items</id>
+   <id>https://tensorlabbet.com/2024/11/11/lost-reading-items</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: An attempt to reconstruct Ilya Sutskever&apos;s 2020 AI reading list &lt;br /&gt;
     &lt;i&gt;(8 min read)&lt;/i&gt;&lt;br /&gt;
@@ -546,9 +665,9 @@ as &lt;em&gt;Christiano et al., 2017&lt;/em&gt; (Note: Introduces RLHF)&lt;/li&g
  
  <entry>
    <title>Summary of Ilya Sutskever's AI Reading List</title>
-   <link href="http://localhost:4000/2024/09/24/ai-reading-list/"/>
+   <link href="https://tensorlabbet.com/2024/09/24/ai-reading-list/"/>
    <updated>2024-09-24T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2024/09/24/ai-reading-list</id>
+   <id>https://tensorlabbet.com/2024/09/24/ai-reading-list</id>
    <content type="html">&lt;p class=&quot;message&quot;&gt;
     In this post: Ilya Sutskever&apos;s AI Reading list in ~120 words per item &lt;br /&gt;
     

@@ -14,19 +14,19 @@
   </title>
 
   
-  <link rel="canonical" href="http://localhost:4000/">
+  <link rel="canonical" href="https://tensorlabbet.com/">
   
 
-  <link rel="stylesheet" href="http://localhost:4000/public/css/poole.css">
-  <link rel="stylesheet" href="http://localhost:4000/public/css/syntax.css">
-  <link rel="stylesheet" href="http://localhost:4000/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://tensorlabbet.com/public/css/poole.css">
+  <link rel="stylesheet" href="https://tensorlabbet.com/public/css/syntax.css">
+  <link rel="stylesheet" href="https://tensorlabbet.com/public/css/lanyon.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://tensorlabbet.com/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="https://tensorlabbet.com/public/favicon.ico">
 
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://localhost:4000/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://tensorlabbet.com/atom.xml">
 
 
   
@@ -46,7 +46,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item active" href="http://localhost:4000/">Home</a>
+    <a class="sidebar-nav-item active" href="https://tensorlabbet.com/">Home</a>
 
     
 
@@ -62,7 +62,7 @@
     
       
         
-          <a class="sidebar-nav-item" href="http://localhost:4000/about/">About</a>
+          <a class="sidebar-nav-item" href="https://tensorlabbet.com/about/">About</a>
         
       
     
@@ -102,7 +102,130 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://localhost:4000/2026/04/27/rise-of-open-weight-llms/">
+      <a href="https://tensorlabbet.com/2026/05/18/hands-on-llm-inference-serving/">
+        Hands-on LLM Inference Bake-Off
+      </a>
+    </h1>
+
+    <span class="post-date">18 May 2026, Taro Langner</span>
+
+    <p class="message">
+    In this post: LLM self-hosting and serving with vLLM and SGLang<br />
+    <i>(8 min read)</i><br />    
+</p>
+
+<p>As the ecosystem around open-weight LLMs expands, so do its options for inference serving. Open-source software enables self-hosting these models on varied hardware, from outright GPU clusters to workstations, laptops and even smartphones.</p>
+
+<p>This post shares a first-hand account of trying to get these models to speed, from self-hosting on local hardware to running inference serving on an H100 GPU using <a href="https://vllm.ai/">vLLM</a> and <a href="https://sgl-project.github.io/">SGLang</a>.</p>
+
+<h2 id="background">Background</h2>
+
+<p>Modern frontier LLMs are rumoured to have trillions of parameters, <a href="https://www.youtube.com/watch?v=xmkSf5IS-zw">requiring an entire rack</a> of datacenter GPUs for serving.</p>
+
+<p>In contrast, Small Language Models (SLMs) and Tiny Language Models (TLMs) can reach below 1B parameters, with memory footprints reduced further through aggressive quantization, compressed KV caches, lower context lengths and architectural innovations. The <a href="https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms/">previous blog post</a> shared a brief overview of this space.</p>
+
+<h2 id="self-hosting-experiments">Self-Hosting Experiments</h2>
+
+<p>Models like <a href="https://huggingface.co/google/gemma-4-E4B">Gemma 4 E4B</a> can run locally even on my six years old MacBook Pro with an M1 chip and 16GB of memory. At 4-bit quantization, it reaches about 16 tok/s using Ollama and almost 20 tok/s on MLX.<br />
+These throughput numbers are less impressive than the emergent capabilities it attains in this setup, however, running hot enough to potentially fry a sausage (at &gt;70°C, especially when combined with Open WebUI).</p>
+
+<p>Even my Android smartphone can run this model with the open-source Google AI Edge Gallery app. Its on-device, offline design is intriguing but also somewhat limiting.</p>
+
+<p>Flexibility in tool use requires more tinkering for the local hosting setup. For web search, LangGraph offers some simple integrations for custom agentic harnesses that I have been experimenting with. For agentic coding, pi.dev (on which OpenClaw was built) offers a terminal-based, minimal coding agent harness that I have been running in a docker sandbox with a local RTX 3090 and larger models.</p>
+
+<p>Ultimately, these setups might go a long way if I was suddenly cut off from proprietary APIs entirely. However, they also show some of the limitations of these smaller and aggressively quantized local models.
+Despite web search capabilities, the outputs from the simple LangGraph harness easily miss the mark and the reasoning traces can be quite revealing as to where the models go wrong. For agentic coding meanwhile, some of the aggressively quantized SLMs tend to produce typos and go down unproductive rabbit holes that larger, more capable models would typically manage to avoid.</p>
+
+<p>Interestingly, self-hosting larger models would actually be more viable on newer Apple Silicon chips than on the RTX 3090 GPU. While the latter still wins out for compute-intensive training tasks, its 24 GB VRAM cannot beat the memory capacity of up to 512 GB of unified memory for pure inference tasks.</p>
+
+<p>For much of this work here, while starved of my Claude usage limit, I ultimately settled on using <a href="https://opencode.ai/">OpenCode</a> with <a href="https://openrouter.ai/">OpenRouter</a> to connect to different proprietary APIs. This setup feels barely distinguishable from Claude Code in capability now and models like <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash">DeepSeek V4 Flash</a> run at low cost with surprisingly long context. But despite good pricing and flexibility, it also means entrusting its Chinese provider with all of the prompt data and code during development.</p>
+
+<p>So what about genuinely self-hosting more beefy and capable models like this in a privacy-conscious and self-contained way, potentially even for multiple concurrent users?</p>
+
+<h2 id="cloud-based-hosting">Cloud-based Hosting</h2>
+
+<p>For this post, I wanted to see how much throughput I could get with the frameworks vLLM and SGLang. These open-source frameworks offer a range of different inference optimizations that could serve in production for an entire organization or large user base, even with an on-premise cluster.</p>
+
+<p>Although I have no larger GPU to spare, there are several commercial offerings for serverless GPU rentals that typically bill by the second. The free monthly credit on <a href="https://modal.com/pricing">Modal</a> seemed just right for my purpose here, covering about 8 to 40 hours of experimentation, depending on the hardware selection.</p>
+
+<p>I started out with a smaller GPU and model for prototyping, using an L4 GPU with 24GB and <a href="https://huggingface.co/Qwen/Qwen3.5-4B">Qwen3.5-4B</a> at bfloat16 precision for Experiments 1, 2 and 3. This turned out to be a wise choice, as the overwhelming majority of the credit budget was spent on dependency management and unexpected quirks of the individual frameworks. The resulting setup is not a strictly fair comparison, but good enough to play around with some of the core features already.</p>
+
+<p>With HuggingFace Transformers (HFT) as baseline and vLLM and SGLang in place, my first goal was to get a hands-on feel for the different throughput numbers. For this, I set up a simple FastAPI web interface that could run each in their own container and show their streaming output in realtime.  For the exact package versions and settings, see <a href="https://github.com/tarolangner/llminferencebakeoff">the implementation on GitHub</a>.</p>
+
+<h3 id="experiment-1-baseline-run">Experiment 1: Baseline Run</h3>
+
+<p>Cold-starting the server backends takes a while, with about 5min for vLLM and 3min for SGLang. Under the hood, they compile CUDA kernels for the given GPU, perform CUDA graph capture for multiple batch sizes and sequence lengths and profile memory usage. This prompted me to set up little indicator lights for server status on the web UI.</p>
+
+<p>To avoid an unfair advantage on repeated runs, where the KV cache contents could be kept in memory, I also disabled prefix caching for vLLM and radix caching for SGLang. All following experiments were done with at least two warmup runs.</p>
+
+<video controls="" playsinline="" style="max-width: 100%;" poster="/assets/llm_bakeoff_exp1_thumbnail.png" preload="none">
+  <source src="/assets/llm_bakeoff_exp1.mp4" type="video/mp4" />
+</video>
+
+<p>Even in this simple setting with a single request, the initial wait is already worth it. Both vLLM and SGLang are well matched and on average beat the baseline by almost 50% higher throughput.</p>
+
+<h3 id="experiment-2-speculative-decoding">Experiment 2: Speculative Decoding</h3>
+
+<p>Next, I wanted to try multi-token prediction (MTP), which the Qwen 3.5 models support natively.</p>
+
+<p>Just as with speculative decoding with a draft model, the speed-up here results from being able to quickly generate a sequence of draft tokens that the main model can verify all at once in parallel. All accepted draft tokens (and the correction for the first rejected speculative one) can be returned after one such step as opposed to producing them sequentially with the main model.</p>
+
+<p>The Qwen 3.5 models are trained with a separate MTP head that predicts one speculative token. It can be run for multiple steps to generate a sequence of draft tokens, but for this experiment I chose a conservative setting of one at a time. Depending on the acceptance rate, this can yield up to two tokens for a single decode step.</p>
+
+<p><img src="/assets/llm_bakeoff_exp2.png" alt="Experiment 2" /></p>
+
+<p>In this setup, vLLM and SGLang can increase their throughput with MTP by yet another 30-50%. Combined with their base advantage, this yields more than double the throughput of the baseline.</p>
+
+<h3 id="experiment-3-prefix-caching">Experiment 3: Prefix Caching</h3>
+
+<p>Many use cases for LLMs involve recurring token sequences like system prompts, context retrieved by RAG and the history of multi-turn chats. With prefix caching, the memory blocks in KV cache can be managed to avoid recomputing its contents for these. With Automatic Prefix Caching in vLLM, or Radix Attention in SGLang, prefixes can even be shared between different sequences, both for speed and reduced memory consumption.</p>
+
+<p>To test this feature, I added a checkbox to the web interface that adds a longer sequence in front of the input prompt before sending to the frameworks. For this, I chose the word ‘poem’ repeated 2000 times. I also turned off the multi-token prediction and enabled prefix caching. I started with three repetitions of the original short prompt before sending three requests with the longer, prefix-based prompt.</p>
+
+<p><img src="/assets/llm_bakeoff_exp3.png" alt="Experiment 3" /></p>
+
+<p>After an initial overhead, both vLLM and SGLang finish the prefill phase much faster than the HFT baseline and reach a TTFT of only 20-30% of the baseline. In the final run 5, the TTFT in SGLang was the same as in the original runs of Experiment 1, running as fast as if no prefix was prepended at all.</p>
+
+<p>On an unrelated but interesting side-note, this experiment also shows Qwen 3.5 successfully handling <a href="https://arxiv.org/abs/2311.17035">the divergence attack in the prefix</a>. Its reasoning traces contain outright questions as to whether it is subject to a prompt injection and it proceeds to yield robust responses regardless.</p>
+
+<h3 id="experiment-4">Experiment 4:</h3>
+<p>For the final experiment, I upgraded to an H100 GPU and the larger model Gemma-4-26B-A4B. This experiment simulates multiple requests coming in, for example from separate users or multi-agent workflows that all use the same serving infrastructure.</p>
+
+<p>For this, both multi-token prediction and prefix/radix caching were disabled. Requests are submitted every 100ms in increasingly large concurrent numbers.</p>
+
+<p>Here, vLLM and SGLang use their continuous batching mechanism, allowing them to include new requests in the batch dimension without having to wait for all sequences in the current batch to be completed. Likewise, they can return sequences once they are completed without having to wait for the other sequences in the given batch.
+In contrast, the HF Transformers baseline naively queues the requests and processes them sequentially, one at a time. Its latency grows linearly and some of the higher numbers reported below are extrapolated to save on time.</p>
+
+<p><img src="/assets/llm_bakeoff_exp4.png" alt="Experiment 4" /></p>
+
+<p>It is for concurrent requests that vLLM and SGLang really show their greatest advantage, scaling to throughputs above 1000 tok/s with no sign of slowing down. Even on the H100, the naive approach only reaches 20 tok/s with the same model when processing incoming requests sequentially.</p>
+
+<p>With 128 concurrent requests, the last in queue would have to wait almost 20min for their response from the naive baseline vs &lt;100ms for vLLM and SGLang.</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>Several of these experiments show a slight edge for vLLM over SGLang, but this is likely down to configuration tuning. For some setups, throughput numbers above 15k tok/s <a href="https://particula.tech/blog/sglang-vs-vllm-inference-engine-comparison">have been reported</a>. A strict and fair throughput benchmarking setup would require more careful tuning, but would have likely burned through the budget on dependency management alone.</p>
+
+<p>Here, I even settled for different CUDA versions for each of the backends, with HF Transformers using the oldest in order to support the highest observed speed. Whereas Ollama and MLX often run out-of-the-box, there were numerous unexpected compatibility issues here that took a bulk of the time to resolve. Trying to think back, I cannot remember the last time I had this many memory issues.</p>
+
+<p>Initially I also meant to have all frameworks produce the exact same output by providing a temperature slider. But even with a temperature of 0 their output diverges due to varying kernel optimizations.  <br />
+In my own work I have seen this before with convolutional neural networks too. There, inference on CPU vs GPU would flip individual pixels in segmentation masks. However, this typically affected the output measurements by less than a floating point number could accurately represent.</p>
+
+<p>For LLM inference, in contrast, I learned that results in capability benchmark challenges are much more fragile, <a href="https://arxiv.org/pdf/2506.09501">varying by up to 9%</a> depending merely on choices around hardware, parallelism and batch size.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>These experiments only scratch the surface of what the frameworks have to offer. But even in isolation, with a modest budget of time and compute, these features show some impressive acceleration. In practice, they are often complementary and scale even further.</p>
+
+<p>There is also a lot happening on the self-hosting front, even if most consumer-grade hardware will currently struggle to reach the &gt;1000 tok/s seen in experiment 4. For example, <a href="https://github.com/waybarrios/vllm-mlx">vLLM-MLX</a> adapts vLLM features for MLX on Apple Silicon chips. Overall, the software is improving rapidly and it will be interesting to see which use cases will move from API-based access to organisational to even entirely individual and private self-hosting.</p>
+
+<p><em>Disclaimer: I have no affiliation with any of the listed vendors and this article is not monetized, sponsored or funded in any other way.</em></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://tensorlabbet.com/2026/04/27/rise-of-open-weight-llms/">
         The Rise of Open-Weight LLMs
       </a>
     </h1>
@@ -186,7 +309,7 @@ Community-driven derivatives and variants on platforms like HuggingFace already 
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://localhost:4000/2025/11/30/hard-to-feel-agi/">
+      <a href="https://tensorlabbet.com/2025/11/30/hard-to-feel-agi/">
         It's Hard to Feel the AGI
       </a>
     </h1>
@@ -253,7 +376,7 @@ This nuance will hopefully not be lost if the industry climate drops to a new �
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://localhost:4000/2025/09/05/dartmouth-ai/">
+      <a href="https://tensorlabbet.com/2025/09/05/dartmouth-ai/">
         When Machines that Simulate Intelligence Seemed Like a Summer Project
       </a>
     </h1>
@@ -352,7 +475,7 @@ were conjectured to be related, with injections of controlled randomness enablin
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://localhost:4000/2025/06/21/review-ai-engineering/">
+      <a href="https://tensorlabbet.com/2025/06/21/review-ai-engineering/">
         Reviewing “AI Engineering” by Chip Huyen
       </a>
     </h1>
@@ -399,125 +522,11 @@ were conjectured to be related, with injections of controlled randomness enablin
 
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/2025/01/29/radiology-image-segmentation/">
-        What Deep Learning can do for Image Segmentation in Radiology
-      </a>
-    </h1>
-
-    <span class="post-date">29 Jan 2025, Taro Langner</span>
-
-    <p class="message">
-    In this post: From Fully Convolutional Networks to TotalSegmentator <br />
-    <i>(10 min read)</i><br />
-    
-</p>
-
-<p>Amidst the ongoing hype around the growing capabilities of large language models, it can be curious to note how earlier predictions about machine learning have stood the test of time.</p>
-
-<p>Autonomous driving and radiology in particular were considered obvious candidates for automation, starting with the deep learning boom for image recognition around 2012. Geoffrey Hinton famously suggested in 2016 that training of radiologists should be discontinued altogether, arguing that they <a href="https://www.youtube.com/watch?v=2HMPRXstSvQ">would be obsolete within five years</a>.</p>
-
-<details>
-<summary>And yet, things turned out quite different... (click to expand)</summary> 
-<img src="/assets/radiologists_in_regular_cars.jpeg" alt="Radiologist Jobs in 2025" />
-
-<i>
-<a href="https://x.com/olexandr/status/1809670998746161426">(Source)</a>.
-And once at work, a US radiologist in 2025  <a href="https://www.glassdoor.com/Salaries/physician-radiologist-salary-SRCH_KO0,21.html">may earn $265-495k per year</a> or pick from a number of job openings that actually <a href="https://x.com/erikbryn/status/1662564885589561344/photo/1">appears to be increasing</a>.
-</i>
-<br />
-
-</details>
-<p><br /></p>
-
-<p>This is a sobering reminder that many real-world problems turned out to be much harder to crack than expected at first. Although the AI hype has since mostly turned elsewhere, a closer look at what happened in these fields can be rather interesting.</p>
-
-<p>This blog post examines one of their most active, and arguably most successful research areas and reviews one decade worth of progress around deep learning methods for semantic segmentation of medical images in radiology.</p>
-
-<h2 id="semantic-segmentation-for-radiology">Semantic Segmentation for Radiology</h2>
-
-<p>From magnetic resonance imaging (MRI) to computed tomography (CT), medical imaging offers various modalities for visualising the human body. Just like the anatomy itself, these images are often three-dimensional and thus composed of volumetric pixels, or voxels, similar to the block worlds of Minecraft.</p>
-
-<p>Early on, measurements and findings were often reported from two-dimensional X-ray images. With increasingly affordable imaging technology, the data has since grown both in quantity and resolution, leaving <a href="https://www.sciencedirect.com/science/article/pii/S1076633215002457?casa_token=Pud-r9Fq_0wAAAAA:2Vb-4PygjIL9U4FDzfmQ_I9g1cqrvSo-UP1KK9tanNCZalCEN_OUtMCwKdFXgCliL0bXCb9TErwI">mere seconds on average</a> for a radiologist to inspect images that can each consist of millions of voxels.</p>
-
-<p><em>Semantic segmentation</em> is one type of image analysis that is commonly performed in research and industry on these images. It aims to assign a class label to every pixel or voxel, typically to mark all parts of the image that contain a certain tissue or structure. Once complete, a segmentation mask can be used to measure volumes, render surface models or plan radiation treatments.</p>
-
-<p class="message">
-
-<b>Video Example:</b> <br />
-
-<a href="https://www.youtube.com/watch?v=ZRYMItzwg8g&amp;t=220s">- Manual CT Image Segmentation in 3D Slicer (YouTube)</a> [7:43 minutes] <br />
-</p>
-
-<p>When done by hand, a given volumetric image is typically segmented by drawing on it as a stack of dozens or hundreds of two-dimensional slices. This can take from minutes to hours or <a href="https://www.cell.com/neuron/fulltext/S0896-6273(02)00569-X?cc=y%3Fcc%3Dy">even days</a>. Results may vary not only between different operators but also when the same image is analysed repeatedly by the same person. This becomes a challenge in studies where hundreds or even thousands of scans are to be analysed in this way.</p>
-
-<p>Despite its many issues, manual segmentation remains the method of choice for many real-world projects that operate in risk-averse settings under restrictive regulatory constraints. On the flip side, these same regulations and concerns have helped to reduce the number of scenarios where malfunctioning software would <a href="https://en.wikipedia.org/wiki/Therac-25">burn patients with radiation</a> or <a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfRes/res.cfm?id=171315">confuse surgeons with misleading 3d navigation views</a>.</p>
-
-<p>Risk-averse skeptics were furthermore proven right on several occasions before when they doubted claims about technology being superior to medical experts. In the late 90s, computer-aided detection (CAD) systems were funded with millions of dollars per year but later reported to provide no benefit or <a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2443369">perhaps even cause harm</a>. The deep learning boom later caused an entire flood of such claims, like in the 2017 <a href="https://arxiv.org/abs/1711.05225">CheXNet paper</a> co-authored by Andrew Ng, the issues of which are discussed with many insights in the <a href="https://laurenoakdenrayner.com/2018/01/24/chexnet-an-in-depth-review/">blog of Lauren Oakden-Rayner</a>.</p>
-
-<p>Despite this history of overpromising, the work done by a multitude of researchers and engineers over the years has nonetheless achieved some impressive progress. Especially deep learning systems for semantic segmentation of medical images have a lot to offer and are worth a closer look.</p>
-
-<h2 id="deep-learning-for-semantic-image-segmentation">Deep Learning for Semantic Image Segmentation</h2>
-
-<p>In the ImageNet challenge of 2012, <a href="https://tensorlabbet.com/#AexNet">AlexNet</a> famously set a new benchmark result for image recognition by assigning one of 1,000 possible class labels to a given input image with unprecedented accuracy.</p>
-
-<p><em>Sliding window segmentation</em> used such image classifiers for semantic segmentation, applying them to each position of an image to receive as input a patch around the current position and predict a class label for the central pixel. This approach suffered from inefficiencies, however, with redundant processing wherever a given image area appeared in multiple, adjacent patches.</p>
-
-<p><a href="https://openaccess.thecvf.com/content_cvpr_2015/html/Long_Fully_Convolutional_Networks_2015_CVPR_paper.html">[Fully Convolutional Networks, 2015]</a> were proposed as a neural network architecture for dense prediction of pixel-wise labels. This approach removes any fully-connected layers from established architectures for image classification. The remaining convolutional and pooling layers act as an encoder, producing feature maps that retain spatial image information at different resolutions. From these, a 1x1 convolution produces one feature map for each class, to be upsampled by transposed convolution layers to restore the original image dimensions.</p>
-
-<p class="message">
-
-<b>Transposed Convolution (Animations)</b> <br />
-
-<a href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md">- Convolution arithmetic (GitHub)</a> by Vincent Dumoulin,  Francesco Visin <br />
-<br />
-
-Note: Transposed convolutions differ from dilated (or à trous) convolutions <a href="https://tensorlabbet.com/#DilatedConv">that featured in a previous blog post</a>.
-
-</p>
-
-<p>With skip connections, these upsampled feature maps are obtained not only from the final, most low-resolution output, but also from earlier steps and fused together by summation to incorporate more high-resolution features.</p>
-
-<p><a href="http://miai.ha.edu.cn/Essays/8Medical%20image%20segmentation/U-Net.pdf">[U-Net, 2015]</a> built on this approach by proposing a symmetric encoder-decoder architecture with even more skip connections. The encoder part forms the left half of its U-shape, with successive network layers producing feature maps of decreasing resolution. The decoder path then gradually restores the original resolution with transposed convolution layers. Long skip connections provide shortcuts that concatenate feature maps of the encoder to their counterparts in the decoder.
-This enables U-Nets to consider both coarse, low-resolution features as well as detailed, high-resolution features.</p>
-
-<p><a href="https://lmb.informatik.uni-freiburg.de/Publications/2016/CABR16/cicek16miccai.pdf">[3D U-Net, 2016]</a> later extended these concepts to volumetric, voxel-based input data by using 3D variants of both pooling and convolution layers.</p>
-
-<p>U-Net architectures enjoyed enormous success and remain competitive options for medical image segmentation to this day. They tend to be robust and reliable, with 2D variants training within minutes on modern GPUs and being lightweight enough for inference even on laptop CPUs.
-They can also perform well even with just a few dozen training images, as each pixel or voxel effectively forms one training sample. Hundreds of U-Net variants were subsequently proposed in the literature, including <a href="https://arxiv.org/abs/1810.11654">SegResNet</a> with short skip connections and <a href="https://arxiv.org/abs/1801.05746">2.5D approaches</a> that stack adjacent slices to form RGB colour images suitable for encoders pre-trained on ImageNet.</p>
-
-<p><a href="https://arxiv.org/abs/1809.10486">[nnU-Net, 2018]</a> (‘no-new-Net’) was ultimately proposed as a self-adapting framework for training effective U-Net architectures. It enables the training of both 2D and 3D U-Nets, as well as cascades with subsequent segmentation steps. Instead of focusing on modifications of the model architecture, it adjusts the preprocessing, training, inference and post-processing with many domain-specific heuristics and also enables cross-validations for evaluation.</p>
-
-<p>For example, as imaging devices of different vendors can vary in contrast, the preprocessing first standardizes or at least scales the image intensities. Some segmentation tasks suffer from extreme class imbalances (for example when small cancerous lesions are to be segmented) and the sampling strategy therefore tries to balance the foreground and background samples for each minibatch in training. Variations in patient anatomy and position are simulated by augmentation with rotation, scaling and mirroring during training. Test-time augmentation furthermore presents each sample with its mirrored copy and averages the predictions for increased robustness. Contemporary GPUs were often limited to 11GB, and so the inference processes larger images by blending patch-wise predictions.</p>
-
-<p>Its authors at the German Cancer Research Center (DKFZ) published an open-source implementation. Its <a href="https://github.com/MIC-DKFZ/nnUNet">research code</a> (which purportedly <a href="https://github.com/MIC-DKFZ/batchgenerators/blob/1185d57bbc002f4b88c03fdea885dc28537ad8e7/batchgenerators/augmentations/noise_augmentations.py#L55">left Godzilla dead</a>, whereas I was merely scarred) enabled many to reproduce these techniques. So successful was this framework both in benchmark challenges and various research papers that even in summer 2024 it <a href="https://arxiv.org/pdf/2404.09556">still lays claim</a> to dominance in this domain.</p>
-
-<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10546353/">[TotalSegmentator, 2023]</a> was later released as a freely available, already trained nnU-Net model for segmentation of 104 different structures in CT images, such as organs, bones, muscle and blood vessels. Up to this point, it was common that segmentation models trained on one dataset would not perform as well on data from other sources due to distribution shifts from different imaging devices, protocols or patient demographics. By training on a varied dataset of over one thousand real-world CT images with different age groups, sites, and protocols, TotalSegmentator made a substantial leap in generalization across arbitrary CT data. Notably, the model was made highly accessible with a Python package, integration into 3D Slicer and even a <a href="https://totalsegmentator.com/">free web interface</a>. In 2024, <a href="https://arxiv.org/pdf/2405.194929">an extended version</a> was released for segmentation of 59 structures in even more variable images from MRI.</p>
-
-<h2 id="concluding-thoughts">Concluding Thoughts</h2>
-
-<p>From early Fully Convolutional Networks of 2014 to TotalSegmentator in 2024 for MRI, these papers trace the evolution of deep learning for semantic segmentation of radiology images over an entire decade. As an open research question it motivated thousands of papers with varied methodologies. Their insights were gradually distilled into the later publications and methods. Today, no programming or deep learning knowledge is required for anyone to simply drag and drop an image into <a href="https://totalsegmentator.com/">TotalSegmentator</a> with impressive results. <br />
-That is progress!</p>
-
-<p>Medical image segmentation still remains an active field of research, with various benchmark challenges (beyond the scope of TotalSegmentator) in conferences like <a href="https://miccai.org/index.php/">MICCAI</a> and <a href="https://www.kaggle.com/competitions/rsna-2024-lumbar-spine-degenerative-classification">Kaggle challenges with monetary prizes</a>.</p>
-
-<p>The convolutional neural network architectures reviewed so far in this post also remain a competitive option especially for limited training data, as is common for medical images. Methods that utilise Transformers have emerged too, such as <a href="https://arxiv.org/abs/2201.01266">SwinUNETR</a> (also see the open-source <a href="https://github.com/Project-MONAI/tutorials/blob/main/auto3dseg/README.md">MONAI</a> framework) and <a href="https://www.nature.com/articles/s41467-024-44824-z">MedSAM</a> as a medical version of the <a href="https://openaccess.thecvf.com/content/ICCV2023/html/Kirillov_Segment_Anything_ICCV_2023_paper.html">Segment Anything Model</a>. More recently, even multimodal <a href="https://pubs.rsna.org/doi/pdf/10.1148/radiol.232756">large language models are being considered for radiology tasks</a> which may warrant an entire blog post of their own.</p>
-
-<p>So with all these innovations, then, why has radiology not been automated yet? While there is a growing number of success stories of FDA-approved and CE marked supporting tools entering the market, these systems have to overcome numerous obstacles. Next to regulatory hurdles, workflow integration and acceptance issues, the technical challenge is just one of them.</p>
-
-<p>However, even the technical challenges in this space have not been truly automated yet. I received a taste of this myself when working on <a href="https://www.nature.com/articles/s41598-020-77981-4">kidney segmentations in MRI of UK Biobank</a>. Before my results for 40,000 participants could be uploaded to the <a href="https://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=159">official data catalogue</a>, I skimmed through thousands of these images to identify and understand outlier cases where my U-Net had failed to accurately segment both kidneys.</p>
-
-<p>This taught me about <a href="https://en.wikipedia.org/wiki/Horseshoe_kidney">horseshoe kidneys</a>, or renal fusion, in which both kidneys are connected from birth. In this large dataset over a dozen such cases occurred, and without any training examples for this rare condition, the model had not learned how to handle them well at first. Mel Gibson is often given as a famous case of renal fusion, and if he had participated in UK Biobank, my system would have likely failed him. But who knows, perhaps today TotalSegmentator would have succeeded even for him?</p>
-
-
-  </div>
-  
 </div>
 
 <div class="pagination">
   
-    <a class="pagination-item older" href="http://localhost:4000/page2">Older</a>
+    <a class="pagination-item older" href="https://tensorlabbet.com/page2">Older</a>
   
   
     <span class="pagination-item newer">Newer</span>
