@@ -4,13 +4,216 @@
  <title>Tensorlabbet</title>
  <link href="https://tensorlabbet.com/atom.xml" rel="self"/>
  <link href="https://tensorlabbet.com/"/>
- <updated>2026-05-18T11:47:09+02:00</updated>
+ <updated>2026-07-19T14:28:50+02:00</updated>
  <id>https://tensorlabbet.com</id>
  <author>
    <name>Taro Langner</name>
    <email>taro.langner [at] tensorlabbet.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Passing the Swedish Medical Licensing Exam by Post-Training Open-Weight LLMs</title>
+   <link href="https://tensorlabbet.com/2026/07/19/medqaswe_post_training/"/>
+   <updated>2026-07-19T00:00:00+02:00</updated>
+   <id>https://tensorlabbet.com/2026/07/19/medqaswe_post_training</id>
+   <content type="html">&lt;p class=&quot;message&quot;&gt;
+    In this post: SFT and RLVR on Swedish MedQA&lt;br /&gt;
+    &lt;i&gt;(10 min read)&lt;/i&gt;&lt;br /&gt;
+    
+&lt;/p&gt;
+
+&lt;p&gt;To practice medicine in Sweden, foreign medical doctors who want to validate their license are first required to pass a multiple-choice test. Given around 140 questions with 5 answer options each, they must reach at least 60% accuracy to pass.&lt;/p&gt;
+
+&lt;p&gt;This theory test is challenging, with a pass rate of just about &lt;a href=&quot;https://lakartidningen.se/vetenskap/vagar-till-svensk-legitimation-for-lakare-utbildade-i-tredje-land/&quot;&gt;one in four&lt;/a&gt; and only 54% of participants ultimately succeeding after one or more attempts.&lt;/p&gt;
+
+&lt;p&gt;I was curious how well newer open-weight LLMs could do on this task by now. This post documents what turned into a little summer project, pushing the accuracy of smaller open-weight LLMs on Swedish MedQA with post-training techniques like supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR).&lt;/p&gt;
+
+&lt;h2 id=&quot;related-work&quot;&gt;Related Work&lt;/h2&gt;
+
+&lt;p&gt;For English language, similar benchmark datasets with medical multiple-choice questions like MedQA have already been mostly saturated, with &lt;a href=&quot;https://pricepertoken.com/leaderboards/benchmark/medqa&quot;&gt;frontier models scoring above 95%&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Swedish, however, accounts for less than 1% of pre-training data for LLMs, making it a &lt;a href=&quot;https://arxiv.org/pdf/2410.08928&quot;&gt;‘medium resource language’&lt;/a&gt;. Its medical vocabulary, local treatment standards and medication also do not cleanly translate from English MedQA.&lt;/p&gt;
+
+&lt;p&gt;Fortunately for me, &lt;a href=&quot;https://aclanthology.org/2024.lrec-main.975/&quot;&gt;MedQA-SWE released by Hertzberg &amp;amp; Lokrantz in 2024&lt;/a&gt; is composed of exactly the medical doctors’ licensing exam data I was interested in. LLMs were evaluated on this data both in the original paper and also by &lt;a href=&quot;https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1557920/full&quot;&gt;Moëll et al. in the 2025 Swedish Medical LLM Benchmark (SMLB)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When published a year ago, it already reported several open-weight models as capable of passing the test on data of MedQA-SWE, with Gemma2-9B as the smallest (with 61.3%) and DeepSeek R1 Distill Llama-70B as the most accurate (with 77.8%).&lt;/p&gt;
+
+&lt;h2 id=&quot;data-prompt-and-evaluation&quot;&gt;Data, Prompt and Evaluation&lt;/h2&gt;
+
+&lt;p&gt;The relevant dataset used in the SMLB paper overlaps with MedQA-SWE. To avoid contamination through shared samples, I therefore isolated the MedQA-SWE samples with the most recent exam date as a validation set (158 samples) and kept the rest of it in reserve for training (3022 samples). All results reported here refer to greedy decoding on that validation set, which has no overlap with the training set. The prompt and evaluation harness are based on those used by Moëll et al., expecting the correct answer to be stated verbatim.&lt;/p&gt;
+
+&lt;h2 id=&quot;medgemma-15-4b&quot;&gt;MedGemma-1.5-4B&lt;/h2&gt;
+
+&lt;p&gt;Just six months ago, researchers at Google Health released MedGemma-1.5-4B for medical tasks. It has multimodal capabilities for both medical image analysis and clinical reasoning, so it seemed like a perfect candidate for this task.&lt;/p&gt;
+
+&lt;p&gt;When deployed out-of-the-box for inference, it only reached a somewhat disappointing 14.6% accuracy, however. Many of its outputs actually give the correct answer eventually, but fail the formatting requirement of stating the correct answer option verbatim. Instead, the model tends to digress with lengthy explanations that the evaluation harness scores with zero.&lt;/p&gt;
+
+&lt;p&gt;This failure in instruction-following appears to be a known failure mode of MedGemma-1.5-4B, even for English. In fact, the authors provide their own &lt;a href=&quot;https://github.com/Google-Health/medgemma/blob/main/notebooks/reinforcement_learning_with_hugging_face.ipynb&quot;&gt;post-training example&lt;/a&gt; for resolving this, as well as &lt;a href=&quot;https://github.com/google-health/medgemma/blob/main/notebooks/fine_tune_with_hugging_face.ipynb&quot;&gt;one for SFT&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;While working on this, I also found another paper, &lt;a href=&quot;https://link.springer.com/article/10.1007/s40670-026-02692-w&quot;&gt;PeruMedQA by Carrillo-Larco et al.&lt;/a&gt;, that successfully used the SFT strategy to adapt an older variant of MedGemma to Peruvian medical licensing exam questions in Spanish language.&lt;/p&gt;
+
+&lt;p&gt;So I decided to set up a similar approach here, using the MedQA-SWE samples from prior years as training data for SFT with LoRA adapters on MedGemma-1.5-4B, to try and get the model to respond with the correct answer option verbatim. To reduce the risk of memorization, all answer options were randomly shuffled with re-assigned letters during training.&lt;/p&gt;
+
+&lt;p&gt;This post-training strategy raised the model accuracy on the validation set from 14.6% to 60.8% on the first attempt, sufficient for passing the exam. Find the &lt;a href=&quot;https://github.com/tarolangner/medqaswe_medgemma_sft&quot;&gt;implementation on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Rather than outright instilling new medical knowledge or improving Swedish language comprehension of the model, the predominant impact of SFT from such a small training set is improved format compliance. By learning to state the correct answer verbatim and nothing else, the model learns to generate outputs that never get truncated and are correctly scored by the evaluation harness. The underlying medical knowledge was likely already baked in the model weights from the start.&lt;/p&gt;
+
+&lt;p&gt;Overall, this is a rather interesting result for a 4B parameter model, considering that a minimum of 9B was reported for this just a year ago. But turns out that we can do even better.&lt;/p&gt;
+
+&lt;h2 id=&quot;gemma4-e4b&quot;&gt;Gemma4-E4B&lt;/h2&gt;
+
+&lt;p&gt;After Google Health released MedGemma-1.5-4B in January, which built on the Gemma3 series, Google DeepMind more recently released the newer Gemma4 series in April.&lt;/p&gt;
+
+&lt;p&gt;When applying its Gemma4-E4B variant to the chosen validation set, it reached 77.2% accuracy out-of-the-box. With no post-training, it reaches almost perfect format compliance, robustly handles the prompt, questions and answers in Swedish language and exceeds the 60.8% accuracy of the fine-tuned MedGemma-1.5-4B reported above. It would appear as if, within a span of three months, Google has been left behind by Google.&lt;/p&gt;
+
+&lt;p&gt;Even its smaller variant Gemma4-E2B reached 52.5%. However, neither seemed to respond well to SFT. The recipe from above failed to improve their accuracy, perhaps due to their already excellent format compliance. Out of curiosity, I decided to venture outside of the Google ecosystem from here.&lt;/p&gt;
+
+&lt;h2 id=&quot;qwen35-4b&quot;&gt;Qwen3.5-4B&lt;/h2&gt;
+
+&lt;p&gt;Released by Chinese Alibaba in March this year, Qwen3.5-4B (with 77.2% accuracy here) and Qwen3.5-2B (with 46.8%) turned out to perform virtually on par with their similarly sized counterparts from Google. Again, the SFT recipe did not yield any improvement for these.&lt;/p&gt;
+
+&lt;p&gt;However, I was curious to see how far the performance could be pushed by enabling reasoning for the 4B model. In the original SMLB paper, o3 in particular was noted for its good performance due to its reasoning capability. In the given project here, Qwen3.5-4B could also generate more or less extensive reasoning traces enclosed in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;think&amp;gt;&lt;/code&gt; blocks that could be stripped before scoring the verbatim answer.&lt;/p&gt;
+
+&lt;p&gt;With reasoning enabled, Qwen3.5-4B improved from 77.2% (with ‘no thinking’) to 88.0% accuracy. These gains, however, come at a cost of substantially longer inference times. From the verbatim responses with up to just ~50 tokens, these reasoning traces can grow to 7,000 tokens and beyond. Three of them never concluded despite the reasoning traces showing a strong preference for the correct option, exhausting the entire context window limit of 32,768 tokens with repetitive reasoning loops about formatting formalities. Interestingly, all reasoning by this model is exclusively in English, in spite of the Swedish prompt, question, answer options and final response.&lt;/p&gt;
+
+&lt;p&gt;This uncapped reasoning can take up to five minutes for a single answer even on an A100 GPU. So from here, I looked into several approaches for getting the best of both worlds: Condensing as much of the accuracy gains from reasoning as possible into shorter and thus faster reasoning traces.&lt;/p&gt;
+
+&lt;h3 id=&quot;reasoning-compression&quot;&gt;Reasoning Compression&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Truncation with max_tokens&lt;/strong&gt;&lt;br /&gt;
+A simple way to cut down on inference time is a hard limit, stopping all outputs at a maximum count of 1024 tokens per sequence. Doing this here yields an answer within about 10s, but often truncates the model responses mid-reasoning, so that only 29.1% are completed with the correct answer.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Thinking Intervention&lt;/strong&gt;&lt;br /&gt;
+A more sophisticated type of thinking intervention is proposed in &lt;a href=&quot;https://arxiv.org/pdf/2505.07686&quot;&gt;a 2025 paper&lt;/a&gt; on early-exit techniques for prevention of overthinking in LLMs.&lt;/p&gt;
+
+&lt;p&gt;It halts the decoding at a pre-determined token count and appends the phrase &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Time is limited, stop thinking and start answering. \n&amp;lt;/think&amp;gt;\n\n&lt;/code&gt; to conclude the reasoning block with a soft transition. Decoding then proceeds, making the model provide its actual response immediately.&lt;/p&gt;
+
+&lt;p&gt;For my experiments on MedQA-SWE here, I applied this technique at a token limit of 896, leaving enough room for any verbatim response to conclude within 1024 tokens. On the validation set, this raised the accuracy of Qwen3.5-4B to 85.4%.&lt;/p&gt;
+
+&lt;p&gt;About one in seven questions were easy enough for the model to answer with shorter reasoning that did not even hit this token count limit while still providing perfect answers.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reinforcement Learning with Verifiable Rewards (RLVR)&lt;/strong&gt;&lt;br /&gt;
+The same paper also proposes the reinforcement learning technique &lt;em&gt;Serial-Group Decaying-Reward Policy Optimization&lt;/em&gt; (S-GRPO). It generates a given sequence up to the specified limit and then creates early-exit variants of multiple lengths from it as rollouts that are each scored against a reward function. The shortest correct sequence yields the highest reward, training the model to produce shorter responses overall.&lt;/p&gt;
+
+&lt;p&gt;Here, I set up this technique to run on a single A100 with 80GB, using vLLM in a colocate setup for speed, syncing the updated LoRA weights into the inference engine at every step. This approach raised the accuracy of Qwen3.5-4B on the validation set from 85.4% to 86.7%.&lt;/p&gt;
+
+&lt;p&gt;This result is somewhat mixed, however. It ultimately represents just two additional questions flipped from false to correct, well within the range of statistical noise. Furthermore, the reasoning traces still required the early-exit intervention and actually ended up longer by six tokens on average instead of getting compressed.&lt;/p&gt;
+
+&lt;p&gt;While improving upon the simple reasoning intervention, this result falls short of capturing all accuracy gains of the uncapped reasoning run in shorter outputs. Chances are that far more compute and experimentation would be required than budgeted for here (much of this project was done from a hammock in a nature reserve).&lt;/p&gt;
+
+&lt;p&gt;Up to 90% accuracy could perhaps be condensed out of the model in this way, judging by the uncapped reasoning run. There, it correctly answered another two questions and expressed a preference for the correct answer in the three degenerate reasoning traces that spiralled until exhausting the entire context window. Whether a more elaborate S-GRPO setup could elicit these or even more from the model will remain an open question for now.&lt;/p&gt;
+
+&lt;h3 id=&quot;memorization&quot;&gt;Memorization&lt;/h3&gt;
+&lt;p&gt;Since MedQA-SWE predates both Qwen3.5-4B and Gemma4-E4B, their high performance could be trivially explained by them having memorized the questions and answers as part of their training data. Their remarkably similar accuracy (when reasoning is deactivated) is striking in this regard.&lt;/p&gt;
+
+&lt;p&gt;However, rather than reproducing identical answers, they actually exhibit quite distinct failure modes. Just about three quarters of their correct responses overlap, whereas half of the errors of one model are answered correctly by the other.&lt;/p&gt;
+
+&lt;p&gt;While memorization is hard to conclusively disprove here, this pattern provides at least some evidence to the contrary, with both models having different strengths and weaknesses.&lt;/p&gt;
+
+&lt;h2 id=&quot;result-overview&quot;&gt;Result Overview&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/medqa_swe_post_training.png&quot; alt=&quot;MedQA-SWE result comparison&quot; /&gt;
+&lt;em&gt;Accuracy for Medical Question Answering in Swedish (MedQA-SWE) by LLMs of varying sizes. Note that the two papers and this project all used different subsets of MedQA-SWE for evaluation. Nonetheless, striking performance gains have made small, open-weight LLMs competitive in this task with proprietary frontier models within just two years.&lt;/em&gt;&lt;/p&gt;
+
+&lt;style&gt;
+table.compact { width: 100%; }
+table.compact td:nth-child(1), table.compact th:nth-child(1),
+table.compact td:nth-child(2), table.compact th:nth-child(2) { white-space: nowrap; width: 1%; padding-right: 2em; }
+table.compact td:nth-child(3), table.compact th:nth-child(3) { width: 100%; text-align: left; }
+&lt;/style&gt;
+
+&lt;table class=&quot;compact&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Model&lt;/th&gt;
+      &lt;th&gt;Accuracy&lt;/th&gt;
+      &lt;th&gt;Note&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MedGemma-1.5-4B&lt;/td&gt;
+      &lt;td&gt;14.6%&lt;/td&gt;
+      &lt;td&gt;format failures&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MedGemma-1.5-4B (post-trained)&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;60.8%&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;SFT (LoRA)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gemma4-E2B&lt;/td&gt;
+      &lt;td&gt;52.5%&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gemma4-E4B&lt;/td&gt;
+      &lt;td&gt;77.2%&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Qwen3.5-2B&lt;/td&gt;
+      &lt;td&gt;46.8%&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Qwen3.5-4B&lt;/td&gt;
+      &lt;td&gt;77.2%&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Qwen3.5-4B, uncapped reasoning&lt;/td&gt;
+      &lt;td&gt;88.0%&lt;/td&gt;
+      &lt;td&gt;5 min latency&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Qwen3.5-4B, truncation (max 1024)&lt;/td&gt;
+      &lt;td&gt;29.1%&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Qwen3.5-4B, early-exit intervention&lt;/td&gt;
+      &lt;td&gt;85.4%&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Qwen3.5-4B (post-trained)&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;86.7%&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;RLVR (S-GRPO)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In summary, MedGemma-1.5-4B narrowly pushed past the goal line after SFT resolved its formatting failures. Nonetheless, the newer models Gemma4-E4B and Qwen3.5-4B significantly outperform it outright, even without any post-training and no reasoning.&lt;/p&gt;
+
+&lt;p&gt;With reasoning enabled, the latter rivals the highest accuracy yet reported for any LLM on MedQA-SWE. The gain in accuracy from reasoning comes at the cost of longer inference times, with uncapped reasoning spiralling up to five minutes for a single question until exhausting the context with no response.&lt;/p&gt;
+
+&lt;p&gt;Thinking interventions like the early-exit strategy cut this down to just 10s while capturing most of the accuracy gain, reaching arguably the best tradeoff in speed, accuracy and engineering effort here. Reinforcement learning takes this idea further with S-GRPO and yielded additional modest accuracy gains while under the early-exit scheme that maintains its speed.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In 2025, the top accuracy on MedQA-SWE required the frontier model o3, estimated at hundreds of billions of parameters. One year later, this project virtually matched its performance with a mere 4B parameter open-weight model and reinforcement learning techniques (albeit on a subset of the data).&lt;/p&gt;
+
+&lt;p&gt;Swedish language does not seem to pose a major obstacle even for these smaller models, despite its sparse representation among LLM training data. Both Gemma4 and Qwen3.5-4B are multilingual and faithfully handled the Swedish instructions, prompt, questions and verbatim responses in Swedish, even if reasoning traces for the latter here were generated entirely in English.&lt;/p&gt;
+
+&lt;p&gt;Even in the span of mere months, these models are rapidly outpacing one another. The domain specialist MedGemma-1.5-4B was notably outperformed by generalist models of similar size released just 2-3 months after.&lt;/p&gt;
+
+&lt;p&gt;What does this mean for European and Swedish domestic efforts to train language-specific, sovereign LLMs? Now that discussion is safely beyond the scope of this post. It seems safe to assume either way that LLM capabilities for Swedish will keep improving.&lt;/p&gt;
+
+&lt;p&gt;So is AI finally ready to automate medicine? For radiologists, &lt;a href=&quot;https://tensorlabbet.com/2025/01/29/radiology-image-segmentation/&quot;&gt;we are five years overdue&lt;/a&gt; by now. But while the medical imaging community figures out the last remaining details there, this project witnessed a new milestone of human-like performance being passed by LLMs: Medical question answering that takes forever due to excessive focus on data entry. And with that, let me leave you with one of the uncapped reasoning traces &lt;a href=&quot;https://github.com/tarolangner/tarolangner.github.io/tree/main/assets/medqa_swe_qwen35_4b_reasoning_spiral.txt&quot;&gt;you can view on GitHub&lt;/a&gt;.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Hands-on LLM Inference Bake-Off</title>

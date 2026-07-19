@@ -102,6 +102,213 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="https://tensorlabbet.com/2026/07/19/medqaswe_post_training/">
+        Passing the Swedish Medical Licensing Exam by Post-Training Open-Weight LLMs
+      </a>
+    </h1>
+
+    <span class="post-date">19 Jul 2026, Taro Langner</span>
+
+    <p class="message">
+    In this post: SFT and RLVR on Swedish MedQA<br />
+    <i>(10 min read)</i><br />
+    
+</p>
+
+<p>To practice medicine in Sweden, foreign medical doctors who want to validate their license are first required to pass a multiple-choice test. Given around 140 questions with 5 answer options each, they must reach at least 60% accuracy to pass.</p>
+
+<p>This theory test is challenging, with a pass rate of just about <a href="https://lakartidningen.se/vetenskap/vagar-till-svensk-legitimation-for-lakare-utbildade-i-tredje-land/">one in four</a> and only 54% of participants ultimately succeeding after one or more attempts.</p>
+
+<p>I was curious how well newer open-weight LLMs could do on this task by now. This post documents what turned into a little summer project, pushing the accuracy of smaller open-weight LLMs on Swedish MedQA with post-training techniques like supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR).</p>
+
+<h2 id="related-work">Related Work</h2>
+
+<p>For English language, similar benchmark datasets with medical multiple-choice questions like MedQA have already been mostly saturated, with <a href="https://pricepertoken.com/leaderboards/benchmark/medqa">frontier models scoring above 95%</a>.</p>
+
+<p>Swedish, however, accounts for less than 1% of pre-training data for LLMs, making it a <a href="https://arxiv.org/pdf/2410.08928">‘medium resource language’</a>. Its medical vocabulary, local treatment standards and medication also do not cleanly translate from English MedQA.</p>
+
+<p>Fortunately for me, <a href="https://aclanthology.org/2024.lrec-main.975/">MedQA-SWE released by Hertzberg &amp; Lokrantz in 2024</a> is composed of exactly the medical doctors’ licensing exam data I was interested in. LLMs were evaluated on this data both in the original paper and also by <a href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1557920/full">Moëll et al. in the 2025 Swedish Medical LLM Benchmark (SMLB)</a>.</p>
+
+<p>When published a year ago, it already reported several open-weight models as capable of passing the test on data of MedQA-SWE, with Gemma2-9B as the smallest (with 61.3%) and DeepSeek R1 Distill Llama-70B as the most accurate (with 77.8%).</p>
+
+<h2 id="data-prompt-and-evaluation">Data, Prompt and Evaluation</h2>
+
+<p>The relevant dataset used in the SMLB paper overlaps with MedQA-SWE. To avoid contamination through shared samples, I therefore isolated the MedQA-SWE samples with the most recent exam date as a validation set (158 samples) and kept the rest of it in reserve for training (3022 samples). All results reported here refer to greedy decoding on that validation set, which has no overlap with the training set. The prompt and evaluation harness are based on those used by Moëll et al., expecting the correct answer to be stated verbatim.</p>
+
+<h2 id="medgemma-15-4b">MedGemma-1.5-4B</h2>
+
+<p>Just six months ago, researchers at Google Health released MedGemma-1.5-4B for medical tasks. It has multimodal capabilities for both medical image analysis and clinical reasoning, so it seemed like a perfect candidate for this task.</p>
+
+<p>When deployed out-of-the-box for inference, it only reached a somewhat disappointing 14.6% accuracy, however. Many of its outputs actually give the correct answer eventually, but fail the formatting requirement of stating the correct answer option verbatim. Instead, the model tends to digress with lengthy explanations that the evaluation harness scores with zero.</p>
+
+<p>This failure in instruction-following appears to be a known failure mode of MedGemma-1.5-4B, even for English. In fact, the authors provide their own <a href="https://github.com/Google-Health/medgemma/blob/main/notebooks/reinforcement_learning_with_hugging_face.ipynb">post-training example</a> for resolving this, as well as <a href="https://github.com/google-health/medgemma/blob/main/notebooks/fine_tune_with_hugging_face.ipynb">one for SFT</a>.</p>
+
+<p>While working on this, I also found another paper, <a href="https://link.springer.com/article/10.1007/s40670-026-02692-w">PeruMedQA by Carrillo-Larco et al.</a>, that successfully used the SFT strategy to adapt an older variant of MedGemma to Peruvian medical licensing exam questions in Spanish language.</p>
+
+<p>So I decided to set up a similar approach here, using the MedQA-SWE samples from prior years as training data for SFT with LoRA adapters on MedGemma-1.5-4B, to try and get the model to respond with the correct answer option verbatim. To reduce the risk of memorization, all answer options were randomly shuffled with re-assigned letters during training.</p>
+
+<p>This post-training strategy raised the model accuracy on the validation set from 14.6% to 60.8% on the first attempt, sufficient for passing the exam. Find the <a href="https://github.com/tarolangner/medqaswe_medgemma_sft">implementation on GitHub</a>.</p>
+
+<p>Rather than outright instilling new medical knowledge or improving Swedish language comprehension of the model, the predominant impact of SFT from such a small training set is improved format compliance. By learning to state the correct answer verbatim and nothing else, the model learns to generate outputs that never get truncated and are correctly scored by the evaluation harness. The underlying medical knowledge was likely already baked in the model weights from the start.</p>
+
+<p>Overall, this is a rather interesting result for a 4B parameter model, considering that a minimum of 9B was reported for this just a year ago. But turns out that we can do even better.</p>
+
+<h2 id="gemma4-e4b">Gemma4-E4B</h2>
+
+<p>After Google Health released MedGemma-1.5-4B in January, which built on the Gemma3 series, Google DeepMind more recently released the newer Gemma4 series in April.</p>
+
+<p>When applying its Gemma4-E4B variant to the chosen validation set, it reached 77.2% accuracy out-of-the-box. With no post-training, it reaches almost perfect format compliance, robustly handles the prompt, questions and answers in Swedish language and exceeds the 60.8% accuracy of the fine-tuned MedGemma-1.5-4B reported above. It would appear as if, within a span of three months, Google has been left behind by Google.</p>
+
+<p>Even its smaller variant Gemma4-E2B reached 52.5%. However, neither seemed to respond well to SFT. The recipe from above failed to improve their accuracy, perhaps due to their already excellent format compliance. Out of curiosity, I decided to venture outside of the Google ecosystem from here.</p>
+
+<h2 id="qwen35-4b">Qwen3.5-4B</h2>
+
+<p>Released by Chinese Alibaba in March this year, Qwen3.5-4B (with 77.2% accuracy here) and Qwen3.5-2B (with 46.8%) turned out to perform virtually on par with their similarly sized counterparts from Google. Again, the SFT recipe did not yield any improvement for these.</p>
+
+<p>However, I was curious to see how far the performance could be pushed by enabling reasoning for the 4B model. In the original SMLB paper, o3 in particular was noted for its good performance due to its reasoning capability. In the given project here, Qwen3.5-4B could also generate more or less extensive reasoning traces enclosed in <code class="language-plaintext highlighter-rouge">&lt;think&gt;</code> blocks that could be stripped before scoring the verbatim answer.</p>
+
+<p>With reasoning enabled, Qwen3.5-4B improved from 77.2% (with ‘no thinking’) to 88.0% accuracy. These gains, however, come at a cost of substantially longer inference times. From the verbatim responses with up to just ~50 tokens, these reasoning traces can grow to 7,000 tokens and beyond. Three of them never concluded despite the reasoning traces showing a strong preference for the correct option, exhausting the entire context window limit of 32,768 tokens with repetitive reasoning loops about formatting formalities. Interestingly, all reasoning by this model is exclusively in English, in spite of the Swedish prompt, question, answer options and final response.</p>
+
+<p>This uncapped reasoning can take up to five minutes for a single answer even on an A100 GPU. So from here, I looked into several approaches for getting the best of both worlds: Condensing as much of the accuracy gains from reasoning as possible into shorter and thus faster reasoning traces.</p>
+
+<h3 id="reasoning-compression">Reasoning Compression</h3>
+
+<p><strong>Truncation with max_tokens</strong><br />
+A simple way to cut down on inference time is a hard limit, stopping all outputs at a maximum count of 1024 tokens per sequence. Doing this here yields an answer within about 10s, but often truncates the model responses mid-reasoning, so that only 29.1% are completed with the correct answer.</p>
+
+<p><strong>Thinking Intervention</strong><br />
+A more sophisticated type of thinking intervention is proposed in <a href="https://arxiv.org/pdf/2505.07686">a 2025 paper</a> on early-exit techniques for prevention of overthinking in LLMs.</p>
+
+<p>It halts the decoding at a pre-determined token count and appends the phrase <code class="language-plaintext highlighter-rouge">Time is limited, stop thinking and start answering. \n&lt;/think&gt;\n\n</code> to conclude the reasoning block with a soft transition. Decoding then proceeds, making the model provide its actual response immediately.</p>
+
+<p>For my experiments on MedQA-SWE here, I applied this technique at a token limit of 896, leaving enough room for any verbatim response to conclude within 1024 tokens. On the validation set, this raised the accuracy of Qwen3.5-4B to 85.4%.</p>
+
+<p>About one in seven questions were easy enough for the model to answer with shorter reasoning that did not even hit this token count limit while still providing perfect answers.</p>
+
+<p><strong>Reinforcement Learning with Verifiable Rewards (RLVR)</strong><br />
+The same paper also proposes the reinforcement learning technique <em>Serial-Group Decaying-Reward Policy Optimization</em> (S-GRPO). It generates a given sequence up to the specified limit and then creates early-exit variants of multiple lengths from it as rollouts that are each scored against a reward function. The shortest correct sequence yields the highest reward, training the model to produce shorter responses overall.</p>
+
+<p>Here, I set up this technique to run on a single A100 with 80GB, using vLLM in a colocate setup for speed, syncing the updated LoRA weights into the inference engine at every step. This approach raised the accuracy of Qwen3.5-4B on the validation set from 85.4% to 86.7%.</p>
+
+<p>This result is somewhat mixed, however. It ultimately represents just two additional questions flipped from false to correct, well within the range of statistical noise. Furthermore, the reasoning traces still required the early-exit intervention and actually ended up longer by six tokens on average instead of getting compressed.</p>
+
+<p>While improving upon the simple reasoning intervention, this result falls short of capturing all accuracy gains of the uncapped reasoning run in shorter outputs. Chances are that far more compute and experimentation would be required than budgeted for here (much of this project was done from a hammock in a nature reserve).</p>
+
+<p>Up to 90% accuracy could perhaps be condensed out of the model in this way, judging by the uncapped reasoning run. There, it correctly answered another two questions and expressed a preference for the correct answer in the three degenerate reasoning traces that spiralled until exhausting the entire context window. Whether a more elaborate S-GRPO setup could elicit these or even more from the model will remain an open question for now.</p>
+
+<h3 id="memorization">Memorization</h3>
+<p>Since MedQA-SWE predates both Qwen3.5-4B and Gemma4-E4B, their high performance could be trivially explained by them having memorized the questions and answers as part of their training data. Their remarkably similar accuracy (when reasoning is deactivated) is striking in this regard.</p>
+
+<p>However, rather than reproducing identical answers, they actually exhibit quite distinct failure modes. Just about three quarters of their correct responses overlap, whereas half of the errors of one model are answered correctly by the other.</p>
+
+<p>While memorization is hard to conclusively disprove here, this pattern provides at least some evidence to the contrary, with both models having different strengths and weaknesses.</p>
+
+<h2 id="result-overview">Result Overview</h2>
+
+<p><img src="/assets/medqa_swe_post_training.png" alt="MedQA-SWE result comparison" />
+<em>Accuracy for Medical Question Answering in Swedish (MedQA-SWE) by LLMs of varying sizes. Note that the two papers and this project all used different subsets of MedQA-SWE for evaluation. Nonetheless, striking performance gains have made small, open-weight LLMs competitive in this task with proprietary frontier models within just two years.</em></p>
+
+<style>
+table.compact { width: 100%; }
+table.compact td:nth-child(1), table.compact th:nth-child(1),
+table.compact td:nth-child(2), table.compact th:nth-child(2) { white-space: nowrap; width: 1%; padding-right: 2em; }
+table.compact td:nth-child(3), table.compact th:nth-child(3) { width: 100%; text-align: left; }
+</style>
+
+<table class="compact">
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Accuracy</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MedGemma-1.5-4B</td>
+      <td>14.6%</td>
+      <td>format failures</td>
+    </tr>
+    <tr>
+      <td>MedGemma-1.5-4B (post-trained)</td>
+      <td><strong>60.8%</strong></td>
+      <td>SFT (LoRA)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Gemma4-E2B</td>
+      <td>52.5%</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Gemma4-E4B</td>
+      <td>77.2%</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Qwen3.5-2B</td>
+      <td>46.8%</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Qwen3.5-4B</td>
+      <td>77.2%</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Qwen3.5-4B, uncapped reasoning</td>
+      <td>88.0%</td>
+      <td>5 min latency</td>
+    </tr>
+    <tr>
+      <td>Qwen3.5-4B, truncation (max 1024)</td>
+      <td>29.1%</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Qwen3.5-4B, early-exit intervention</td>
+      <td>85.4%</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Qwen3.5-4B (post-trained)</td>
+      <td><strong>86.7%</strong></td>
+      <td>RLVR (S-GRPO)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In summary, MedGemma-1.5-4B narrowly pushed past the goal line after SFT resolved its formatting failures. Nonetheless, the newer models Gemma4-E4B and Qwen3.5-4B significantly outperform it outright, even without any post-training and no reasoning.</p>
+
+<p>With reasoning enabled, the latter rivals the highest accuracy yet reported for any LLM on MedQA-SWE. The gain in accuracy from reasoning comes at the cost of longer inference times, with uncapped reasoning spiralling up to five minutes for a single question until exhausting the context with no response.</p>
+
+<p>Thinking interventions like the early-exit strategy cut this down to just 10s while capturing most of the accuracy gain, reaching arguably the best tradeoff in speed, accuracy and engineering effort here. Reinforcement learning takes this idea further with S-GRPO and yielded additional modest accuracy gains while under the early-exit scheme that maintains its speed.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In 2025, the top accuracy on MedQA-SWE required the frontier model o3, estimated at hundreds of billions of parameters. One year later, this project virtually matched its performance with a mere 4B parameter open-weight model and reinforcement learning techniques (albeit on a subset of the data).</p>
+
+<p>Swedish language does not seem to pose a major obstacle even for these smaller models, despite its sparse representation among LLM training data. Both Gemma4 and Qwen3.5-4B are multilingual and faithfully handled the Swedish instructions, prompt, questions and verbatim responses in Swedish, even if reasoning traces for the latter here were generated entirely in English.</p>
+
+<p>Even in the span of mere months, these models are rapidly outpacing one another. The domain specialist MedGemma-1.5-4B was notably outperformed by generalist models of similar size released just 2-3 months after.</p>
+
+<p>What does this mean for European and Swedish domestic efforts to train language-specific, sovereign LLMs? Now that discussion is safely beyond the scope of this post. It seems safe to assume either way that LLM capabilities for Swedish will keep improving.</p>
+
+<p>So is AI finally ready to automate medicine? For radiologists, <a href="https://tensorlabbet.com/2025/01/29/radiology-image-segmentation/">we are five years overdue</a> by now. But while the medical imaging community figures out the last remaining details there, this project witnessed a new milestone of human-like performance being passed by LLMs: Medical question answering that takes forever due to excessive focus on data entry. And with that, let me leave you with one of the uncapped reasoning traces <a href="https://github.com/tarolangner/tarolangner.github.io/tree/main/assets/medqa_swe_qwen35_4b_reasoning_spiral.txt">you can view on GitHub</a>.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="https://tensorlabbet.com/2026/05/18/hands-on-llm-inference-serving/">
         Hands-on LLM Inference Bake-Off
       </a>
@@ -470,55 +677,6 @@ were conjectured to be related, with injections of controlled randomness enablin
 <a href="https://en.wikipedia.org/wiki/Marvin_Minsky">Marvin Minsky</a>,
 <a href="https://en.wikipedia.org/wiki/Nathaniel_Rochester_(computer_scientist)">Nathaniel Rochester</a> and
 <a href="https://en.wikipedia.org/wiki/Claude_Shannon">Claude Shannon</a>. Many more big names were ultimately involved in this summer project, but all that may well warrant another blog post in the future.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="https://tensorlabbet.com/2025/06/21/review-ai-engineering/">
-        Reviewing “AI Engineering” by Chip Huyen
-      </a>
-    </h1>
-
-    <span class="post-date">21 Jun 2025, Taro Langner</span>
-
-    <p class="message">
-    In this post: A book review <br />
-    <i>(5 min read)</i><br />
-    
-</p>
-
-<p>In January this year, <a href="https://huyenchip.com/">Chip Huyen</a> published her newest book <a href="https://www.amazon.com/dp/1098166302?&amp;linkCode=sl1&amp;tag=chiphuyen-20&amp;linkId=0a4e5ad4b14080d44c42640550a9291e&amp;language=en_US&amp;ref_=as_li_ss_tl"><em>‘AI Engineering’</em></a>, which quickly <a href="https://www.youtube.com/watch?v=98o_L3jlixw&amp;pp=ygUscHJhZ21hdGljIGVuZ2luZWVyIGFpIGVuZ2luZWVyaW5nIGNoaXAgaHV5ZW4%3D">made waves</a> online.</p>
-
-<p>Having read her previous book <a href="https://www.amazon.com/Designing-Machine-Learning-Systems-Production-Ready/dp/1098107969?&amp;_encoding=UTF8&amp;tag=chiphuyen-20&amp;linkCode=ur2&amp;linkId=0a1dbab0e76f5996e29e1a97d45f14a5&amp;camp=1789&amp;creative=9325"><em>‘Designing Machine Learning Systems’</em> (2022)</a>, which I warmly recommend, I wondered what could possibly remain to be covered in 500+ additional pages. It really turned out to be something entirely different, and this blog post will attempt a short review for anyone still curious about the book.</p>
-
-<h2 id="machine-learning-vs-ai-engineering">Machine Learning vs AI Engineering</h2>
-<p>Her previous book, <em>‘Designing Machine Learning Systems’</em>, was a gentle but comprehensive overview of machine learning terms, techniques and applications that went easy on mathematical notation. While it briefly mentioned Large Language Models (LLMs) and remains highly relevant, it was published about half a year before the release of ChatGPT in November 2022, pre-dating its impact on the field.</p>
-
-<p>The new book <em>‘AI Engineering’</em> is now entirely dedicated to working with LLMs. Subtitled <em>‘Building Applications with Foundation Models’</em>, it addresses a much wider audience than just ML Engineers or Researchers with a technical or scientific interest. Indeed, it clearly sets apart ML from the scope of the book and expects little prior knowledge of the field. The contents have therefore hardly any overlap with the previous book and are mostly complementary.</p>
-
-<h2 id="format-and-style">Format and Style</h2>
-<p>The field is now moving faster than anyone could hope to read about, with sensational new announcements almost every week. Technical specifics are quickly outdated and the book accordingly sticks to more timeless high-level concepts, insights and approaches. These are nonetheless often supported by hard evidence from statistics or relevant papers and first-hand accounts from industry experts. However, this also tends to make it a quite verbose, lighter read of often more ‘qualitative’ nature, with plenty of examples and a minimum of mathematical notation and formulas.</p>
-
-<h2 id="content">Content</h2>
-<p>The author has an hopeful but grounded take on the capabilities of LLMs, with the credentials to back it up. The book provides many use cases and guides, but also known failure modes backed by the scientific literature, along with techniques to mitigate them.</p>
-
-<p>The contents include concepts such as pre- and post-training, retrieval-augmented generation (RAG), agents, tool-use, evaluation techniques, emergent properties and quirks of the models. It offers strategies for application development, an in-depth chapter on fine-tuning with techniques such as Low-Rank Adaptation (LoRA) as well as optimization strategies for inference and more.</p>
-
-<p>The facts laid out in the book are well-researched and appear solid overall. However, it does repeat the common claim that the 2012 <a href="https://dl.acm.org/doi/abs/10.1145/3065386">AlexNet paper</a> was the first to utilize GPUs for training of neural networks. As mentioned in my previous <a href="https://tensorlabbet.com/#AlexNet">summary on AlexNet</a> the truth seems <a href="https://www.deeplearningbook.org/contents/applications.html">somewhat more nuanced</a>. Chances are that the author already has a rebuttal waiting in their inbox by 
-<a href="https://arxiv.org/abs/2212.11279">Jürgen Schmidhuber</a>.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>The book provides a comprehensive overview and also offers many insights that were new to me, from the <a href="https://aclanthology.org/2023.acl-long.656/">mapped-out political leanings of LLMs</a> over the availability of <a href="https://commoncrawl.github.io/cc-crawl-statistics/plots/languages.html">training material in different languages</a> to prompt injection attacks that could leak sensitive training data when tasked to merely <a href="https://arxiv.org/abs/2311.17035">repeat the word ‘poem’ an infinite number of times</a>.</p>
-
-<p>The distinction between ML and AI Engineering itself is thought-provoking. It illustrates how ML-based capabilities which used to be academic research topics are rapidly becoming applicable, abstracted and commoditized via APIs.</p>
-
-<p>As with any other API, these capabilities thereby become accessible even without any deeper understanding of the field. The latter nonetheless helps, as simple LLM wrappers still encounter many limitations which are laid out in the book (hallucinations, costs, prompt injection attacks etc) and are still rarely competitive for hard engineering challenges (as seen e.g. in Kaggle challenges).</p>
-
-<p>The book provides a solid foundation in this regard. Even with a more technical background, its balance between breadth and depth covered many gaps in my knowledge and makes it likely to remain relevant for years to come, so that it was well worth reading for me.</p>
-
-<p><em>Disclaimer: I have no affiliation with the author and this review is not monetized, sponsored or funded in any other way. Originally, this post was meant to also review the book <a href="https://www.sscardapane.it/alice-book/">‘Alice’s Adventures in a Differentiable Wonderland’</a> by Simone Scardapane that I read earlier, but that will remain for a future post.</em></p>
 
   </div>
   
