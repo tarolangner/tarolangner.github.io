@@ -8,14 +8,37 @@ layout: default
   {{ content }}
 </div>
 
-{% if site.related_posts.size >= 1 %}
+{% comment %}
+  Related posts: other posts in the same category first, then fall back to the
+  most recent other posts to fill up to 3. All links point to canonical URLs.
+{% endcomment %}
+{% assign related = "" | split: "" %}
+{% assign used = "" %}
+{% assign same_cat = site.posts | where: "category", page.category %}
+{% for p in same_cat %}
+  {% unless p.url == page.url %}
+    {% assign related = related | push: p %}
+    {% assign used = used | append: p.url | append: "," %}
+  {% endunless %}
+{% endfor %}
+{% if related.size < 3 %}
+  {% for p in site.posts %}
+    {% if related.size >= 3 %}{% break %}{% endif %}
+    {% unless p.url == page.url or used contains p.url %}
+      {% assign related = related | push: p %}
+      {% assign used = used | append: p.url | append: "," %}
+    {% endunless %}
+  {% endfor %}
+{% endif %}
+
+{% if related.size >= 1 %}
 <div class="related">
   <h2>Related posts</h2>
   <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
+    {% for post in related limit:3 %}
       <li>
         <h3>
-          <a href="{{ site.baseurl }}{{ post.url }}">
+          <a href="{{ post.url | absolute_url }}">
             {{ post.title }}
             <small>{{ post.date | date_to_string }}, Taro Langner</small>
           </a>

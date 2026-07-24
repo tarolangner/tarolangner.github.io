@@ -2,6 +2,8 @@
 layout: post
 title: When Machines that Simulate Intelligence Seemed Like a Summer Project
 author: Taro Langner
+category: Literature Studies
+summary: "A look back at pioneering thoughts on AI research"
 ---
 
 <p class="message">

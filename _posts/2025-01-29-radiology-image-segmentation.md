@@ -2,6 +2,8 @@
 layout: post
 title: What Deep Learning can do for Image Segmentation in Radiology
 author: Taro Langner
+category: Commentary
+summary: "From Fully Convolutional Networks to TotalSegmentator"
 ---
 
 <p class="message">
@@ -17,7 +19,7 @@ Autonomous driving and radiology in particular were considered obvious candidate
 
 <details>
 <summary>And yet, things turned out quite different... (click to expand)</summary> 
-<img src="/assets/radiologists_in_regular_cars.jpeg" alt="Radiologist Jobs in 2025">
+{% include image.html name="radiologists_in_regular_cars" alt="Radiologist Jobs in 2025" width="1216" height="657" %}
 
 <I>
 <a href="https://x.com/olexandr/status/1809670998746161426">(Source)</a>.

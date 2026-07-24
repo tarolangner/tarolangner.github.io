@@ -4,19 +4,25 @@
 
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
-  <div class="sidebar-item">
-    <p>{{ site.description }}</p>
+  <div class="sidebar-item sidebar-brand">
+    <a href="{{ '/' | absolute_url }}">{{ site.title }}</a>
   </div>
 
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item{% if page.title == 'Home' %} active{% endif %}" href="{{ '/' | absolute_url }}">Home</a>
+
+    {% comment %} Shortcut to the most recent article (its canonical URL). {% endcomment %}
+    {% assign newest = site.posts | first %}
+    {% if newest %}
+    <a class="sidebar-nav-item{% if page.url == newest.url %} active{% endif %}" href="{{ newest.url | absolute_url }}">Newest Post</a>
+    {% endif %}
 
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
       `layout: page` in the front-matter. See readme for usage.
     {% endcomment %}
 
-    {% assign pages_list = site.pages | sort:"url" %}
+    {% assign pages_list = site.pages | sort:"nav_order" %}
     {% for node in pages_list %}
       {% if node.title != null %}
         {% if node.layout == "page" %}

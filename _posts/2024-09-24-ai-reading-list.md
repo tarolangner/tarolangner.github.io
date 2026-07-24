@@ -2,6 +2,8 @@
 layout: post
 title: Summary of Ilya Sutskever's AI Reading List
 author: Taro Langner
+category: Literature Studies
+summary: "Ilya Sutskever's AI Reading list in ~120 words per item"
 ---
 
 <p class="message">

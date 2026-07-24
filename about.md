@@ -1,10 +1,8 @@
 ---
 layout: page
 title: About
+nav_order: 2
 ---
-
-
-![Banner](/assets/tensorlabbet_banner.png)
 
 
 <h1>About</h1>
@@ -20,7 +18,7 @@ He published [several deep learning papers](https://scholar.google.com/citations
 He founded this blog as a passion project in his spare time because he likes the way *labbet* (from Swedish *tensorlabbet* -> 'The tensor lab') rolls of his tongue and required an outlet for his free expression of thoughts and opinions beyond anything peer review, quality control or good taste would normally allow.
 
 
-![Profile Picture](/assets/profile_picture.jpeg)
+{% include image.html name="profile_picture" alt="Profile Picture" width="800" height="800" %}
 
 <p style="text-align:center;">
 
@@ -32,4 +30,4 @@ He founded this blog as a passion project in his spare time because he likes the
 
 </p>
 
-![Contact Info](/assets/contact.png)
+{% include image.html name="contact" alt="Contact Info" width="1024" height="64" %}

@@ -2,6 +2,8 @@
 layout: post
 title: Passing the Swedish Medical Licensing Exam by Post-Training Open-Weight LLMs
 author: Taro Langner
+category: LLM Engineering
+summary: "SFT and RLVR on Swedish MedQA"
 ---
 
 <p class="message">
@@ -106,7 +108,7 @@ While memorization is hard to conclusively disprove here, this pattern provides 
 
 ## Result Overview
 
-<img src="/assets/medqa_swe_post_training.png" alt="MedQA-SWE result comparison">
+{% include image.html name="medqa_swe_post_training" alt="MedQA-SWE result comparison" width="1216" height="751" %}
 *Accuracy for Medical Question Answering in Swedish (MedQA-SWE) by LLMs of varying sizes. Note that the two papers and this project all used different subsets of MedQA-SWE for evaluation. Nonetheless, striking performance gains have made small, open-weight LLMs competitive in this task with proprietary frontier models within just two years.*
 
 

@@ -2,6 +2,8 @@
 layout: post
 title: The Rise of Open-Weight LLMs
 author: Taro Langner
+category: LLM Engineering
+summary: "A survey of the open LLM ecosystem"
 ---
 
 <p class="message">

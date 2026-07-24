@@ -2,6 +2,8 @@
 layout: post
 title: Reviewing “AI Engineering” by Chip Huyen
 author: Taro Langner
+category: Reviews
+summary: "A book review"
 ---
 
 <p class="message">

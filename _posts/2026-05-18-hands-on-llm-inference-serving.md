@@ -2,6 +2,8 @@
 layout: post
 title: Hands-on LLM Inference Bake-Off
 author: Taro Langner
+category: LLM Engineering
+summary: "LLM self-hosting and serving with vLLM and SGLang"
 ---
 
 <p class="message">
@@ -56,7 +58,7 @@ Cold-starting the server backends takes a while, with about 5min for vLLM and 3m
 
 To avoid an unfair advantage on repeated runs, where the KV cache contents could be kept in memory, I also disabled prefix caching for vLLM and radix caching for SGLang. All following experiments were done with at least two warmup runs.
 
-<video controls playsinline style="max-width: 100%;" poster="/assets/llm_bakeoff_exp1_thumbnail.png" preload="none">
+<video controls playsinline style="max-width: 100%;" poster="{{ '/assets/llm_bakeoff_exp1_thumbnail.jpg' | relative_url }}" preload="none">
   <source src="/assets/llm_bakeoff_exp1.mp4" type="video/mp4">
 </video>
 
@@ -71,7 +73,7 @@ Just as with speculative decoding with a draft model, the speed-up here results 
 
 The Qwen 3.5 models are trained with a separate MTP head that predicts one speculative token. It can be run for multiple steps to generate a sequence of draft tokens, but for this experiment I chose a conservative setting of one at a time. Depending on the acceptance rate, this can yield up to two tokens for a single decode step.
 
-<img src="/assets/llm_bakeoff_exp2.png" alt="Experiment 2">
+{% include image.html name="llm_bakeoff_exp2" alt="Experiment 2" width="1200" height="750" %}
 
 In this setup, vLLM and SGLang can increase their throughput with MTP by yet another 30-50%. Combined with their base advantage, this yields more than double the throughput of the baseline.
 
@@ -82,7 +84,7 @@ Many use cases for LLMs involve recurring token sequences like system prompts, c
 
 To test this feature, I added a checkbox to the web interface that adds a longer sequence in front of the input prompt before sending to the frameworks. For this, I chose the word ‘poem’ repeated 2000 times. I also turned off the multi-token prediction and enabled prefix caching. I started with three repetitions of the original short prompt before sending three requests with the longer, prefix-based prompt. 
 
-<img src="/assets/llm_bakeoff_exp3.png" alt="Experiment 3">
+{% include image.html name="llm_bakeoff_exp3" alt="Experiment 3" width="1200" height="750" %}
 
 After an initial overhead, both vLLM and SGLang finish the prefill phase much faster than the HFT baseline and reach a TTFT of only 20-30% of the baseline. In the final run 5, the TTFT in SGLang was the same as in the original runs of Experiment 1, running as fast as if no prefix was prepended at all. 
 
@@ -100,7 +102,7 @@ In contrast, the HF Transformers baseline naively queues the requests and proces
 
 
 
-<img src="/assets/llm_bakeoff_exp4.png" alt="Experiment 4">
+{% include image.html name="llm_bakeoff_exp4" alt="Experiment 4" width="1600" height="600" %}
 
 It is for concurrent requests that vLLM and SGLang really show their greatest advantage, scaling to throughputs above 1000 tok/s with no sign of slowing down. Even on the H100, the naive approach only reaches 20 tok/s with the same model when processing incoming requests sequentially.
 

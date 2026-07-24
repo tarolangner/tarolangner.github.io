@@ -2,6 +2,8 @@
 layout: post
 title: It's Hard to Feel the AGI
 author: Taro Langner
+category: Commentary
+summary: "A reality check from leading researchers"
 ---
 
 <p class="message">

@@ -1,0 +1,9 @@
+{%- comment -%}
+Responsive image with WebP primary + JPEG fallback.
+Params: name (basename in /assets/, no extension), alt, width, height,
+        loading (default "lazy"), style (optional).
+{%- endcomment -%}
+<picture>
+  <source srcset="{{ include.name | prepend: '/assets/' | append: '.webp' | relative_url }}" type="image/webp">
+  <img src="{{ include.name | prepend: '/assets/' | append: '.jpg' | relative_url }}" alt="{{ include.alt }}"{% if include.width %} width="{{ include.width }}"{% endif %}{% if include.height %} height="{{ include.height }}"{% endif %} loading="{{ include.loading | default: 'lazy' }}" decoding="async"{% if include.style %} style="{{ include.style }}"{% endif %}>
+</picture>

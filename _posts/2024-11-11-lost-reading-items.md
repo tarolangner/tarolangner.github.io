@@ -2,6 +2,8 @@
 layout: post
 title: The Lost Reading Items
 author: Taro Langner
+category: Literature Studies
+summary: "An attempt to reconstruct Ilya Sutskever's 2020 AI reading list"
 ---
 
 <p class="message">
