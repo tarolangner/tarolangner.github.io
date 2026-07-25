@@ -572,14 +572,17 @@ a.pagination-item:hover {
 }
 
 /* Overview landing page (grouped by category) */
-.site-intro {
+.home-hero {
+  /* Banner + intro occupy most of the first screen so the category list
+     still sits mostly below the fold, but with less trailing whitespace.
+     Increase the subtracted value to tighten the gap further. */
+  min-height: calc(100vh - 16rem);
+}
+.home-intro {
   margin-top: 1rem;
-  margin-bottom: 0;
 }
 .overview-browse {
-  margin: 2rem 0 1.25rem;
-  padding-bottom: .4rem;
-  border-bottom: 1px solid #e5e5e5;
+  margin: 0 0 1.5rem;
   font-size: .8rem;
   font-weight: bold;
   font-style: italic;
@@ -588,14 +591,17 @@ a.pagination-item:hover {
   color: #7a7a7a;
 }
 .overview-category {
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
 }
 .overview-category > .post-title {
-  border-bottom: 1px solid #eee;
-  padding-bottom: .25rem;
-  margin-bottom: .75rem;
+  margin: 0 0 1rem;
+  padding: .6rem 1rem;
+  background-color: #f9f9f9;
+  font-size: .78rem;
   font-weight: bold;
-  color: #7a7a7a;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #717171;
 }
 .overview-list {
   list-style: none;
@@ -628,8 +634,9 @@ a.pagination-item:hover {
   gap: 1rem;
 }
 .overview-link {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: bold;
+  color: #303030;
   transition: color .15s ease;
 }
 .overview-card:hover .overview-link,

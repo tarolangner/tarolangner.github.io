@@ -3,11 +3,15 @@ layout: default
 title: Home
 ---
 
-{% include image.html name="tensorlabbet_banner" alt="Banner" width="1216" height="615" loading="eager" %}
+<div class="home-hero">
+  {% include image.html name="tensorlabbet_banner" alt="Banner" width="1216" height="615" loading="eager" %}
 
-<p class="site-intro">{{ site.description }}.</p>
+  <p class="home-intro">{{ site.description }}.</p>
+</div>
 
 {% assign categories = "LLM Engineering,Literature Studies,Commentary,Reviews" | split: "," %}
+
+<hr>
 
 <h2 class="overview-browse">Browse by Category</h2>
 
